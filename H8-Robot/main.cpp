@@ -6,8 +6,8 @@
 #define TURN_TIME 2
 #define MOTOR_SPEED 30
 
-FEHMotor leftDriveMotor(FEHMotor::Motor0);
-FEHMotor rightDriveMotor(FEHMotor::Motor1);
+FEHMotor leftDriveMotor(FEHMotor::Motor0, 9);
+FEHMotor rightDriveMotor(FEHMotor::Motor1, 9);
 DigitalInputPin frontRightBumper(FEHIO::P1_0);
 DigitalInputPin frontLeftBumper(FEHIO::P1_1);
 DigitalInputPin backRightBumper(FEHIO::P2_0);
