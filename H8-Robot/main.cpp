@@ -7,7 +7,7 @@ int main(void)
 
     LCD.Clear(FEHLCD::Black);
     LCD.SetFontColor(FEHLCD::White);
-
+    //H8isboss
     while(true)
     {
         if(LCD.Touch(&x,&y))
