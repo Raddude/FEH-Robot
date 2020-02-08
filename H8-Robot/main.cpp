@@ -52,6 +52,12 @@ int main(void)
         goStraight();
     }
 
+    //Action 2
+    while(!backLeftBumper.Value()() && !backRightBumper.Value())
+    {
+        turnRight();
+    }
+
 
 
 
