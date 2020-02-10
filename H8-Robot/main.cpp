@@ -1,9 +1,21 @@
+/*  MAIN.CPP
+ *  Author: Jake Marchewitz
+ *  Creation Date: 2/10/20
+ *
+ *  Purpose: This file is the hub for the robot's control system, and is the highest level class in the project. The main method is called regularly and often, and acts as an overview of the entire robot's function.
+ *
+ *  Superclasses: None.
+ *  Subclasses: None.
+ *  Used in: None.
+ *  Uses: screen_controller.cpp, main_drive_controller.cpp.
+ */
+
 #include <FEHLCD.h>
 #include <FEHUtility.h>
 #include <FEHMotor.h>
 #include <FEHIO.h>
 
-#include "screencontroller.h"
+#include "screen_controller.h"
 
 
 
