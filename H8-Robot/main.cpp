@@ -3,7 +3,7 @@
 #include <FEHMotor.h>
 #include <FEHIO.h>
 
-#define TURN_TIME 2
+#define TURN_TIME 1450
 #define MOTOR_SPEED 30
 
 FEHMotor leftDriveMotor(FEHMotor::Motor0, 9);
@@ -18,7 +18,8 @@ DigitalInputPin backLeftBumper(FEHIO::P2_1);
 void clearScreen();
 void turnLeft();
 void turnRight();
-void goStraight();
+void goForward();
+void goBackward();
 void wait();
 void stopMotors();
 
@@ -34,9 +35,13 @@ void stopMotors();
 int main(void)
 {
     float x,y;
+    int timer = 0;
+
+    clearScreen();
 
 
 
+    LCD.WriteLine("A");
 
     //Wait to start until screen is touched and released
     while(!LCD.Touch(&x,&y))
@@ -44,37 +49,62 @@ int main(void)
     while(LCD.Touch(&x,&y))
     {}
 
-
+    LCD.WriteLine("B");
 
     //Action 1
-    while(!frontRightBumper.Value() && !frontLeftBumper.Value())
+    while(frontRightBumper.Value() && frontLeftBumper.Value())
     {
-        goStraight();
+        goForward();
     }
 
+    LCD.WriteLine("1");
+
+
+
     //Action 2
-    while(!backLeftBumper.Value()() && !backRightBumper.Value())
+    while(backRightBumper.Value()) //backLeftBumper.Value() &&
     {
         turnRight();
     }
 
+    LCD.WriteLine("2");
+
+
+
     //Action 3
-    while(!frontRightBumper.Value() && !frontLeftBumper.Value())
+    while(frontRightBumper.Value() && frontLeftBumper.Value())
     {
-        goStraight();
+        goForward();
     }
+
+    LCD.WriteLine("3");
+
+
 
     //Action 4
-    while(!backLeftBumper.Value()() && !backRightBumper.Value())
+    while(timer < TURN_TIME)
     {
         turnLeft();
+        Sleep(50);
+        timer += 50;
     }
 
-    //Action 5
-    while(!frontRightBumper.Value() && !frontLeftBumper.Value())
+    while(backLeftBumper.Value()) // && backRightBumper.Value()
     {
-        goStraight();
+        goBackward();
     }
+
+    LCD.WriteLine("4");
+
+
+
+    //Action 5
+    while(frontRightBumper.Value() && frontLeftBumper.Value())
+    {
+        goForward();
+    }
+
+    LCD.WriteLine("5");
 
     //Do nothing afterwards
     while(true)
@@ -105,19 +135,27 @@ void clearScreen()
 
 void turnLeft()
 {
-    leftDriveMotor.SetPercent(-MOTOR_SPEED);
+    leftDriveMotor.SetPercent(MOTOR_SPEED/2);
+    //leftDriveMotor.Stop();
     rightDriveMotor.SetPercent(MOTOR_SPEED);
 }
 
 void turnRight()
 {
+    leftDriveMotor.SetPercent(-MOTOR_SPEED);
+    rightDriveMotor.Stop();
+    //rightDriveMotor.SetPercent(-MOTOR_SPEED);
+}
+
+void goForward()
+{
     leftDriveMotor.SetPercent(MOTOR_SPEED);
     rightDriveMotor.SetPercent(-MOTOR_SPEED);
 }
 
-void goStraight()
+void goBackward()
 {
-    leftDriveMotor.SetPercent(MOTOR_SPEED);
+    leftDriveMotor.SetPercent(-MOTOR_SPEED);
     rightDriveMotor.SetPercent(MOTOR_SPEED);
 }
 
