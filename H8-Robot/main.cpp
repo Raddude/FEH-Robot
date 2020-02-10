@@ -58,6 +58,30 @@ int main(void)
         turnRight();
     }
 
+    //Action 3
+    while(!frontRightBumper.Value() && !frontLeftBumper.Value())
+    {
+        goStraight();
+    }
+
+    //Action 4
+    while(!backLeftBumper.Value()() && !backRightBumper.Value())
+    {
+        turnLeft();
+    }
+
+    //Action 5
+    while(!frontRightBumper.Value() && !frontLeftBumper.Value())
+    {
+        goStraight();
+    }
+
+    //Do nothing afterwards
+    while(true)
+    {
+        stopMotors();
+    }
+
 
 
 
