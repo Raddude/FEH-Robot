@@ -16,11 +16,13 @@ int main(void)
     int timer = 0;
 
     //Singleton Instances
-    ScreenController screen = new ScreenController();
+    ScreenController* screen = new ScreenController();
 
 
 
-    screen.clearScreen();
+    //Wait message
+    screen->clearScreen();
+    screen->displayFullScreenMessage("WAIT...");
 
 
 
@@ -30,7 +32,12 @@ int main(void)
     while(LCD.Touch(&x,&y))
     {}
 
-    LCD.WriteLine("B");
+
+
+    screen->clearScreen();
+    screen->displayBatteryVoltage();
+
+
 
     return 0;
 }

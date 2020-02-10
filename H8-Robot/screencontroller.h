@@ -6,8 +6,9 @@ class ScreenController
 {
 public:
     ScreenController();
-    clearScreen();
-    displayFullScreenMessage(String);
+    void clearScreen();
+    void displayFullScreenMessage(const char*);
+    void displayBatteryVoltage();
 };
 
 #endif // SCREENCONTROLLER_H
