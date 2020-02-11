@@ -6,6 +6,8 @@ Drive/maindrivecontroller.cpp
 Drive/maindrivecontroller.h
 Drive/rightdrive.cpp
 Drive/rightdrive.h
-Screen/screencontroller.cpp
-Screen/screencontroller.h
+IO/filemanager.cpp
+IO/filemanager.h
+IO/screencontroller.cpp
+IO/screencontroller.h
 main.cpp
