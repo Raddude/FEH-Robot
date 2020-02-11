@@ -15,7 +15,8 @@
 #include <FEHMotor.h>
 #include <FEHIO.h>
 
-#include "Screen/screencontroller.h"
+#include "IO/screencontroller.h"
+#include "IO/filemanager.h"
 #include "Drive/maindrivecontroller.h"
 
 #define DRIVE_MOTOR_SPEED 35
