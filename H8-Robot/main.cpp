@@ -15,7 +15,10 @@
 #include <FEHMotor.h>
 #include <FEHIO.h>
 
-#include "screen_controller.h"
+#include "Screen/screencontroller.h"
+#include "Drive/maindrivecontroller.h"
+
+#define DRIVE_MOTOR_SPEED 35
 
 
 
@@ -29,25 +32,25 @@ int main(void)
 
     //Singleton Instances
     ScreenController* screen = new ScreenController();
+    MainDriveController* drive = new MainDriveController();
 
 
 
-    //Wait message
+    //Start Condition: Wait for a touch of the screen
     screen->clearScreen();
-    screen->displayFullScreenMessage("WAIT...");
+    screen->displayFullScreenMessage("TAP TO START");
 
-
-
-    //Wait to start until screen is touched and released
     while(!LCD.Touch(&x,&y))
     {}
     while(LCD.Touch(&x,&y))
     {}
 
-
-
     screen->clearScreen();
-    screen->displayBatteryVoltage();
+
+
+
+    //Drive straight for a while
+    drive->driveMotors(DRIVE_MOTOR_SPEED, DRIVE_MOTOR_SPEED);
 
 
 
