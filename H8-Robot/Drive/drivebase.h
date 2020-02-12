@@ -16,8 +16,7 @@ public:
     void stopRightMotor();
 
 private:
-    //FEHMotor leftMotor;
-    //FEHMotor rightMotor;
+
 };
 
 #endif // DRIVEBASE_H

@@ -14,8 +14,7 @@
 #include "leftdrive.h"
 #include "rightdrive.h"
 
-LeftDrive* leftDrive = new LeftDrive();
-RightDrive* rightDrive = new RightDrive();
+#define RIGHT_ANGLE_TURN_DISTANCE 0 //Determine through testing
 
 
 
@@ -34,7 +33,11 @@ MainDriveController::MainDriveController()
 
 
 
-//Drive motors as the listed speeds. This is a generalized version of the specific methods that follow.
+/*  This method directly drives the motors by setting each motor to run at the listed speed.
+ *
+ *  int leftSpeed - The percent speed of the left motor from [-100, 100]. Positive is 'forwards' for the robot, as the input's direction is corrected by driveLeftCorrected().
+ *  int rightSpeed - The percent speed of the right motor from [-100, 100]. Positive is 'forwards' for the robot, as the input's direction is corrected by driveRightCorrected().
+ */
 void MainDriveController::driveByPower(int leftSpeed, int rightSpeed)
 {
     driveLeftCorrected(leftSpeed);
@@ -43,57 +46,100 @@ void MainDriveController::driveByPower(int leftSpeed, int rightSpeed)
 
 
 
-//Drive motors at the listed speeds to the desired distance
-void MainDriveController::driveByEncoders(int target, int speed)
+
+
+/*  This overloaded method drives the robot forward to the target distance at the listed speed.
+ *
+ *  double target - A distance in INCHES of how far the robot should travel.
+ *  int speed - The percent speed of both motors on the interval [-100. 100]. Positive is 'forwards', since the direction is corrected for by the driveLeftCorrected() and driveRightCorrected() methods.
+ */
+void MainDriveController::driveByEncoders(double target, int speed)
 {
 
 
-    if (leftDrive->getLeftEncoderDistance() < target)
+    if (LeftDrive::getLeftEncoderDistance() < target)
     {
-        leftDrive->driveLeftCorrected(speed);
+        LeftDrive::driveLeftCorrected(speed);
     }
 
     else
     {
-        leftDrive->stopLeftMotor();
+        LeftDrive::stopLeftMotor();
     }
 
 
 
-    if (rightDrive->getRightEncoderDistance() < target)
+    if (RightDrive::getRightEncoderDistance() < target)
     {
-        rightDrive->driveRightCorrected(speed);
+        RightDrive::driveRightCorrected(speed);
     }
 
     else
     {
-        rightDrive->stopRightMotor();
+        RightDrive::stopRightMotor();
+    }
+}
+
+/*  This overloaded method drives each half of the robot to its own distance at its own speed.
+ *
+ *  double leftTarget - A distance in INCHES of how far the left half of the robot should travel.
+ *  int leftSpeed - The percent speed of the left motor on the interval [-100. 100]. Positive is 'forwards', since the direction is corrected for by the driveLeftCorrected() method.
+ *  double rightTarget - A distance in INCHES of how far the right half of robot should travel.
+ *  int rightSpeed - The percent speed of the right motor on the interval [-100. 100]. Positive is 'forwards', since the direction is corrected for by the driveRightCorrected() method.
+ */
+void MainDriveController::driveByEncoders(double leftTarget, int leftSpeed, double rightTarget, int rightSpeed)
+{
+
+
+    if (LeftDrive::getLeftEncoderDistance() < leftTarget)
+    {
+        LeftDrive::driveLeftCorrected(leftSpeed);
+    }
+
+    else
+    {
+        LeftDrive::stopLeftMotor();
+    }
+
+
+
+    if (RightDrive::getRightEncoderDistance() < rightTarget)
+    {
+        RightDrive::driveRightCorrected(rightSpeed);
+    }
+
+    else
+    {
+        RightDrive::stopRightMotor();
     }
 }
 
 
 
-//Go straight at the listed speed
-void MainDriveController::goStraight(int speed)
-{
-    driveByPower(speed, speed);
-}
 
-//Turn left at the listed speed
+
+/*  This method has the robot make a 90 degree left turn about the center of rotation
+ *
+ *  int speed - The speed at which the turn is executed, on a scale of [0, 100]
+ */
 void MainDriveController::turnLeft(int speed)
 {
-    driveByPower(-speed, speed);
+    driveByEncoders(-RIGHT_ANGLE_TURN_DISTANCE, -speed, RIGHT_ANGLE_TURN_DISTANCE, speed);
 }
 
-//Turn right at the listed speed
+/*  This method has the robot make a 90 degree right turn about the center of rotation
+ *
+ *  int speed - The speed at which the turn is executed, on a scale of [0, 100]
+ */
 void MainDriveController::turnRight(int speed)
 {
-    driveByPower(speed, -speed);
+    driveByEncoders(RIGHT_ANGLE_TURN_DISTANCE, speed, -RIGHT_ANGLE_TURN_DISTANCE, -speed);
 }
 
 
 
-//Stop motors
+/*  This method stops both motors.
+ */
 void MainDriveController::stopMotors()
 {
     LeftDrive::stopLeftMotor();

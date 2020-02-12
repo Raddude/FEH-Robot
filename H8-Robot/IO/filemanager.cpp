@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include "filemanager.h"
 
-int variables[100];
+//int variables[100];
 
 
 
@@ -31,7 +31,7 @@ FileManager::FileManager()
 
 
 
-
+/*
 
 //Read and write the entire variables[][] array to and from the Stored_Values.txt file
 void FileManager::readAllVariables()
@@ -74,3 +74,5 @@ void FileManager::writeIntVariable(int ID, int value)
 {
     variables[ID] = value;
 }
+
+*/

@@ -15,12 +15,6 @@
 #include <math.h>
 #include "drivebase.h"
 
-#define WHEEL_DIAMETER 2.5
-#define TICKS_PER_ROTATION 318
-#define PI 3.141592653589793238463
-#define DISTANCE_PER_ROTATION (PI*WHEEL_DIAMETER)
-#define DISTANCE_PER_TICK (DISTANCE_PER_ROTATION/TICKS_PER_ROTATION)
-
 FEHMotor leftMotor(FEHMotor::Motor0, 9.0);
 FEHMotor rightMotor(FEHMotor::Motor1, 9.0);
 
@@ -41,12 +35,19 @@ DriveBase::DriveBase()
 
 
 
-//Drive motors at the exact percent listed, without correcting for the mounting direction
+/*  This is a wrapper for the left motor's SetPercent() function, and is meant to restrict control of that motor.
+ *
+ *  int speed - A number in the range [-100, 100] that determines the motor's output speed.
+ */
 void DriveBase::driveLeftMotor(int speed)
 {
     leftMotor.SetPercent(speed);
 }
 
+/*  This is a wrapper for the right motor's SetPercent() function, and is meant to restrict control of that motor through one method.
+ *
+ *  int speed - A number in the range [-100, 100] that determines the motor's output speed.
+ */
 void DriveBase::driveRightMotor(int speed)
 {
     rightMotor.SetPercent(speed);
@@ -54,12 +55,17 @@ void DriveBase::driveRightMotor(int speed)
 
 
 
-//Stop motors
+
+
+/*  This is a wrapper for the left motor's stop function, and is meant to restrict control of that motor through one method.
+ */
 void DriveBase::stopLeftMotor()
 {
     leftMotor.Stop();
 }
 
+/*  This is a wrapper for the left motor's stop function, and is meant to restrict control of that motor through one method.
+ */
 void DriveBase::stopRightMotor()
 {
     rightMotor.Stop();

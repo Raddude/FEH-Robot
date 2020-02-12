@@ -9,8 +9,8 @@ class MainDriveController : public LeftDrive, public RightDrive
 public:
     MainDriveController();
     void driveByPower(int, int);
-    void driveByEncoders(int, int);
-    void goStraight(int);
+    void driveByEncoders(double, int);
+    void driveByEncoders(double, int, double, int);
     void turnLeft(int);
     void turnRight(int);
     void stopMotors();
