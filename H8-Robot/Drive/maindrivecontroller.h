@@ -11,8 +11,9 @@ public:
     void driveByPower(int, int);
     void driveByEncoders(double, int);
     void driveByEncoders(double, int, double, int);
-    void turnLeft(int);
-    void turnRight(int);
+    void driveByEncoders(int, int, int, int);
+    void turnLeft(double, int);
+    void turnRight(double, int);
     void stopMotors();
 };
 
