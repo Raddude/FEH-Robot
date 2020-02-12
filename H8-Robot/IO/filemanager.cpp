@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include "filemanager.h"
 
-int variables[100][2], numRows;
+int variables[100];
 
 
 
@@ -34,32 +34,29 @@ FileManager::FileManager()
 
 
 //Read and write the entire variables[][] array to and from the Stored_Values.txt file
-void FileManager::readAllFromFile()
+void FileManager::readAllVariables()
 {
     FEHFile *fptr = SD.FOpen("Stored_Values.txt", "r");
     int i = 0;
 
     while(!SD.FEof(fptr))
     {
-        variables[i][0] = i;
-        SD.FScanf(fptr, "%d", &variables[i][1]);
+        SD.FScanf(fptr, "%d", &variables[i]);
         i++;
     }
 
     SD.FClose(fptr);
 }
 
-void FileManager::writeAllToFile()
+void FileManager::writeAllVariables()
 {
     remove("Stored_Values.txt");
 
     FEHFile *fptr = SD.FOpen("Stored_Values.txt", "w");
 
-    numRows = sizeof(variables)/sizeof(variables[0]);
-
-    for(int j = 0; j < numRows; j++)
+    for(int j = 0; j < 100; j++)
     {
-        SD.FPrintf(fptr, "%i", variables[j][2]);
+        SD.FPrintf(fptr, "%i\n", variables[j]);
     }
 
     SD.FClose(fptr);
@@ -70,10 +67,10 @@ void FileManager::writeAllToFile()
 //Read and write specific variables from the array read from the SD
 int FileManager::readIntVariable(int ID)
 {
-
+    return variables[ID];
 }
 
-void FileManager::writeIntVariable(int ID)
+void FileManager::writeIntVariable(int ID, int value)
 {
-
+    variables[ID] = value;
 }

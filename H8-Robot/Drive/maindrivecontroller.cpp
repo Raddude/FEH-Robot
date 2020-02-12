@@ -14,6 +14,9 @@
 #include "leftdrive.h"
 #include "rightdrive.h"
 
+LeftDrive* leftDrive = new LeftDrive();
+RightDrive* rightDrive = new RightDrive();
+
 
 
 
@@ -32,7 +35,7 @@ MainDriveController::MainDriveController()
 
 
 //Drive motors as the listed speeds. This is a generalized version of the specific methods that follow.
-void MainDriveController::driveMotors(int leftSpeed, int rightSpeed)
+void MainDriveController::driveByPower(int leftSpeed, int rightSpeed)
 {
     driveLeftCorrected(leftSpeed);
     driveRightCorrected(rightSpeed);
@@ -40,22 +43,52 @@ void MainDriveController::driveMotors(int leftSpeed, int rightSpeed)
 
 
 
+//Drive motors at the listed speeds to the desired distance
+void MainDriveController::driveByEncoders(int target, int speed)
+{
+
+
+    if (leftDrive->getLeftEncoderDistance() < target)
+    {
+        leftDrive->driveLeftCorrected(speed);
+    }
+
+    else
+    {
+        leftDrive->stopLeftMotor();
+    }
+
+
+
+    if (rightDrive->getRightEncoderDistance() < target)
+    {
+        rightDrive->driveRightCorrected(speed);
+    }
+
+    else
+    {
+        rightDrive->stopRightMotor();
+    }
+}
+
+
+
 //Go straight at the listed speed
 void MainDriveController::goStraight(int speed)
 {
-    driveMotors(speed, speed);
+    driveByPower(speed, speed);
 }
 
 //Turn left at the listed speed
 void MainDriveController::turnLeft(int speed)
 {
-    driveMotors(-speed, speed);
+    driveByPower(-speed, speed);
 }
 
 //Turn right at the listed speed
 void MainDriveController::turnRight(int speed)
 {
-    driveMotors(speed, -speed);
+    driveByPower(speed, -speed);
 }
 
 

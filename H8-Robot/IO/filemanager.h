@@ -6,10 +6,10 @@ class FileManager
 {
 public:
     FileManager();
-    void readAllFromFile();
-    void writeAllToFile();
+    void readAllVariables();
+    void writeAllVariables();
     int readIntVariable(int);
-    void writeIntVariable(int);
+    void writeIntVariable(int, int);
 };
 
 #endif // FILEMANAGER_H

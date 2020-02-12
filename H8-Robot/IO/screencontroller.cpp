@@ -12,11 +12,13 @@
 
 #include <FEHLCD.h>
 #include <FEHBattery.h>
-#include <string.h>
+#include <string>
 #include "screencontroller.h"
 
 #define SCREEN_WIDTH 240
 #define SCREEN_HEIGHT 320
+
+using namespace std;
 
 
 

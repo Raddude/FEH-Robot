@@ -14,12 +14,16 @@
 #include <FEHUtility.h>
 #include <FEHMotor.h>
 #include <FEHIO.h>
+#include <string>
+#include <iostream>
 
 #include "IO/screencontroller.h"
 #include "IO/filemanager.h"
 #include "Drive/maindrivecontroller.h"
 
 #define DRIVE_MOTOR_SPEED 35
+
+using namespace std;
 
 
 
@@ -34,6 +38,7 @@ int main(void)
     //Singleton Instances
     ScreenController* screen = new ScreenController();
     MainDriveController* drive = new MainDriveController();
+    FileManager* fileIO = new FileManager();
 
 
 
@@ -50,8 +55,16 @@ int main(void)
 
 
 
+
+
     //Drive straight for a while
-    drive->driveMotors(DRIVE_MOTOR_SPEED, DRIVE_MOTOR_SPEED);
+    //drive->driveMotors(DRIVE_MOTOR_SPEED, DRIVE_MOTOR_SPEED);
+
+    while(true)
+    {
+        drive->driveByEncoders(4, 40);
+    }
+
 
 
 

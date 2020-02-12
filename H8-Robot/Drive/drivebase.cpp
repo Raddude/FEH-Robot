@@ -11,9 +11,15 @@
  */
 
 #include <FEHMotor.h>
+#include <FEHIO.h>
+#include <math.h>
 #include "drivebase.h"
 
-
+#define WHEEL_DIAMETER 2.5
+#define TICKS_PER_ROTATION 318
+#define PI 3.141592653589793238463
+#define DISTANCE_PER_ROTATION (PI*WHEEL_DIAMETER)
+#define DISTANCE_PER_TICK (DISTANCE_PER_ROTATION/TICKS_PER_ROTATION)
 
 FEHMotor leftMotor(FEHMotor::Motor0, 9.0);
 FEHMotor rightMotor(FEHMotor::Motor1, 9.0);

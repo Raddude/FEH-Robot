@@ -8,7 +8,8 @@ class MainDriveController : public LeftDrive, public RightDrive
 {
 public:
     MainDriveController();
-    void driveMotors(int, int);
+    void driveByPower(int, int);
+    void driveByEncoders(int, int);
     void goStraight(int);
     void turnLeft(int);
     void turnRight(int);

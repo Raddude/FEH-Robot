@@ -8,6 +8,9 @@ class LeftDrive : public DriveBase
 public:
     LeftDrive();
     void driveLeftCorrected(int);
+    int getLeftEncoderCount();
+    double getLeftEncoderDistance();
+    void resetLeftEncoder();
 };
 
 #endif // LEFTDRIVE_H

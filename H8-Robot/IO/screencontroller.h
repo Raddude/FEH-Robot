@@ -1,6 +1,10 @@
 #ifndef SCREENCONTROLLER_H
 #define SCREENCONTROLLER_H
 
+#include <string.h>
+
+using namespace std;
+
 
 class ScreenController
 {
