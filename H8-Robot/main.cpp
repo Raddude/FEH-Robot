@@ -29,6 +29,8 @@ using namespace std;
 
 
 
+
+
 int main(void)
 {
     //Main variables
@@ -58,7 +60,9 @@ int main(void)
 
 
     //Drive straight for a while
-    //drive->driveMotors(DRIVE_MOTOR_SPEED, DRIVE_MOTOR_SPEED);
+    drive->driveByEncoders(4.0, 40);
+
+    //OR
 
     while(true)
     {
