@@ -16,6 +16,8 @@
 
 #define RIGHT_ANGLE_TURN_DISTANCE 0 //Determine through testing
 
+using namespace std;
+
 
 
 

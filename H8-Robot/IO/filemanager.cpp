@@ -14,7 +14,9 @@
 #include <stdio.h>
 #include "filemanager.h"
 
-//int variables[100];
+using namespace std;
+
+int variables[100];
 
 
 
@@ -31,9 +33,10 @@ FileManager::FileManager()
 
 
 
-/*
 
-//Read and write the entire variables[][] array to and from the Stored_Values.txt file
+
+/*  This method reads all of the tracked variables from the Stored_Values.txt.
+ */
 void FileManager::readAllVariables()
 {
     FEHFile *fptr = SD.FOpen("Stored_Values.txt", "r");
@@ -48,6 +51,8 @@ void FileManager::readAllVariables()
     SD.FClose(fptr);
 }
 
+/*  This method writes all of the tracked variables to Stored_Variables.txt.
+ */
 void FileManager::writeAllVariables()
 {
     remove("Stored_Values.txt");
@@ -64,15 +69,23 @@ void FileManager::writeAllVariables()
 
 
 
-//Read and write specific variables from the array read from the SD
+
+
+/*  This method reads a specific variable from the array and returns it.
+ *
+ *  int ID - The index of the array being read. This can act as the variable's ID.
+ */
 int FileManager::readIntVariable(int ID)
 {
     return variables[ID];
 }
 
+/*  This method writes a given value to a specific variable in the array.
+ *
+ *  int ID - The index of the array being read. This can act as the variable's ID.
+ *  int value - The value being written to the variable.
+ */
 void FileManager::writeIntVariable(int ID, int value)
 {
     variables[ID] = value;
 }
-
-*/

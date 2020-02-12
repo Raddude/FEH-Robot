@@ -15,6 +15,8 @@
 #include <math.h>
 #include "drivebase.h"
 
+using namespace std;
+
 FEHMotor leftMotor(FEHMotor::Motor0, 9.0);
 FEHMotor rightMotor(FEHMotor::Motor1, 9.0);
 

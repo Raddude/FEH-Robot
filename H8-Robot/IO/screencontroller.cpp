@@ -37,6 +37,8 @@ ScreenController::ScreenController()
 
 
 
+/*  This method fills the screen with black and resets the font color and orientation.
+ */
 void ScreenController::clearScreen()
 {
     LCD.Clear(FEHLCD::Black);
@@ -46,14 +48,24 @@ void ScreenController::clearScreen()
 
 
 
+
+
+/*  This method writes a message to the center of the screen for clarity.
+ *
+ *  const char* input - The message to be displayed on screen.
+ */
 void ScreenController::displayFullScreenMessage(const char* input)
 {
-    //Write at the center of the screen, LARGE
+    //Try to make font size bigger if possible
     LCD.WriteAt(input, SCREEN_HEIGHT/2  - (6*strlen(input)), SCREEN_WIDTH/2);
 }
 
 
 
+
+
+/*  This function simply displays the battery's voltage in the top left corner.
+ */
 void ScreenController::displayBatteryVoltage()
 {
     LCD.WriteLine(Battery.Voltage());
