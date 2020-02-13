@@ -756,7 +756,7 @@ Discarded input sections
  .debug_macinfo
                 0x00000000    0x6402e Drivers/mcg.o
  .debug_line    0x00000000      0x89f Drivers/mcg.o
- .debug_str     0x00000000      0x6a8 Drivers/mcg.o
+ .debug_str     0x00000000      0x6b3 Drivers/mcg.o
  .comment       0x00000000       0x7a Drivers/mcg.o
  .debug_frame   0x00000000      0x2b4 Drivers/mcg.o
  .ARM.attributes
@@ -1023,7 +1023,7 @@ Discarded input sections
  .debug_macinfo
                 0x00000000    0x6545d Libraries/FEHServo.o
  .debug_line    0x00000000      0x69c Libraries/FEHServo.o
- .debug_str     0x00000000     0x13cf Libraries/FEHServo.o
+ .debug_str     0x00000000     0x13da Libraries/FEHServo.o
  .comment       0x00000000       0x7a Libraries/FEHServo.o
  .debug_frame   0x00000000      0x174 Libraries/FEHServo.o
  .ARM.attributes
@@ -30921,65 +30921,65 @@ OUTPUT(../H8-Robot.elf elf32-littlearm)
  .debug_line    0x0000b2aa      0x782 Libraries/FEHSD.o
  .debug_line    0x0000ba2c      0x429 Libraries/FEHRandom.o
 
-.debug_str      0x00000000     0x7bc7
- .debug_str     0x00000000     0x11ba ../Drive/drivebase.o
-                               0x129c (size before relaxing)
- .debug_str     0x000011ba      0x261 ../Drive/driveconstants.o
-                                0x393 (size before relaxing)
- .debug_str     0x0000141b      0x395 ../Drive/leftdrive.o
-                                0x8da (size before relaxing)
- .debug_str     0x000017b0      0x3ea ../Drive/maindrivecontroller.o
-                                0x9bf (size before relaxing)
- .debug_str     0x00001b9a       0x48 ../Drive/rightdrive.o
-                                0x8e8 (size before relaxing)
- .debug_str     0x00001be2      0x39c ../IO/filemanager.o
-                                0x9af (size before relaxing)
- .debug_str     0x00001f7e     0x196a ../IO/screencontroller.o
-                               0x22d6 (size before relaxing)
- .debug_str     0x000038e8      0x7ca ../main.o
-                               0x3167 (size before relaxing)
- .debug_str     0x000040b2      0xc2a Startup/startup_mk60d10.o
-                               0x2061 (size before relaxing)
- .debug_str     0x00004cdc       0x4d Libraries/FEHMotor.o
-                                0x431 (size before relaxing)
- .debug_str     0x00004d29      0x147 Drivers/i2c.o
-                                0x319 (size before relaxing)
- .debug_str     0x00004e70      0x18b Drivers/spi.o
-                                0x4a7 (size before relaxing)
- .debug_str     0x00004ffb      0x188 Drivers/uart.o
-                                0x434 (size before relaxing)
- .debug_str     0x00005183      0x5ed Drivers/ff.o
-                                0x8f7 (size before relaxing)
- .debug_str     0x00005770      0x4c5 Drivers/SDHC.o
-                                0x915 (size before relaxing)
- .debug_str     0x00005c35       0x5a Drivers/lptmr.o
-                                0x2f5 (size before relaxing)
- .debug_str     0x00005c8f       0x28 FEHProteus.o
-                                0x33a (size before relaxing)
- .debug_str     0x00005cb7       0x35 Drivers/FEHPropeller.o
-                                0x4d0 (size before relaxing)
- .debug_str     0x00005cec       0xc0 Libraries/FEHUtility.o
-                                0x2c6 (size before relaxing)
- .debug_str     0x00005dac      0xfd5 Libraries/FEHIO.o
-                               0x16cd (size before relaxing)
- .debug_str     0x00006d81       0xd7 Drivers/adc16.o
-                                0x389 (size before relaxing)
- .debug_str     0x00006e58      0x1de Libraries/FEHBuzzer.o
-                                0x4a9 (size before relaxing)
- .debug_str     0x00007036      0x382 Libraries/FEHLCD.o
-                               0x164a (size before relaxing)
- .debug_str     0x000073b8       0xad Libraries/FEHAccel.o
-                                0x2b7 (size before relaxing)
- .debug_str     0x00007465       0x54 Libraries/FEHBattery.o
-                                0x4be (size before relaxing)
- .debug_str     0x000074b9      0x22c Drivers/FEHXBee.o
-                               0x1165 (size before relaxing)
- .debug_str     0x000076e5      0x40a Libraries/FEHRPS.o
-                               0x1d7a (size before relaxing)
- .debug_str     0x00007aef       0xa7 Libraries/FEHSD.o
-                               0x1700 (size before relaxing)
- .debug_str     0x00007b96       0x31 Libraries/FEHRandom.o
-                               0x12d0 (size before relaxing)
+.debug_str      0x00000000     0x7bd2
+ .debug_str     0x00000000     0x11c5 ../Drive/drivebase.o
+                               0x12a7 (size before relaxing)
+ .debug_str     0x000011c5      0x261 ../Drive/driveconstants.o
+                                0x39e (size before relaxing)
+ .debug_str     0x00001426      0x395 ../Drive/leftdrive.o
+                                0x8e5 (size before relaxing)
+ .debug_str     0x000017bb      0x3ea ../Drive/maindrivecontroller.o
+                                0x9ca (size before relaxing)
+ .debug_str     0x00001ba5       0x48 ../Drive/rightdrive.o
+                                0x8f3 (size before relaxing)
+ .debug_str     0x00001bed      0x39c ../IO/filemanager.o
+                                0x9ba (size before relaxing)
+ .debug_str     0x00001f89     0x196a ../IO/screencontroller.o
+                               0x22e1 (size before relaxing)
+ .debug_str     0x000038f3      0x7ca ../main.o
+                               0x3172 (size before relaxing)
+ .debug_str     0x000040bd      0xc2a Startup/startup_mk60d10.o
+                               0x206c (size before relaxing)
+ .debug_str     0x00004ce7       0x4d Libraries/FEHMotor.o
+                                0x43c (size before relaxing)
+ .debug_str     0x00004d34      0x147 Drivers/i2c.o
+                                0x324 (size before relaxing)
+ .debug_str     0x00004e7b      0x18b Drivers/spi.o
+                                0x4b2 (size before relaxing)
+ .debug_str     0x00005006      0x188 Drivers/uart.o
+                                0x43f (size before relaxing)
+ .debug_str     0x0000518e      0x5ed Drivers/ff.o
+                                0x902 (size before relaxing)
+ .debug_str     0x0000577b      0x4c5 Drivers/SDHC.o
+                                0x920 (size before relaxing)
+ .debug_str     0x00005c40       0x5a Drivers/lptmr.o
+                                0x300 (size before relaxing)
+ .debug_str     0x00005c9a       0x28 FEHProteus.o
+                                0x345 (size before relaxing)
+ .debug_str     0x00005cc2       0x35 Drivers/FEHPropeller.o
+                                0x4db (size before relaxing)
+ .debug_str     0x00005cf7       0xc0 Libraries/FEHUtility.o
+                                0x2d1 (size before relaxing)
+ .debug_str     0x00005db7      0xfd5 Libraries/FEHIO.o
+                               0x16d8 (size before relaxing)
+ .debug_str     0x00006d8c       0xd7 Drivers/adc16.o
+                                0x394 (size before relaxing)
+ .debug_str     0x00006e63      0x1de Libraries/FEHBuzzer.o
+                                0x4b4 (size before relaxing)
+ .debug_str     0x00007041      0x382 Libraries/FEHLCD.o
+                               0x1655 (size before relaxing)
+ .debug_str     0x000073c3       0xad Libraries/FEHAccel.o
+                                0x2c2 (size before relaxing)
+ .debug_str     0x00007470       0x54 Libraries/FEHBattery.o
+                                0x4c9 (size before relaxing)
+ .debug_str     0x000074c4      0x22c Drivers/FEHXBee.o
+                               0x1170 (size before relaxing)
+ .debug_str     0x000076f0      0x40a Libraries/FEHRPS.o
+                               0x1d85 (size before relaxing)
+ .debug_str     0x00007afa       0xa7 Libraries/FEHSD.o
+                               0x170b (size before relaxing)
+ .debug_str     0x00007ba1       0x31 Libraries/FEHRandom.o
+                               0x12db (size before relaxing)
 
 .debug_frame    0x00000000    0x1c3d0
  .debug_frame   0x00000000      0x108 ../Drive/drivebase.o

@@ -1,4 +1,4 @@
-/*  ScreenController.cpp
+/*  FileManager.cpp
  *  Author: Jake Marchewitz
  *  Creation Date: 2/11/20
  *
