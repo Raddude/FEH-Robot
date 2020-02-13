@@ -10,18 +10,13 @@
  *  Uses: LeftDrive.cpp, RightDrive.cpp.
  */
 
+#include <FEHUtility.h>
 #include "maindrivecontroller.h"
 #include "leftdrive.h"
 #include "rightdrive.h"
+#include "driveconstants.h"
 
-#define WHEEL_DIAMETER 2.5
-#define WHEEL_SPAN 7 //This is the distance between the center of the contact points of both wheels
-#define TICKS_PER_ROTATION 318
-#define PI 3.141592653589793238463
-#define DISTANCE_PER_ROTATION (PI*WHEEL_DIAMETER)
-#define DISTANCE_PER_TICK (DISTANCE_PER_ROTATION/TICKS_PER_ROTATION)
-#define DISTANCE_PER_FULL_TURN (PI*WHEEL_SPAN)
-#define TICKS_PER_FULL_TURN (DISTANCE_PER_TICK/DISTANCE_PER_FULL_TURN)
+#define SLEEP_AMOUNT 0.25
 
 using namespace std;
 
@@ -62,31 +57,39 @@ void MainDriveController::driveByPower(int leftSpeed, int rightSpeed)
  *  double target - A distance in INCHES of how far the robot should travel.
  *  int speed - The percent speed of both motors on the interval [-100. 100]. Positive is 'forwards', since the direction is corrected for by the driveLeftCorrected() and driveRightCorrected() methods.
  */
-void MainDriveController::driveByEncoders(double target, int speed)
+bool MainDriveController::driveByEncoders(double target, int speed)
 {
 
 
-    if (LeftDrive::getLeftEncoderDistance() < target)
+    if (LeftDrive::getLeftEncoderDistance() <= target)
     {
         LeftDrive::driveLeftCorrected(speed);
     }
 
     else
     {
-        LeftDrive::stopLeftMotor();
+        stopMotors();
+        resetEncoders();
+        LeftDrive::getSleepAmount();
+        return false;
     }
 
 
 
-    if (RightDrive::getRightEncoderDistance() < target)
+    if (RightDrive::getRightEncoderDistance() <= target)
     {
         RightDrive::driveRightCorrected(speed);
     }
 
     else
     {
-        RightDrive::stopRightMotor();
+        stopMotors();
+        resetEncoders();
+        LeftDrive::getSleepAmount();
+        return false;
     }
+
+    return true;
 }
 
 /*  This overloaded method drives each half of the robot to its own distance at its own speed.
@@ -96,7 +99,7 @@ void MainDriveController::driveByEncoders(double target, int speed)
  *  double rightTarget - A distance in INCHES of how far the right half of robot should travel.
  *  int rightSpeed - The percent speed of the right motor on the interval [-100. 100]. Positive is 'forwards', since the direction is corrected for by the driveRightCorrected() method.
  */
-void MainDriveController::driveByEncoders(double leftTarget, int leftSpeed, double rightTarget, int rightSpeed)
+bool MainDriveController::driveByEncoders(double leftTarget, int leftSpeed, double rightTarget, int rightSpeed)
 {
 
 
@@ -107,7 +110,10 @@ void MainDriveController::driveByEncoders(double leftTarget, int leftSpeed, doub
 
     else
     {
-        LeftDrive::stopLeftMotor();
+        stopMotors();
+        resetEncoders();
+        LeftDrive::getSleepAmount();
+        return false;
     }
 
 
@@ -119,8 +125,13 @@ void MainDriveController::driveByEncoders(double leftTarget, int leftSpeed, doub
 
     else
     {
-        RightDrive::stopRightMotor();
+        stopMotors();
+        resetEncoders();
+        LeftDrive::getSleepAmount();
+        return false;
     }
+
+    return true;
 }
 
 /*  This overloaded method drives each half of the robot to its own distance at its own speed.
@@ -130,7 +141,7 @@ void MainDriveController::driveByEncoders(double leftTarget, int leftSpeed, doub
  *  int rightTarget - A distance in TICKS of how far the right half of robot should travel.
  *  int rightSpeed - The percent speed of the right motor on the interval [-100. 100]. Positive is 'forwards', since the direction is corrected for by the driveRightCorrected() method.
  */
-void MainDriveController::driveByEncoders(int leftTarget, int leftSpeed, int rightTarget, int rightSpeed)
+bool MainDriveController::driveByEncoders(int leftTarget, int leftSpeed, int rightTarget, int rightSpeed)
 {
 
 
@@ -141,7 +152,10 @@ void MainDriveController::driveByEncoders(int leftTarget, int leftSpeed, int rig
 
     else
     {
-        LeftDrive::stopLeftMotor();
+        stopMotors();
+        resetEncoders();
+        LeftDrive::getSleepAmount();
+        return false;
     }
 
 
@@ -153,8 +167,13 @@ void MainDriveController::driveByEncoders(int leftTarget, int leftSpeed, int rig
 
     else
     {
-        RightDrive::stopRightMotor();
+        stopMotors();
+        resetEncoders();
+        LeftDrive::getSleepAmount();
+        return false;
     }
+
+    return true;
 }
 
 
@@ -166,9 +185,9 @@ void MainDriveController::driveByEncoders(int leftTarget, int leftSpeed, int rig
  *  double angle - The angle in DEGREES that the robot should turn left.
  *  int speed - The speed at which the turn is executed, on a scale of [0, 100].
  */
-void MainDriveController::turnLeft(double angle, int speed)
+bool MainDriveController::turnLeft(double angle, int speed)
 {
-    driveByEncoders(-(angle/360)*DISTANCE_PER_FULL_TURN, -speed, (angle/360)*DISTANCE_PER_FULL_TURN, speed);
+    return driveByEncoders((angle/360) * LeftDrive::getDistancePerFullTurn(), -speed, (angle/360) * LeftDrive::getDistancePerFullTurn(), speed);
 }
 
 /*  This method has the robot make a 90 degree right turn about the center of rotation.
@@ -176,10 +195,34 @@ void MainDriveController::turnLeft(double angle, int speed)
  *  double angle - The angle in DEGREES that the robot should turn right.
  *  int speed - The speed at which the turn is executed, on a scale of [0, 100].
  */
-void MainDriveController::turnRight(double angle, int speed)
+bool MainDriveController::turnRight(double angle, int speed)
 {
-    driveByEncoders((angle/360)*DISTANCE_PER_FULL_TURN, speed, -(angle/360)*DISTANCE_PER_FULL_TURN, -speed);
+    return driveByEncoders((angle/360) * RightDrive::getDistancePerFullTurn(), speed, (angle/360) * RightDrive::getDistancePerFullTurn(), -speed);
 }
+
+
+
+
+
+/*  This method returns the number of ticks required to move one wheel the given distance
+ *
+ *  double distance - The distance in INCHES to be converted into ticks
+ */
+double MainDriveController::getTickCountFromDistance(double distance)
+{
+    return distance * LeftDrive::getDistancePerTick();
+}
+
+/*  This method returns the number of ticks required on both sides of the robot to turn the robot the given angle
+ *
+ *  double angle - The angle in DEGREES to be converted to ticks
+ */
+double MainDriveController::getDistanceFromAngle(double angle)
+{
+    return (angle/360) * LeftDrive::getDistancePerFullTurn();
+}
+
+
 
 
 
@@ -189,4 +232,12 @@ void MainDriveController::stopMotors()
 {
     LeftDrive::stopLeftMotor();
     RightDrive::stopRightMotor();
+}
+
+/*  This method resets both encoders.
+ */
+void MainDriveController::resetEncoders()
+{
+    LeftDrive::resetLeftEncoder();
+    RightDrive::resetRightEncoder();
 }

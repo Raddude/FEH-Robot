@@ -1,9 +1,10 @@
 #ifndef RIGHTDRIVE_H
 #define RIGHTDRIVE_H
 #include "drivebase.h"
+#include "driveconstants.h"
 
 
-class RightDrive : public DriveBase
+class RightDrive : public DriveBase, public DriveConstants
 {
 public:
     RightDrive();

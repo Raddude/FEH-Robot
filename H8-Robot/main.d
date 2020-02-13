@@ -4,7 +4,8 @@
  Libraries/FEHMotor.h Libraries/FEHIO.h Drivers/adc16.h \
  ../IO/screencontroller.h ../IO/filemanager.h \
  ../Drive/maindrivecontroller.h ../Drive/leftdrive.h ../Drive/drivebase.h \
- ../Drive/rightdrive.h
+ ../Drive/driveconstants.h ../Drive/rightdrive.h \
+ ../Drive/driveconstants.h
 
 Libraries/FEHLCD.h:
 
@@ -36,4 +37,8 @@ Drivers/adc16.h:
 
 ../Drive/drivebase.h:
 
+../Drive/driveconstants.h:
+
 ../Drive/rightdrive.h:
+
+../Drive/driveconstants.h:

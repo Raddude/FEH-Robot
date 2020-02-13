@@ -57,6 +57,7 @@ void ScreenController::clearScreen()
 void ScreenController::displayFullScreenMessage(const char* input)
 {
     //Try to make font size bigger if possible
+    clearScreen();
     LCD.WriteAt(input, SCREEN_HEIGHT/2  - (6*strlen(input)), SCREEN_WIDTH/2);
 }
 

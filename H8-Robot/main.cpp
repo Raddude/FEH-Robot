@@ -20,8 +20,9 @@
 #include "IO/screencontroller.h"
 #include "IO/filemanager.h"
 #include "Drive/maindrivecontroller.h"
+#include "Drive/driveconstants.h"
 
-#define DRIVE_MOTOR_SPEED 35
+#define TEST_MOTOR_SPEED 40
 
 using namespace std;
 
@@ -43,10 +44,13 @@ int main(void)
     FileManager* fileIO = new FileManager();
 
 
+TouchCondition:
 
     //Start Condition: Wait for a touch of the screen
     screen->clearScreen();
     screen->displayFullScreenMessage("TAP TO START");
+
+    LCD.ClearBuffer();
 
     while(!LCD.Touch(&x,&y))
     {}
@@ -57,19 +61,21 @@ int main(void)
 
 
 
+    drive->resetEncoders();
 
 
-    //Drive straight for a while
-    drive->driveByEncoders(4.0, 40);
-
-    //OR
-
-    while(true)
+    for (int i = 0; i < 4; i++)
     {
-        drive->driveByEncoders(4, 40);
+        while(drive->driveByEncoders(5.0, TEST_MOTOR_SPEED)){}
+        while(drive->turnRight(90, TEST_MOTOR_SPEED)){}
     }
 
+    screen->displayFullScreenMessage("B");
 
+
+    drive->stopMotors();
+
+    goto TouchCondition;
 
 
     return 0;

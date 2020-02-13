@@ -1,5 +1,7 @@
 Drive/drivebase.cpp
 Drive/drivebase.h
+Drive/driveconstants.cpp
+Drive/driveconstants.h
 Drive/leftdrive.cpp
 Drive/leftdrive.h
 Drive/maindrivecontroller.cpp

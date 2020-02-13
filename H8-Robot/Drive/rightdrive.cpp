@@ -13,12 +13,7 @@
 #include <FEHMotor.h>
 #include <FEHIO.h>
 #include "rightdrive.h"
-
-#define WHEEL_DIAMETER 2.5
-#define TICKS_PER_ROTATION 318
-#define PI 3.141592653589793238463
-#define DISTANCE_PER_ROTATION (PI*WHEEL_DIAMETER)
-#define DISTANCE_PER_TICK (DISTANCE_PER_ROTATION/TICKS_PER_ROTATION)
+#include "driveconstants.h"
 
 using namespace std;
 
@@ -65,7 +60,7 @@ int RightDrive::getRightEncoderCount()
  */
 double RightDrive::getRightEncoderDistance()
 {
-    return rightEncoder.Counts()*DISTANCE_PER_TICK;
+    return rightEncoder.Counts()*getDistancePerTick();
 }
 
 /*  This method resets the tick count of the right encoder to 0.

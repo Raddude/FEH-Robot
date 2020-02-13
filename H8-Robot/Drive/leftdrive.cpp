@@ -13,18 +13,13 @@
 #include <FEHMotor.h>
 #include <FEHIO.h>
 #include "leftdrive.h"
-
-#define WHEEL_DIAMETER 2.5
-#define TICKS_PER_ROTATION 318
-#define PI 3.141592653589793238463
-#define DISTANCE_PER_ROTATION (PI*WHEEL_DIAMETER)
-#define DISTANCE_PER_TICK (DISTANCE_PER_ROTATION/TICKS_PER_ROTATION)
-
-
+#include "driveconstants.h"
 
 using namespace std;
 
 DigitalEncoder leftEncoder(FEHIO::P0_1);
+
+DriveConstants* constants = new DriveConstants();
 
 
 
@@ -49,7 +44,7 @@ LeftDrive::LeftDrive()
  */
 void LeftDrive::driveLeftCorrected(int speed)
 {
-    driveLeftMotor(speed);
+    driveLeftMotor(-speed);
 }
 
 
@@ -67,7 +62,7 @@ int LeftDrive::getLeftEncoderCount()
  */
 double LeftDrive::getLeftEncoderDistance()
 {
-    return leftEncoder.Counts()*DISTANCE_PER_TICK;
+    return leftEncoder.Counts()*getDistancePerTick();
 }
 
 /*  This method resets the tick count of the left encoder to 0.
