@@ -44,7 +44,7 @@ LeftDrive::LeftDrive()
  */
 void LeftDrive::driveLeftCorrected(int speed)
 {
-    driveLeftMotor(-speed);
+    driveLeftMotor(speed);
 }
 
 

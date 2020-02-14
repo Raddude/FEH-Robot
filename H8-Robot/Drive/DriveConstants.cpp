@@ -13,7 +13,7 @@
 #include "DriveConstants.h"
 
 #define WHEEL_DIAMETER 2.5
-#define WHEEL_SPAN 7.45 //This is the distance between the center of the contact points of both wheels
+#define WHEEL_SPAN 6.875 //This is the distance between the center of the contact points of both wheels, std 6.875
 #define TICKS_PER_ROTATION 318
 #define PI 3.141592653589793238463
 #define DISTANCE_PER_ROTATION (PI*WHEEL_DIAMETER)

@@ -1,4 +1,4 @@
-../Drive/driveconstants.d: ../Drive/driveconstants.cpp \
- ../Drive/driveconstants.h
+../Drive/DriveConstants.d: ../Drive/DriveConstants.cpp \
+ ../Drive/DriveConstants.h
 
-../Drive/driveconstants.h:
+../Drive/DriveConstants.h:

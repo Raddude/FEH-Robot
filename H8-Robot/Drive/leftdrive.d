@@ -1,7 +1,7 @@
-../Drive/leftdrive.d: ../Drive/leftdrive.cpp Libraries/FEHMotor.h \
+../Drive/LeftDrive.d: ../Drive/LeftDrive.cpp Libraries/FEHMotor.h \
  Startup/derivative.h Startup/MK60DZ10.h Libraries/FEHIO.h \
- Drivers/adc16.h ../Drive/leftdrive.h ../Drive/drivebase.h \
- ../Drive/driveconstants.h
+ Drivers/adc16.h ../Drive/LeftDrive.h ../Drive/DriveBase.h \
+ ../Drive/DriveConstants.h
 
 Libraries/FEHMotor.h:
 
@@ -13,8 +13,8 @@ Libraries/FEHIO.h:
 
 Drivers/adc16.h:
 
-../Drive/leftdrive.h:
+../Drive/LeftDrive.h:
 
-../Drive/drivebase.h:
+../Drive/DriveBase.h:
 
-../Drive/driveconstants.h:
+../Drive/DriveConstants.h:

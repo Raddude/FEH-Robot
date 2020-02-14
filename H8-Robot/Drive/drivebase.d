@@ -1,6 +1,6 @@
-../Drive/drivebase.d: ../Drive/drivebase.cpp Libraries/FEHMotor.h \
+../Drive/DriveBase.d: ../Drive/DriveBase.cpp Libraries/FEHMotor.h \
  Startup/derivative.h Startup/MK60DZ10.h Libraries/FEHIO.h \
- Drivers/adc16.h ../Drive/drivebase.h
+ Drivers/adc16.h ../Drive/DriveBase.h
 
 Libraries/FEHMotor.h:
 
@@ -12,4 +12,4 @@ Libraries/FEHIO.h:
 
 Drivers/adc16.h:
 
-../Drive/drivebase.h:
+../Drive/DriveBase.h:

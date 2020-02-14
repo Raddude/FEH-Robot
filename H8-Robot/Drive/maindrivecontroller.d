@@ -1,16 +1,16 @@
-../Drive/maindrivecontroller.d: ../Drive/maindrivecontroller.cpp \
- Libraries/FEHUtility.h ../Drive/maindrivecontroller.h \
- ../Drive/leftdrive.h ../Drive/drivebase.h Libraries/FEHMotor.h \
- Startup/derivative.h Startup/MK60DZ10.h ../Drive/driveconstants.h \
- ../Drive/rightdrive.h
+../Drive/MainDriveController.d: ../Drive/MainDriveController.cpp \
+ Libraries/FEHUtility.h ../Drive/MainDriveController.h \
+ ../Drive/LeftDrive.h ../Drive/DriveBase.h Libraries/FEHMotor.h \
+ Startup/derivative.h Startup/MK60DZ10.h ../Drive/DriveConstants.h \
+ ../Drive/RightDrive.h
 
 Libraries/FEHUtility.h:
 
-../Drive/maindrivecontroller.h:
+../Drive/MainDriveController.h:
 
-../Drive/leftdrive.h:
+../Drive/LeftDrive.h:
 
-../Drive/drivebase.h:
+../Drive/DriveBase.h:
 
 Libraries/FEHMotor.h:
 
@@ -18,6 +18,6 @@ Startup/derivative.h:
 
 Startup/MK60DZ10.h:
 
-../Drive/driveconstants.h:
+../Drive/DriveConstants.h:
 
-../Drive/rightdrive.h:
+../Drive/RightDrive.h:

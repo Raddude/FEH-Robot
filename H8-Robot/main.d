@@ -2,10 +2,10 @@
  ../fehproteusfirmware/Startup/derivative.h Startup/MK60DZ10.h \
  Libraries/FEHUtility.h Startup/derivative.h Libraries/LCDColors.h \
  Libraries/FEHMotor.h Libraries/FEHIO.h Drivers/adc16.h \
- ../IO/screencontroller.h ../IO/filemanager.h \
- ../Drive/maindrivecontroller.h ../Drive/leftdrive.h ../Drive/drivebase.h \
- ../Drive/driveconstants.h ../Drive/rightdrive.h \
- ../Drive/driveconstants.h
+ ../General/ScreenController.h ../General/FileManager.h \
+ ../Drive/MainDriveController.h ../Drive/LeftDrive.h ../Drive/DriveBase.h \
+ ../Drive/DriveConstants.h ../Drive/RightDrive.h \
+ ../Drive/DriveConstants.h
 
 Libraries/FEHLCD.h:
 
@@ -27,18 +27,18 @@ Libraries/FEHIO.h:
 
 Drivers/adc16.h:
 
-../IO/screencontroller.h:
+../General/ScreenController.h:
 
-../IO/filemanager.h:
+../General/FileManager.h:
 
-../Drive/maindrivecontroller.h:
+../Drive/MainDriveController.h:
 
-../Drive/leftdrive.h:
+../Drive/LeftDrive.h:
 
-../Drive/drivebase.h:
+../Drive/DriveBase.h:
 
-../Drive/driveconstants.h:
+../Drive/DriveConstants.h:
 
-../Drive/rightdrive.h:
+../Drive/RightDrive.h:
 
-../Drive/driveconstants.h:
+../Drive/DriveConstants.h:

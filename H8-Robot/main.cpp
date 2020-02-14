@@ -74,20 +74,22 @@ TouchCondition:
     {}
 
     screen->clearScreen();
-
-
-
     drive->resetEncoders();
 
 
-    for (int i = 0; i < 4; i++)
-    {
-        while(drive->driveByEncoders(5.0, TEST_MOTOR_SPEED)){}
-        while(drive->turnRight(90, TEST_MOTOR_SPEED)){}
-    }
+    screen->displayBatteryVoltage();
 
-    screen->displayFullScreenMessage("B");
+    //while(drive->turnLeft(90, TEST_MOTOR_SPEED)){}
 
+
+    while(drive->driveByEncoders(14.0, TEST_MOTOR_SPEED)){}
+    while(drive->turnLeft(90, TEST_MOTOR_SPEED)){}
+    while(drive->driveByEncoders(10.0, TEST_MOTOR_SPEED)){}
+    while(drive->turnRight(90, TEST_MOTOR_SPEED)){}
+    while(drive->driveByEncoders(4.0, TEST_MOTOR_SPEED)){}
+
+
+    Sleep(3.0);
 
     drive->stopMotors();
 
