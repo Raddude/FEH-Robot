@@ -17,8 +17,8 @@
 #include <string>
 #include <iostream>
 
-#include "IO/screencontroller.h"
-#include "IO/filemanager.h"
+#include "General/screencontroller.h"
+#include "General/filemanager.h"
 #include "Drive/maindrivecontroller.h"
 #include "Drive/driveconstants.h"
 
@@ -34,6 +34,22 @@ using namespace std;
 
 int main(void)
 {
+    /*  TO-DO LIST
+     *
+     * -Timer class, that constantly counts up and manages time
+     * -Speed functions relating to time, that take in time and output speeds at different rates (y=sqrt(2), y=x, y=x^2, y=asin(bx+c)+d)
+     * -Optosensor and color sensor classes and methods
+     *
+     *
+     *
+     */
+
+
+
+
+
+
+
     //Main variables
     float x,y;
     int timer = 0;
