@@ -13,7 +13,7 @@
 #include <FEHLCD.h>
 #include <FEHBattery.h>
 #include <string>
-#include "screencontroller.h"
+#include "ScreenController.h"
 
 #define SCREEN_WIDTH 240
 #define SCREEN_HEIGHT 320

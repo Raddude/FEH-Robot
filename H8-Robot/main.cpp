@@ -17,7 +17,7 @@
 #include <string>
 #include <iostream>
 
-#include "General/screencontroller.h"
+#include "General/ScreenController.h"
 #include "General/filemanager.h"
 #include "Drive/maindrivecontroller.h"
 #include "Drive/driveconstants.h"
