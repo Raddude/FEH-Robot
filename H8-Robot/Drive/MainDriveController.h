@@ -1,8 +1,8 @@
 #ifndef MAINDRIVECONTROLLER_H
 #define MAINDRIVECONTROLLER_H
-#include "leftdrive.h"
-#include "rightdrive.h"
-#include "driveconstants.h"
+#include "LeftDrive.h"
+#include "RightDrive.h"
+#include "DriveConstants.h"
 
 
 class MainDriveController : public LeftDrive, public RightDrive

@@ -12,8 +12,8 @@
 
 #include <FEHMotor.h>
 #include <FEHIO.h>
-#include "leftdrive.h"
-#include "driveconstants.h"
+#include "LeftDrive.h"
+#include "DriveConstants.h"
 
 using namespace std;
 

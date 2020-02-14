@@ -11,10 +11,10 @@
  */
 
 #include <FEHUtility.h>
-#include "maindrivecontroller.h"
-#include "leftdrive.h"
-#include "rightdrive.h"
-#include "driveconstants.h"
+#include "MainDriveController.h"
+#include "LeftDrive.h"
+#include "RightDrive.h"
+#include "DriveConstants.h"
 
 #define SLEEP_AMOUNT 0.25
 

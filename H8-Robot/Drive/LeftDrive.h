@@ -1,7 +1,7 @@
 #ifndef LEFTDRIVE_H
 #define LEFTDRIVE_H
-#include "drivebase.h"
-#include "driveconstants.h"
+#include "DriveBase.h"
+#include "DriveConstants.h"
 
 
 class LeftDrive : public DriveBase, public DriveConstants

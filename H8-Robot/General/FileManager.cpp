@@ -12,7 +12,7 @@
 
 #include <FEHSD.h>
 #include <stdio.h>
-#include "filemanager.h"
+#include "FileManager.h"
 
 using namespace std;
 

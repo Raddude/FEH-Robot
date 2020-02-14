@@ -18,9 +18,9 @@
 #include <iostream>
 
 #include "General/ScreenController.h"
-#include "General/filemanager.h"
-#include "Drive/maindrivecontroller.h"
-#include "Drive/driveconstants.h"
+#include "General/FileManager.h"
+#include "Drive/MainDriveController.h"
+#include "Drive/DriveConstants.h"
 
 #define TEST_MOTOR_SPEED 40
 

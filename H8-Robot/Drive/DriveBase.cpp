@@ -13,7 +13,7 @@
 #include <FEHMotor.h>
 #include <FEHIO.h>
 #include <math.h>
-#include "drivebase.h"
+#include "DriveBase.h"
 
 using namespace std;
 
