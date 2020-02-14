@@ -8,6 +8,7 @@ class RightDrive : public DriveBase, public DriveConstants
 {
 public:
     RightDrive();
+    RightDrive* getInstance();
     void driveRightCorrected(int);
     int getRightEncoderCount();
     double getRightEncoderDistance();

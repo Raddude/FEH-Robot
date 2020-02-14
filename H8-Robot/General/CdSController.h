@@ -6,6 +6,7 @@ class CdSController
 {
 public:
     CdSController();
+    CdSController* getInstance();
 };
 
 #endif // CDSCONTROLLER_H

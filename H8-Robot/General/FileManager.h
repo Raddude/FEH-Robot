@@ -6,6 +6,7 @@ class FileManager
 {
 public:
     FileManager();
+    FileManager* getInstance();
     void readAllVariables();
     void writeAllVariables();
     int readIntVariable(int);

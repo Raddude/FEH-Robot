@@ -6,6 +6,7 @@ class BurgerFlipper
 {
 public:
     BurgerFlipper();
+    BurgerFlipper* getInstance();
 };
 
 #endif // BURGERFLIPPER_H

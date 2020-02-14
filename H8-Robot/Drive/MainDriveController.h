@@ -9,6 +9,7 @@ class MainDriveController : public LeftDrive, public RightDrive
 {
 public:
     MainDriveController();
+    MainDriveController* getInstance();
     void driveByPower(int, int);
     bool driveByEncoders(double, int);
     bool driveByEncoders(double, int, double, int);

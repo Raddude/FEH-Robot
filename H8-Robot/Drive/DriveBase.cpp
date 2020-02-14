@@ -17,6 +17,8 @@
 
 using namespace std;
 
+DriveBase* instance = new DriveBase();
+
 FEHMotor leftMotor(FEHMotor::Motor0, 9.0);
 FEHMotor rightMotor(FEHMotor::Motor1, 9.0);
 
@@ -29,6 +31,13 @@ FEHMotor rightMotor(FEHMotor::Motor1, 9.0);
 DriveBase::DriveBase()
 {
 
+}
+
+/*  This returns the singleton instance of DriveBase.cpp
+ */
+DriveBase* DriveBase::getInstance()
+{
+    return instance;
 }
 
 

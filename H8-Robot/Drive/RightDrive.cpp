@@ -17,6 +17,8 @@
 
 using namespace std;
 
+RightDrive* instance = new RightDrive();
+
 DigitalEncoder rightEncoder(FEHIO::P0_0);
 
 
@@ -29,6 +31,14 @@ RightDrive::RightDrive()
 {
 
 }
+
+/*  This method returns the singleton instance of RightDrive.cpp
+ */
+RightDrive* RightDrive::getInstance()
+{
+    return instance;
+}
+
 
 
 

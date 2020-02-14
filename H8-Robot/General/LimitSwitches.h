@@ -6,6 +6,7 @@ class LimitSwitches
 {
 public:
     LimitSwitches();
+    LimitSwitches* getInstance();
 };
 
 #endif // LIMITSWITCHES_H

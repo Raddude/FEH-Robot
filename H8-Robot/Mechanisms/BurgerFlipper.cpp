@@ -6,12 +6,14 @@
  *
  *  Superclasses: None.
  *  Subclasses: None.
- *  Used in: main.cpp.
+ *  Used in: None.
  *  Uses: None.
  */
 
 #include <FEHServo.h>
 #include "BurgerFlipper.h"
+
+BurgerFlipper* instance = new BurgerFlipper();
 
 
 
@@ -22,4 +24,11 @@
 BurgerFlipper::BurgerFlipper()
 {
 
+}
+
+/*  This method returns the singleton instance of BurgerFlipper.cpp
+ */
+BurgerFlipper* BurgerFlipper::getInstance()
+{
+    return instance;
 }

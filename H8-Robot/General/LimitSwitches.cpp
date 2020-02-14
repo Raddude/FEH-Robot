@@ -6,11 +6,13 @@
  *
  *  Superclasses: None.
  *  Subclasses: None.
- *  Used in: main.cpp.
+ *  Used in: None.
  *  Uses: None.
  */
 
 #include "LimitSwitches.h"
+
+LimitSwitches* instance = new LimitSwitches();
 
 
 
@@ -21,4 +23,11 @@
 LimitSwitches::LimitSwitches()
 {
 
+}
+
+/*  This method returns the singleton instance of LimitSwitches.cpp
+ */
+LimitSwitches* LimitSwitches::getInstance()
+{
+    return instance;
 }

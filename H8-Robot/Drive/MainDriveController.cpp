@@ -20,6 +20,8 @@
 
 using namespace std;
 
+MainDriveController* instance = new MainDriveController();
+
 
 
 
@@ -29,6 +31,13 @@ using namespace std;
 MainDriveController::MainDriveController()
 {
 
+}
+
+/*  This method returns the singleton instance of MainDriveController.cpp
+ */
+MainDriveController* MainDriveController::getInstance()
+{
+    return instance;
 }
 
 

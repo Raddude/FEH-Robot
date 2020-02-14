@@ -55,9 +55,9 @@ int main(void)
     int timer = 0;
 
     //Singleton Instances
-    ScreenController* screen = new ScreenController();
-    MainDriveController* drive = new MainDriveController();
-    FileManager* fileIO = new FileManager();
+    ScreenController screen = ScreenController.getInstance();
+    MainDriveController* drive = MainDriveController.getInstance();
+    FileManager* fileIO = FileManager.getInstance();
 
 
 TouchCondition:

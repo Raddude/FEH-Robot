@@ -1,11 +1,12 @@
-#ifndef ICECREAM_H
-#define ICECREAM_H
+#ifndef ICECREAMCLAW_H
+#define ICECREAMCLAW_H
 
 
-class IceCream
+class IceCreamClaw
 {
 public:
-    IceCream();
+    IceCreamClaw();
+    IceCreamClaw* getInstance();
 };
 
-#endif // ICECREAM_H
+#endif // ICECREAMCLAW_H

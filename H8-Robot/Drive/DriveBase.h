@@ -8,6 +8,7 @@ class DriveBase
 {
 public:
     DriveBase();
+    DriveBase* getInstance();
 
     void driveLeftMotor(int);
     void driveRightMotor(int);

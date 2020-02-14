@@ -6,6 +6,7 @@ class Time
 {
 public:
     Time();
+    Time* getInstance();
 };
 
 #endif // TIME_H

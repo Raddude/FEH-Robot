@@ -6,19 +6,28 @@
  *
  *  Superclasses: None.
  *  Subclasses: None.
- *  Used in: main.cpp.
+ *  Used in: None.
  *  Uses: None.
  */
 
 #include "IceCreamClaw.h"
 
+IceCreamClaw* instance = new IceCreamClaw();
 
 
 
 
 
 
-IceCream::IceCream()
+
+IceCreamClaw::IceCreamClaw()
 {
 
+}
+
+/* This method returns the singleton instance of IceCreamClaw.cpp
+ */
+IceCreamClaw* IceCreamClaw::getInstance()
+{
+    return instance;
 }

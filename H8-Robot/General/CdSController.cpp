@@ -6,11 +6,16 @@
  *
  *  Superclasses: None.
  *  Subclasses: None.
- *  Used in: main.cpp.
+ *  Used in: None.
  *  Uses: None.
  */
 
+#include <FEHIO.h>
 #include "CdSController.h"
+
+CdSController* instance = new CdSController();
+
+AnalogInputPin CdSCell(FEHIO::P2_0);
 
 
 
@@ -21,4 +26,11 @@
 CdSController::CdSController()
 {
 
+}
+
+/*  This method returns the singleton instance of CdSController.cpp
+ */
+CdSController* CdSController::getInstance()
+{
+    return instance;
 }

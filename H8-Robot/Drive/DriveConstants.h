@@ -6,6 +6,7 @@ class DriveConstants
 {
 public:
     DriveConstants();
+    DriveConstants* getInstance();
     double getWheelDiameter();
     double getWheelSpan();
     double getTicksPerRotation();

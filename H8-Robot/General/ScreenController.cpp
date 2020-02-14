@@ -20,6 +20,8 @@
 
 using namespace std;
 
+ScreenController* instance = new ScreenController();
+
 
 
 
@@ -31,7 +33,12 @@ ScreenController::ScreenController()
 
 }
 
-
+/*  This method returns the singleton instance of ScreenController.cpp
+ */
+ScreenController* ScreenController::getInstance()
+{
+    return instance;
+}
 
 
 
