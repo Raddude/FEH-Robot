@@ -6,7 +6,10 @@ class CdSController
 {
 public:
     CdSController();
-    CdSController* getInstance();
+    static CdSController* getInstance();
+
+private:
+    static CdSController *instance;
 };
 
 #endif // CDSCONTROLLER_H

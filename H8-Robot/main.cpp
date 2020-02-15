@@ -55,9 +55,9 @@ int main(void)
     int timer = 0;
 
     //Singleton Instances
-    ScreenController screen = ScreenController.getInstance();
-    MainDriveController* drive = MainDriveController.getInstance();
-    FileManager* fileIO = FileManager.getInstance();
+    ScreenController* screen = ScreenController::getInstance();
+    MainDriveController* drive = MainDriveController::getInstance();
+    FileManager* fileIO = FileManager::getInstance();
 
 
 TouchCondition:
@@ -87,12 +87,6 @@ TouchCondition:
     while(drive->driveByEncoders(10.0, TEST_MOTOR_SPEED)){}
     while(drive->turnRight(90, TEST_MOTOR_SPEED)){}
     while(drive->driveByEncoders(4.0, TEST_MOTOR_SPEED)){}
-
-
-    Sleep(3.0);
-
-    drive->stopMotors();
-
     goto TouchCondition;
 
 

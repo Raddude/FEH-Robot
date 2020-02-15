@@ -6,10 +6,13 @@ class Optosensors
 {
 public:
     Optosensors();
-    Optosensors* getInstance();
+    static Optosensors* getInstance();
     double getLeftOptosensor();
     double getMiddleOptosensor();
     double getRightOptosensor();
+
+private:
+    static Optosensors *instance;
 };
 
 #endif // OPTOSENSORS_H

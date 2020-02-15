@@ -22,7 +22,7 @@
 #define TICKS_PER_FULL_TURN (DISTANCE_PER_TICK/DISTANCE_PER_FULL_TURN)
 #define SLEEP_AMOUNT 0.125
 
-DriveConstants* instance = new DriveConstants();
+DriveConstants* DriveConstants::instance = 0;
 
 
 
@@ -39,6 +39,10 @@ DriveConstants::DriveConstants()
  */
 DriveConstants* DriveConstants::getInstance()
 {
+    if (instance == 0)
+    {
+        instance = new DriveConstants();
+    }
     return instance;
 }
 

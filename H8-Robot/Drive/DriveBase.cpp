@@ -17,7 +17,7 @@
 
 using namespace std;
 
-DriveBase* instance = new DriveBase();
+DriveBase* DriveBase::instance = 0;
 
 FEHMotor leftMotor(FEHMotor::Motor0, 9.0);
 FEHMotor rightMotor(FEHMotor::Motor1, 9.0);
@@ -37,6 +37,10 @@ DriveBase::DriveBase()
  */
 DriveBase* DriveBase::getInstance()
 {
+    if (instance == 0)
+    {
+        instance = new DriveBase();
+    }
     return instance;
 }
 

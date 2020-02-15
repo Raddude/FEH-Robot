@@ -9,7 +9,7 @@ class MainDriveController : public LeftDrive, public RightDrive
 {
 public:
     MainDriveController();
-    MainDriveController* getInstance();
+    static MainDriveController* getInstance();
     void driveByPower(int, int);
     bool driveByEncoders(double, int);
     bool driveByEncoders(double, int, double, int);
@@ -21,6 +21,8 @@ public:
     double getTickCountFromDistance(double);
     double getDistanceFromAngle(double);
 
+private:
+    static MainDriveController *instance;
 };
 
 #endif // MAINDRIVECONTROLLER_H

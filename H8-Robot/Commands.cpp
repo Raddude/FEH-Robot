@@ -12,7 +12,7 @@
 
 #include "Commands.h"
 
-Commands* instance = new Commands();
+Commands* Commands::instance = 0;
 
 
 
@@ -29,5 +29,9 @@ Commands::Commands()
  */
 Commands* Commands::getInstance()
 {
+    if (instance == 0)
+    {
+        instance = new Commands();
+    }
     return instance;
 }

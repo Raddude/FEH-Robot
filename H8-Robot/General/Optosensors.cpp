@@ -17,7 +17,7 @@ AnalogInputPin leftSensor(FEHIO::P1_2);
 AnalogInputPin middleSensor(FEHIO::P1_1);
 AnalogInputPin rightSensor(FEHIO::P1_0);
 
-Optosensors *instance = new Optosensors();
+Optosensors* Optosensors::instance = 0;
 
 
 
@@ -34,6 +34,10 @@ Optosensors::Optosensors()
  */
 Optosensors* Optosensors::getInstance()
 {
+    if (instance == 0)
+    {
+        instance = new Optosensors();
+    }
     return instance;
 }
 

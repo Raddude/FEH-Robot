@@ -12,7 +12,7 @@
 
 #include "Time.h"
 
-Time* instance = new Time();
+Time* Time::instance = 0;
 
 
 
@@ -29,5 +29,9 @@ Time::Time()
  */
 Time* Time::getInstance()
 {
+    if (instance == 0)
+    {
+        instance = new Time();
+    }
     return instance;
 }

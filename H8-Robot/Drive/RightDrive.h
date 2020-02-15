@@ -13,6 +13,9 @@ public:
     int getRightEncoderCount();
     double getRightEncoderDistance();
     void resetRightEncoder();
+
+private:
+    static RightDrive *instance;
 };
 
 #endif // RIGHTDRIVE_H

@@ -16,7 +16,7 @@
 
 using namespace std;
 
-FileManager* instance = new FileManager();
+FileManager* FileManager::instance = 0;
 
 int variables[100];
 
@@ -35,6 +35,10 @@ FileManager::FileManager()
  */
 FileManager* FileManager::getInstance()
 {
+    if (instance == 0)
+    {
+        instance = new FileManager();
+    }
     return instance;
 }
 

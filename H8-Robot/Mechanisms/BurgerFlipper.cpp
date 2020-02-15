@@ -13,7 +13,7 @@
 #include <FEHServo.h>
 #include "BurgerFlipper.h"
 
-BurgerFlipper* instance = new BurgerFlipper();
+BurgerFlipper* BurgerFlipper::instance = 0;
 
 
 
@@ -30,5 +30,9 @@ BurgerFlipper::BurgerFlipper()
  */
 BurgerFlipper* BurgerFlipper::getInstance()
 {
+    if (instance == 0)
+    {
+        instance = new BurgerFlipper();
+    }
     return instance;
 }

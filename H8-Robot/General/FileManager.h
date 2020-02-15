@@ -6,11 +6,14 @@ class FileManager
 {
 public:
     FileManager();
-    FileManager* getInstance();
+    static FileManager* getInstance();
     void readAllVariables();
     void writeAllVariables();
     int readIntVariable(int);
     void writeIntVariable(int, int);
+
+private:
+    static FileManager *instance;
 };
 
 #endif // FILEMANAGER_H

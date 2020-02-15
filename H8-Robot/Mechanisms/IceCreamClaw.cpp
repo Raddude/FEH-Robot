@@ -12,7 +12,7 @@
 
 #include "IceCreamClaw.h"
 
-IceCreamClaw* instance = new IceCreamClaw();
+IceCreamClaw* IceCreamClaw::instance = 0;
 
 
 
@@ -29,5 +29,9 @@ IceCreamClaw::IceCreamClaw()
  */
 IceCreamClaw* IceCreamClaw::getInstance()
 {
+    if (instance == 0)
+    {
+        instance = new IceCreamClaw();
+    }
     return instance;
 }

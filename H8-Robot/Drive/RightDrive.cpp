@@ -17,7 +17,7 @@
 
 using namespace std;
 
-RightDrive* instance = new RightDrive();
+RightDrive* RightDrive::instance = 0;
 
 DigitalEncoder rightEncoder(FEHIO::P0_0);
 
@@ -36,6 +36,10 @@ RightDrive::RightDrive()
  */
 RightDrive* RightDrive::getInstance()
 {
+    if (instance == 0)
+    {
+        instance = new RightDrive();
+    }
     return instance;
 }
 

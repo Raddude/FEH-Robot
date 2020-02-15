@@ -6,7 +6,10 @@ class IceCreamClaw
 {
 public:
     IceCreamClaw();
-    IceCreamClaw* getInstance();
+    static IceCreamClaw* getInstance();
+
+private:
+    static IceCreamClaw *instance;
 };
 
 #endif // ICECREAMCLAW_H

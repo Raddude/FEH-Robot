@@ -29,5 +29,9 @@ LimitSwitches::LimitSwitches()
  */
 LimitSwitches* LimitSwitches::getInstance()
 {
+    if (instance == 0)
+    {
+        instance = new LimitSwitches();
+    }
     return instance;
 }

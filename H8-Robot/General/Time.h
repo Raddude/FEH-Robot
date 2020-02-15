@@ -6,7 +6,10 @@ class Time
 {
 public:
     Time();
-    Time* getInstance();
+    static Time* getInstance();
+
+private:
+    static Time *instance;
 };
 
 #endif // TIME_H

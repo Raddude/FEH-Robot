@@ -6,7 +6,10 @@ class Commands
 {
 public:
     Commands();
-    Commands* getInstance();
+    static Commands* getInstance();
+
+private:
+    static Commands *instance;
 };
 
 #endif // COMMANDS_H

@@ -10,10 +10,13 @@ class ScreenController
 {
 public:
     ScreenController();
-    ScreenController* getInstance();
+    static ScreenController* getInstance();
     void clearScreen();
     void displayFullScreenMessage(const char*);
     void displayBatteryVoltage();
+
+private:
+    static ScreenController *instance;
 };
 
 #endif // SCREENCONTROLLER_H

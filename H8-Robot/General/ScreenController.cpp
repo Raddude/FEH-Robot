@@ -20,7 +20,7 @@
 
 using namespace std;
 
-ScreenController* instance = new ScreenController();
+ScreenController* ScreenController::instance = 0;
 
 
 
@@ -37,6 +37,10 @@ ScreenController::ScreenController()
  */
 ScreenController* ScreenController::getInstance()
 {
+    if (instance == 0)
+    {
+        instance = new ScreenController();
+    }
     return instance;
 }
 

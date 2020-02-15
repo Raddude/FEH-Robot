@@ -17,7 +17,7 @@
 
 using namespace std;
 
-LeftDrive* instance = new LeftDrive();
+LeftDrive* LeftDrive::instance = 0;
 
 DigitalEncoder leftEncoder(FEHIO::P0_1);
 
@@ -36,6 +36,10 @@ LeftDrive::LeftDrive()
  */
 LeftDrive* LeftDrive::getInstance()
 {
+    if (instance == 0)
+    {
+        instance = new LeftDrive();
+    }
     return instance;
 }
 
