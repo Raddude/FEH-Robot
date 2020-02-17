@@ -13,6 +13,9 @@
 #include <FEHIO.h>
 #include "Optosensors.h"
 
+#define MIN_LINE_THRESHOLD 0
+#define MAX_LINE_THRESHOLD 3.3
+
 AnalogInputPin leftSensor(FEHIO::P1_2);
 AnalogInputPin middleSensor(FEHIO::P1_1);
 AnalogInputPin rightSensor(FEHIO::P1_0);
@@ -66,4 +69,44 @@ double Optosensors::getMiddleOptosensor()
 double Optosensors::getRightOptosensor()
 {
     return rightSensor.Value();
+}
+
+
+
+
+
+/*  This method returns if the left sensor is over a black line
+ */
+bool Optosensors::isLeftSeeingALine()
+{
+    if (leftSensor.Value() > MIN_LINE_THRESHOLD && leftSensor.Value() < MAX_LINE_THRESHOLD)
+    {
+        return true;
+    }
+
+    return false;
+}
+
+/*  This method returns if the middle sensor is over a black line
+ */
+bool Optosensors::isMiddleSeeingALine()
+{
+    if (middleSensor.Value() > MIN_LINE_THRESHOLD && middleSensor.Value() < MAX_LINE_THRESHOLD)
+    {
+        return true;
+    }
+
+    return false;
+}
+
+/*  This method returns if the right sensor is over a black line
+ */
+bool Optosensors::isRightSeeingALine()
+{
+    if (rightSensor.Value() > MIN_LINE_THRESHOLD && rightSensor.Value() < MAX_LINE_THRESHOLD)
+    {
+        return true;
+    }
+
+    return false;
 }

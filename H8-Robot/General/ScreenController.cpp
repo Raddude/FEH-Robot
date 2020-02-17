@@ -14,6 +14,8 @@
 #include <FEHBattery.h>
 #include <string>
 #include "ScreenController.h"
+#include "CdSController.h"
+#include "Optosensors.h"
 
 #define SCREEN_WIDTH 240
 #define SCREEN_HEIGHT 320
@@ -21,7 +23,8 @@
 using namespace std;
 
 ScreenController* ScreenController::instance = 0;
-
+CdSController* cdsCell = CdSController::getInstance();
+Optosensors* optosensors = Optosensors::getInstance();
 
 
 
@@ -81,4 +84,41 @@ void ScreenController::displayFullScreenMessage(const char* input)
 void ScreenController::displayBatteryVoltage()
 {
     LCD.WriteLine(Battery.Voltage());
+}
+
+
+
+
+
+/*  This function displays the current value of the CdS cell to the screen.
+ */
+void ScreenController::displayCdSReading()
+{
+    LCD.WriteLine(cdsCell->getCurrentValue());
+}
+
+
+
+
+
+/*  This function displays the reading of the selected optosensor.
+ *
+ *  char input - This letter (L, M, or R) represents which optosensor to display.
+ */
+void ScreenController::displayOptosensorReading(char input)
+{
+    if (input == 'L')
+    {
+        LCD.WriteLine(optosensors->getLeftOptosensor());
+    }
+
+    else if (input == 'M')
+    {
+        LCD.WriteLine(optosensors->getMiddleOptosensor());
+    }
+
+    else if (input == 'R')
+    {
+        LCD.WriteLine(optosensors->getRightOptosensor());
+    }
 }

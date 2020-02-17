@@ -8,6 +8,10 @@ public:
     CdSController();
     static CdSController* getInstance();
 
+    bool isRed();
+    bool isBlue();
+    double getCurrentValue();
+
 private:
     static CdSController *instance;
 };

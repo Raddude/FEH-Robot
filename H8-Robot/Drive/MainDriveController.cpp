@@ -83,7 +83,7 @@ bool MainDriveController::driveByEncoders(double target, int speed)
     {
         stopMotors();
         resetEncoders();
-        Sleep(LeftDrive::getSleepAmount);
+        Sleep(LeftDrive::getSleepAmount());
         return false;
     }
 
@@ -98,7 +98,7 @@ bool MainDriveController::driveByEncoders(double target, int speed)
     {
         stopMotors();
         resetEncoders();
-        Sleep(LeftDrive::getSleepAmount);
+        Sleep(LeftDrive::getSleepAmount());
         return false;
     }
 
@@ -125,7 +125,7 @@ bool MainDriveController::driveByEncoders(double leftTarget, int leftSpeed, doub
     {
         stopMotors();
         resetEncoders();
-        Sleep(LeftDrive::getSleepAmount);
+        Sleep(LeftDrive::getSleepAmount());
         return false;
     }
 
@@ -140,7 +140,7 @@ bool MainDriveController::driveByEncoders(double leftTarget, int leftSpeed, doub
     {
         stopMotors();
         resetEncoders();
-        Sleep(LeftDrive::getSleepAmount);
+        Sleep(LeftDrive::getSleepAmount());
         return false;
     }
 
@@ -167,7 +167,7 @@ bool MainDriveController::driveByEncoders(int leftTarget, int leftSpeed, int rig
     {
         stopMotors();
         resetEncoders();
-        Sleep(LeftDrive::getSleepAmount);
+        Sleep(LeftDrive::getSleepAmount());
         return false;
     }
 
@@ -182,7 +182,7 @@ bool MainDriveController::driveByEncoders(int leftTarget, int leftSpeed, int rig
     {
         stopMotors();
         resetEncoders();
-        Sleep(LeftDrive::getSleepAmount);
+        Sleep(LeftDrive::getSleepAmount());
         return false;
     }
 

@@ -10,6 +10,9 @@ public:
     double getLeftOptosensor();
     double getMiddleOptosensor();
     double getRightOptosensor();
+    bool isLeftSeeingALine();
+    bool isMiddleSeeingALine();
+    bool isRightSeeingALine();
 
 private:
     static Optosensors *instance;

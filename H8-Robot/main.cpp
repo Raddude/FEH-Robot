@@ -17,8 +17,10 @@
 #include <string>
 #include <iostream>
 
-#include "General/ScreenController.h"
+#include "General/CdSController.h"
 #include "General/FileManager.h"
+#include "General/ScreenController.h"
+#include "General/Optosensors.h"
 #include "Drive/MainDriveController.h"
 #include "Drive/DriveConstants.h"
 
@@ -52,12 +54,13 @@ int main(void)
 
     //Main variables
     float x,y;
-    int timer = 0;
 
     //Singleton Instances
     ScreenController* screen = ScreenController::getInstance();
     MainDriveController* drive = MainDriveController::getInstance();
     FileManager* fileIO = FileManager::getInstance();
+    CdSController* cdsCell = CdSController::getInstance();
+    Optosensors* optosensors = Optosensors::getInstance();
 
 
 TouchCondition:
@@ -75,18 +78,27 @@ TouchCondition:
 
     screen->clearScreen();
     drive->resetEncoders();
-
-
     screen->displayBatteryVoltage();
 
-    //while(drive->turnLeft(90, TEST_MOTOR_SPEED)){}
 
 
-    while(drive->driveByEncoders(14.0, TEST_MOTOR_SPEED)){}
-    while(drive->turnLeft(90, TEST_MOTOR_SPEED)){}
-    while(drive->driveByEncoders(10.0, TEST_MOTOR_SPEED)){}
-    while(drive->turnRight(90, TEST_MOTOR_SPEED)){}
-    while(drive->driveByEncoders(4.0, TEST_MOTOR_SPEED)){}
+
+
+
+
+    /*
+     *  MAIN ROBOT COMMANDS
+     */
+
+    while(true)
+    {
+
+    }
+
+
+
+
+
     goto TouchCondition;
 
 

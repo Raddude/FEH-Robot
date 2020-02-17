@@ -3,7 +3,8 @@
  ../fehproteusfirmware/Startup/derivative.h Startup/MK60DZ10.h \
  Libraries/FEHUtility.h Startup/derivative.h Libraries/LCDColors.h \
  Libraries/FEHBattery.h Libraries/FEHIO.h Drivers/adc16.h \
- ../General/ScreenController.h
+ ../General/ScreenController.h ../General/CdSController.h \
+ ../General/Optosensors.h
 
 Libraries/FEHLCD.h:
 
@@ -26,3 +27,7 @@ Libraries/FEHIO.h:
 Drivers/adc16.h:
 
 ../General/ScreenController.h:
+
+../General/CdSController.h:
+
+../General/Optosensors.h:

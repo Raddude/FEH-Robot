@@ -14,6 +14,8 @@ public:
     void clearScreen();
     void displayFullScreenMessage(const char*);
     void displayBatteryVoltage();
+    void displayCdSReading();
+    void displayOptosensorReading(char);
 
 private:
     static ScreenController *instance;
