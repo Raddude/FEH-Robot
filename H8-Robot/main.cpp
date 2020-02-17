@@ -28,6 +28,8 @@
 
 using namespace std;
 
+void gotoCorrectStartingCondition(char);
+
 
 
 
@@ -54,6 +56,7 @@ int main(void)
 
     //Main variables
     float x,y;
+    bool testMode = true;
 
     //Singleton Instances
     ScreenController* screen = ScreenController::getInstance();
@@ -61,6 +64,16 @@ int main(void)
     FileManager* fileIO = FileManager::getInstance();
     CdSController* cdsCell = CdSController::getInstance();
     Optosensors* optosensors = Optosensors::getInstance();
+
+
+
+    //If test mode is enabled, use the touch condition instead of the light condition
+    if (testMode)
+    {
+        goto TouchCondition;
+    }
+    goto LightCondition;
+
 
 
 TouchCondition:
@@ -80,15 +93,32 @@ TouchCondition:
     drive->resetEncoders();
     screen->displayBatteryVoltage();
 
+    goto DriveLoop;
+
+
+
+LightCondition:
+
+    //Start Condition: Wait for the light to turn on
+    screen->clearScreen();
+    LCD.ClearBuffer();
+    drive->resetEncoders();
+
+    goto DriveLoop;
 
 
 
 
 
 
+
+DriveLoop:
     /*
      *  MAIN ROBOT COMMANDS
      */
+
+    //Example command
+    //while(drive->driveByEncoders(14.0, TEST_MOTOR_SPEED));
 
     while(true)
     {
@@ -98,8 +128,12 @@ TouchCondition:
 
 
 
-
-    goto TouchCondition;
+    //If test mode is enabled, use the touch condition instead of the light condition
+    if (testMode)
+    {
+        goto TouchCondition;
+    }
+    goto LightCondition;
 
 
     return 0;
