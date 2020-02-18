@@ -6,7 +6,6 @@ class DriveConstants
 {
 public:
     DriveConstants();
-    static DriveConstants* getInstance();
 
     double getWheelDiameter();
     double getWheelSpan();
@@ -17,9 +16,8 @@ public:
     double getDistancePerFullTurn();
     double getTicksPerFullTurn();
     double getSleepAmount();
-
-private:
-    static DriveConstants *instance;
 };
+
+extern DriveConstants driveConstants;
 
 #endif // DRIVECONSTANTS_H

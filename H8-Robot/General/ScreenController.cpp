@@ -22,9 +22,7 @@
 
 using namespace std;
 
-ScreenController* ScreenController::instance = 0;
-CdSController* cdsCell = CdSController::getInstance();
-Optosensors* optosensors = Optosensors::getInstance();
+ScreenController screen;
 
 
 
@@ -36,16 +34,7 @@ ScreenController::ScreenController()
 
 }
 
-/*  This method returns the singleton instance of ScreenController.cpp
- */
-ScreenController* ScreenController::getInstance()
-{
-    if (instance == 0)
-    {
-        instance = new ScreenController();
-    }
-    return instance;
-}
+
 
 
 
@@ -94,7 +83,7 @@ void ScreenController::displayBatteryVoltage()
  */
 void ScreenController::displayCdSReading()
 {
-    LCD.WriteLine(cdsCell->getCurrentValue());
+    LCD.WriteLine(cdsCell.getCurrentValue());
 }
 
 
@@ -109,16 +98,66 @@ void ScreenController::displayOptosensorReading(char input)
 {
     if (input == 'L')
     {
-        LCD.WriteLine(optosensors->getLeftOptosensor());
+        LCD.WriteLine('L');
+        LCD.WriteLine(optosensors.getLeftOptosensor());
     }
 
     else if (input == 'M')
     {
-        LCD.WriteLine(optosensors->getMiddleOptosensor());
+        LCD.WriteLine('M');
+        LCD.WriteLine(optosensors.getMiddleOptosensor());
     }
 
     else if (input == 'R')
     {
-        LCD.WriteLine(optosensors->getRightOptosensor());
+        LCD.WriteLine('R');
+        LCD.WriteLine(optosensors.getRightOptosensor());
     }
+}
+
+/*  This function displays the reading of the selected optosensor.
+ *
+ *  char input - This letter (L, M, or R) represents which optosensor to display.
+ */
+void ScreenController::displayOptosensorDetection(char input)
+{
+    if (input == 'L')
+    {
+        LCD.WriteLine('L');
+        LCD.WriteLine(optosensors.isLeftSeeingALine());
+    }
+
+    else if (input == 'M')
+    {
+        LCD.WriteLine('M');
+        LCD.WriteLine(optosensors.isMiddleSeeingALine());
+    }
+
+    else if (input == 'R')
+    {
+        LCD.WriteLine('R');
+        LCD.WriteLine(optosensors.isRightSeeingALine());
+    }
+}
+
+
+
+
+
+/*  This method displays all 3 optosensor readings to the screen
+ */
+void ScreenController::displayAllOptosensorReading()
+{
+    displayOptosensorReading('L');
+    displayOptosensorReading('M');
+    displayOptosensorReading('R');
+}
+
+/*  This method displays all 3 optosensor detections to the screen
+ */
+void ScreenController::displayAllOptosensorDetection()
+{
+    displayOptosensorDetection('L');
+    displayOptosensorDetection('M');
+    displayOptosensorDetection('R');
 }

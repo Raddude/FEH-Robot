@@ -16,9 +16,9 @@
 
 using namespace std;
 
-FileManager* FileManager::instance = 0;
+FileManager fileManager;
 
-int variables[100];
+int variables[0];
 
 
 
@@ -29,17 +29,6 @@ int variables[100];
 FileManager::FileManager()
 {
 
-}
-
-/*  This method returns the singleton instance of FileManager.cpp
- */
-FileManager* FileManager::getInstance()
-{
-    if (instance == 0)
-    {
-        instance = new FileManager();
-    }
-    return instance;
 }
 
 

@@ -6,10 +6,8 @@ class BurgerFlipper
 {
 public:
     BurgerFlipper();
-    static BurgerFlipper* getInstance();
-
-private:
-    static BurgerFlipper *instance;
 };
+
+extern BurgerFlipper burger;
 
 #endif // BURGERFLIPPER_H

@@ -12,7 +12,7 @@
 
 #include "IceCreamClaw.h"
 
-IceCreamClaw* IceCreamClaw::instance = 0;
+IceCreamClaw iceCream;
 
 
 
@@ -23,15 +23,4 @@ IceCreamClaw* IceCreamClaw::instance = 0;
 IceCreamClaw::IceCreamClaw()
 {
 
-}
-
-/* This method returns the singleton instance of IceCreamClaw.cpp
- */
-IceCreamClaw* IceCreamClaw::getInstance()
-{
-    if (instance == 0)
-    {
-        instance = new IceCreamClaw();
-    }
-    return instance;
 }

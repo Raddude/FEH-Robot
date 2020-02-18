@@ -8,16 +8,14 @@ class DriveBase
 {
 public:
     DriveBase();
-    static DriveBase* getInstance();
 
     void driveLeftMotor(int);
     void driveRightMotor(int);
 
     void stopLeftMotor();
     void stopRightMotor();
-
-private:
-    static DriveBase *instance;
 };
+
+extern DriveBase driveBase;
 
 #endif // DRIVEBASE_H

@@ -17,7 +17,7 @@
 
 using namespace std;
 
-LeftDrive* LeftDrive::instance = 0;
+LeftDrive leftDrive;
 
 DigitalEncoder leftEncoder(FEHIO::P0_1);
 
@@ -30,17 +30,6 @@ DigitalEncoder leftEncoder(FEHIO::P0_1);
 LeftDrive::LeftDrive()
 {
 
-}
-
-/*  This method returns the singleton instance of LeftDrive
- */
-LeftDrive* LeftDrive::getInstance()
-{
-    if (instance == 0)
-    {
-        instance = new LeftDrive();
-    }
-    return instance;
 }
 
 

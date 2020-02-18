@@ -6,10 +6,8 @@ class Time
 {
 public:
     Time();
-    static Time* getInstance();
-
-private:
-    static Time *instance;
 };
+
+extern Time time;
 
 #endif // TIME_H

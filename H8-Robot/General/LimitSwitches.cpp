@@ -12,7 +12,7 @@
 
 #include "LimitSwitches.h"
 
-LimitSwitches* instance = new LimitSwitches();
+LimitSwitches limitSwitches;
 
 
 
@@ -23,15 +23,4 @@ LimitSwitches* instance = new LimitSwitches();
 LimitSwitches::LimitSwitches()
 {
 
-}
-
-/*  This method returns the singleton instance of LimitSwitches.cpp
- */
-LimitSwitches* LimitSwitches::getInstance()
-{
-    if (instance == 0)
-    {
-        instance = new LimitSwitches();
-    }
-    return instance;
 }

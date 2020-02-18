@@ -18,7 +18,7 @@
 #define BLUE_MIN_THRESHOLD 1.2
 #define BLUE_MAX_THRESHOLD 1.6
 
-CdSController* CdSController::instance = 0;
+CdSController cdsCell;
 
 AnalogInputPin CdSCell(FEHIO::P2_0);
 
@@ -31,17 +31,6 @@ AnalogInputPin CdSCell(FEHIO::P2_0);
 CdSController::CdSController()
 {
 
-}
-
-/*  This method returns the singleton instance of CdSController.cpp
- */
-CdSController* CdSController::getInstance()
-{
-    if (instance == 0)
-    {
-        instance = new CdSController();
-    }
-    return instance;
 }
 
 

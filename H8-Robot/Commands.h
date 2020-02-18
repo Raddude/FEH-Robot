@@ -1,15 +1,17 @@
 #ifndef COMMANDS_H
 #define COMMANDS_H
 
+#include "General/Optosensors.h"
+
 
 class Commands
 {
 public:
     Commands();
-    static Commands* getInstance();
 
-private:
-    static Commands *instance;
+    bool followLineForDistance(double, int);
 };
+
+extern Commands commands;
 
 #endif // COMMANDS_H

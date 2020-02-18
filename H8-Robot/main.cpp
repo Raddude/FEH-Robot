@@ -23,8 +23,9 @@
 #include "General/Optosensors.h"
 #include "Drive/MainDriveController.h"
 #include "Drive/DriveConstants.h"
+#include "Commands.h"
 
-#define TEST_MOTOR_SPEED 40
+#define TEST_MOTOR_SPEED 30
 
 using namespace std;
 
@@ -58,15 +59,6 @@ int main(void)
     float x,y;
     bool testMode = true;
 
-    //Singleton Instances
-    ScreenController* screen = ScreenController::getInstance();
-    MainDriveController* drive = MainDriveController::getInstance();
-    FileManager* fileIO = FileManager::getInstance();
-    CdSController* cdsCell = CdSController::getInstance();
-    Optosensors* optosensors = Optosensors::getInstance();
-
-
-
     //If test mode is enabled, use the touch condition instead of the light condition
     if (testMode)
     {
@@ -79,8 +71,8 @@ int main(void)
 TouchCondition:
 
     //Start Condition: Wait for a touch of the screen
-    screen->clearScreen();
-    screen->displayFullScreenMessage("TAP TO START");
+    screen.clearScreen();
+    screen.displayFullScreenMessage("TAP TO START");
 
     LCD.ClearBuffer();
 
@@ -89,9 +81,9 @@ TouchCondition:
     while(LCD.Touch(&x,&y))
     {}
 
-    screen->clearScreen();
-    drive->resetEncoders();
-    screen->displayBatteryVoltage();
+    screen.clearScreen();
+    drive.resetEncoders();
+    screen.displayBatteryVoltage();
 
     goto DriveLoop;
 
@@ -100,9 +92,9 @@ TouchCondition:
 LightCondition:
 
     //Start Condition: Wait for the light to turn on
-    screen->clearScreen();
+    screen.clearScreen();
     LCD.ClearBuffer();
-    drive->resetEncoders();
+    drive.resetEncoders();
 
     goto DriveLoop;
 
@@ -118,12 +110,24 @@ DriveLoop:
      */
 
     //Example command
-    //while(drive->driveByEncoders(14.0, TEST_MOTOR_SPEED));
+    //while(drive.driveByEncoders(14.0, TEST_MOTOR_SPEED));
 
+
+
+
+    while(commands.followLineForDistance(25.0, TEST_MOTOR_SPEED)){}
+
+    /*
     while(true)
     {
-
+        screen.displayAllOptosensorDetection();
+        screen.displayAllOptosensorReading();
+        Sleep(100);
+        screen.clearScreen();
     }
+    */
+
+
 
 
 

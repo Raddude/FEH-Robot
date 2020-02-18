@@ -9,20 +9,23 @@ class MainDriveController : public LeftDrive, public RightDrive
 {
 public:
     MainDriveController();
-    static MainDriveController* getInstance();
+
     void driveByPower(int, int);
+
     bool driveByEncoders(double, int);
     bool driveByEncoders(double, int, double, int);
     bool driveByEncoders(int, int, int, int);
+
     bool turnLeft(double, int);
     bool turnRight(double, int);
+
     void stopMotors();
     void resetEncoders();
+
     double getTickCountFromDistance(double);
     double getDistanceFromAngle(double);
-
-private:
-    static MainDriveController *instance;
 };
+
+extern MainDriveController drive;
 
 #endif // MAINDRIVECONTROLLER_H

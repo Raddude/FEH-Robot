@@ -1,2 +1,2 @@
    text	   data	    bss	    dec	    hex	filename
- 341956	   6088	  15144	 363188	  58ab4	../H8-Robot.elf
+ 343840	   6088	  15168	 365096	  59228	../H8-Robot.elf

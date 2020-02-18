@@ -3,10 +3,11 @@
  Libraries/FEHUtility.h Startup/derivative.h Libraries/LCDColors.h \
  Libraries/FEHMotor.h Libraries/FEHIO.h Drivers/adc16.h \
  ../General/CdSController.h ../General/FileManager.h \
- ../General/ScreenController.h ../General/Optosensors.h \
+ ../General/ScreenController.h ../General/CdSController.h \
+ ../General/Optosensors.h ../General/Optosensors.h \
  ../Drive/MainDriveController.h ../Drive/LeftDrive.h ../Drive/DriveBase.h \
  ../Drive/DriveConstants.h ../Drive/RightDrive.h \
- ../Drive/DriveConstants.h
+ ../Drive/DriveConstants.h ../Commands.h
 
 Libraries/FEHLCD.h:
 
@@ -34,6 +35,10 @@ Drivers/adc16.h:
 
 ../General/ScreenController.h:
 
+../General/CdSController.h:
+
+../General/Optosensors.h:
+
 ../General/Optosensors.h:
 
 ../Drive/MainDriveController.h:
@@ -47,3 +52,5 @@ Drivers/adc16.h:
 ../Drive/RightDrive.h:
 
 ../Drive/DriveConstants.h:
+
+../Commands.h:

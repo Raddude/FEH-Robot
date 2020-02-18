@@ -12,7 +12,7 @@
 
 #include "Time.h"
 
-Time* Time::instance = 0;
+Time time;
 
 
 
@@ -23,15 +23,4 @@ Time* Time::instance = 0;
 Time::Time()
 {
 
-}
-
-/*  This method returns the singleton instance of Time.cpp
- */
-Time* Time::getInstance()
-{
-    if (instance == 0)
-    {
-        instance = new Time();
-    }
-    return instance;
 }

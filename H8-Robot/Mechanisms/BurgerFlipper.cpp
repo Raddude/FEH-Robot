@@ -13,7 +13,7 @@
 #include <FEHServo.h>
 #include "BurgerFlipper.h"
 
-BurgerFlipper* BurgerFlipper::instance = 0;
+BurgerFlipper burger;
 
 
 
@@ -24,15 +24,4 @@ BurgerFlipper* BurgerFlipper::instance = 0;
 BurgerFlipper::BurgerFlipper()
 {
 
-}
-
-/*  This method returns the singleton instance of BurgerFlipper.cpp
- */
-BurgerFlipper* BurgerFlipper::getInstance()
-{
-    if (instance == 0)
-    {
-        instance = new BurgerFlipper();
-    }
-    return instance;
 }

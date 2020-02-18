@@ -8,14 +8,13 @@ class LeftDrive : public DriveBase, public DriveConstants
 {
 public:
     LeftDrive();
-    static LeftDrive* getInstance();
+
     void driveLeftCorrected(int);
     int getLeftEncoderCount();
     double getLeftEncoderDistance();
     void resetLeftEncoder();
-
-private:
-    static LeftDrive *instance;
 };
+
+extern LeftDrive leftDrive;
 
 #endif // LEFTDRIVE_H

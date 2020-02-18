@@ -12,15 +12,19 @@
 
 #include <FEHIO.h>
 #include "Optosensors.h"
-
-#define MIN_LINE_THRESHOLD 0
-#define MAX_LINE_THRESHOLD 3.3
+//7 6 9
+#define L_MIN_LINE_THRESHOLD 2.6
+#define L_MAX_LINE_THRESHOLD 2.9
+#define M_MIN_LINE_THRESHOLD 2.3
+#define M_MAX_LINE_THRESHOLD 2.8
+#define R_MIN_LINE_THRESHOLD 2.8
+#define R_MAX_LINE_THRESHOLD 3.0
 
 AnalogInputPin leftSensor(FEHIO::P1_2);
 AnalogInputPin middleSensor(FEHIO::P1_1);
 AnalogInputPin rightSensor(FEHIO::P1_0);
 
-Optosensors* Optosensors::instance = 0;
+Optosensors optosensors;
 
 
 
@@ -31,17 +35,6 @@ Optosensors* Optosensors::instance = 0;
 Optosensors::Optosensors()
 {
 
-}
-
-/*  Returns the singleton instance of Optosensors.cpp
- */
-Optosensors* Optosensors::getInstance()
-{
-    if (instance == 0)
-    {
-        instance = new Optosensors();
-    }
-    return instance;
 }
 
 
@@ -79,7 +72,7 @@ double Optosensors::getRightOptosensor()
  */
 bool Optosensors::isLeftSeeingALine()
 {
-    if (leftSensor.Value() > MIN_LINE_THRESHOLD && leftSensor.Value() < MAX_LINE_THRESHOLD)
+    if (leftSensor.Value() > L_MIN_LINE_THRESHOLD && leftSensor.Value() < L_MAX_LINE_THRESHOLD)
     {
         return true;
     }
@@ -91,7 +84,7 @@ bool Optosensors::isLeftSeeingALine()
  */
 bool Optosensors::isMiddleSeeingALine()
 {
-    if (middleSensor.Value() > MIN_LINE_THRESHOLD && middleSensor.Value() < MAX_LINE_THRESHOLD)
+    if (middleSensor.Value() > M_MIN_LINE_THRESHOLD && middleSensor.Value() < M_MAX_LINE_THRESHOLD)
     {
         return true;
     }
@@ -103,7 +96,7 @@ bool Optosensors::isMiddleSeeingALine()
  */
 bool Optosensors::isRightSeeingALine()
 {
-    if (rightSensor.Value() > MIN_LINE_THRESHOLD && rightSensor.Value() < MAX_LINE_THRESHOLD)
+    if (rightSensor.Value() > R_MIN_LINE_THRESHOLD && rightSensor.Value() < R_MAX_LINE_THRESHOLD)
     {
         return true;
     }

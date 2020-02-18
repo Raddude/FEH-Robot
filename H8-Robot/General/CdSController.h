@@ -6,14 +6,12 @@ class CdSController
 {
 public:
     CdSController();
-    static CdSController* getInstance();
 
     bool isRed();
     bool isBlue();
     double getCurrentValue();
-
-private:
-    static CdSController *instance;
 };
+
+extern CdSController cdsCell;
 
 #endif // CDSCONTROLLER_H
