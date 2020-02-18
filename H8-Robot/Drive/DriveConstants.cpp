@@ -7,7 +7,6 @@
  *  Superclasses: None.
  *  Subclasses: None.
  *  Used in: Main.cpp, MainDriveController.cpp, LeftDrive.cpp, RightDrive.cpp.
- *  Uses: None.
  */
 
 #include "DriveConstants.h"

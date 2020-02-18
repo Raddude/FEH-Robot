@@ -6,19 +6,18 @@
  *
  *  Superclasses: None.
  *  Subclasses: None.
- *  Used in: main.cpp.
- *  Uses: None.
+ *  Used in: Commands.cpp, ScreenController.cpp.
  */
 
 #include <FEHIO.h>
 #include "Optosensors.h"
-//7 6 9
-#define L_MIN_LINE_THRESHOLD 2.6
-#define L_MAX_LINE_THRESHOLD 2.9
-#define M_MIN_LINE_THRESHOLD 2.3
-#define M_MAX_LINE_THRESHOLD 2.8
-#define R_MIN_LINE_THRESHOLD 2.8
-#define R_MAX_LINE_THRESHOLD 3.0
+
+#define L_MIN_LINE_THRESHOLD 2.66
+#define L_MAX_LINE_THRESHOLD 2.85
+#define M_MIN_LINE_THRESHOLD 2.55
+#define M_MAX_LINE_THRESHOLD 2.75
+#define R_MIN_LINE_THRESHOLD 2.75
+#define R_MAX_LINE_THRESHOLD 2.95
 
 AnalogInputPin leftSensor(FEHIO::P1_2);
 AnalogInputPin middleSensor(FEHIO::P1_1);

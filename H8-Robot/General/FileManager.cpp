@@ -7,7 +7,6 @@
  *  Superclasses: None.
  *  Subclasses: None.
  *  Used in: main.cpp.
- *  Uses: None.
  */
 
 #include <FEHSD.h>

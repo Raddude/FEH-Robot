@@ -5,9 +5,8 @@
  *  Purpose: This is a sub-class of DriveBase and contains any right-half specific methods.
  *
  *  Superclasses: DriveBase.cpp.
- *  Subclasses: None.
- *  Used in: MainDriveController.cpp.
- *  Uses: None.
+ *  Subclasses: MainDriveController.cpp.
+ *  Used in: None.
  */
 
 #include <FEHMotor.h>

@@ -7,7 +7,6 @@
  *  Superclasses: None.
  *  Subclasses: None.
  *  Used in: None.
- *  Uses: screen_controller.cpp, main_drive_controller.cpp.
  */
 
 #include <FEHLCD.h>
@@ -25,11 +24,9 @@
 #include "Drive/DriveConstants.h"
 #include "Commands.h"
 
-#define TEST_MOTOR_SPEED 30
+#define TEST_MOTOR_SPEED 40
 
 using namespace std;
-
-void gotoCorrectStartingCondition(char);
 
 
 
@@ -43,9 +40,8 @@ int main(void)
      *
      * -Timer class, that constantly counts up and manages time
      * -Speed functions relating to time, that take in time and output speeds at different rates (y=sqrt(2), y=x, y=x^2, y=asin(bx+c)+d)
-     * -Optosensor and color sensor classes and methods
-     *
-     *
+     * -Double check the optosensor ranges to verify they are accurate
+     * -Add more robust line following that knows which side it was on last
      *
      */
 
@@ -55,9 +51,13 @@ int main(void)
 
 
 
-    //Main variables
+    //TEST MODE
+    bool testMode = false;
+
+
+
+    //Other variables
     float x,y;
-    bool testMode = true;
 
     //If test mode is enabled, use the touch condition instead of the light condition
     if (testMode)
@@ -83,9 +83,12 @@ TouchCondition:
 
     screen.clearScreen();
     drive.resetEncoders();
-    screen.displayBatteryVoltage();
 
-    goto DriveLoop;
+    if (testMode)
+    {
+        goto TestLoop;
+    }
+    goto PerformanceLoop;
 
 
 
@@ -96,7 +99,13 @@ LightCondition:
     LCD.ClearBuffer();
     drive.resetEncoders();
 
-    goto DriveLoop;
+    while(!cdsCell.isRed()){}
+
+    if (testMode)
+    {
+        goto TestLoop;
+    }
+    goto PerformanceLoop;
 
 
 
@@ -104,30 +113,143 @@ LightCondition:
 
 
 
-DriveLoop:
-    /*
-     *  MAIN ROBOT COMMANDS
-     */
-
+TestLoop:
     //Example command
     //while(drive.driveByEncoders(14.0, TEST_MOTOR_SPEED));
 
+    //Tray
+    while(drive.turnLeft(10.0, TEST_MOTOR_SPEED)){}
+    while(drive.driveByEncoders(20.0, TEST_MOTOR_SPEED)){}
+    while(commands.followLineForDistance(15.0, TEST_MOTOR_SPEED)){}
 
 
 
-    while(commands.followLineForDistance(25.0, TEST_MOTOR_SPEED)){}
+    //Button
+    while(drive.driveByEncoders(2.0, -TEST_MOTOR_SPEED)){}
+    while(drive.turnRight(160.0, TEST_MOTOR_SPEED)){}
+    while(drive.driveByEncoders(2.0, -TEST_MOTOR_SPEED)){}
+    while(drive.turnRight(45.0, TEST_MOTOR_SPEED)){}
+    while(drive.driveByEncoders(6.0, -TEST_MOTOR_SPEED)){}
+    while(drive.turnLeft(30.0, TEST_MOTOR_SPEED)){}
+    while(commands.followLineForDistance(7.375, TEST_MOTOR_SPEED)){}
+    while(drive.turnLeft(15.0, TEST_MOTOR_SPEED)){}
+    while(drive.driveByEncoders(3.0, TEST_MOTOR_SPEED)){}
+    while(drive.turnRight(20.0, TEST_MOTOR_SPEED)){}
 
-    /*
-    while(true)
+    //Button Selection
+    if (cdsCell.isBlue()) //BLUE
     {
-        screen.displayAllOptosensorDetection();
-        screen.displayAllOptosensorReading();
-        Sleep(100);
-        screen.clearScreen();
+        while(drive.turnLeft(20.0, TEST_MOTOR_SPEED)){}
+        while(drive.driveByEncoders(2.0, TEST_MOTOR_SPEED)){}
+        while(commands.followLineForDistance(7.5, TEST_MOTOR_SPEED)){}
+        //Button Push Here
+        while(drive.driveByEncoders(4.0, -TEST_MOTOR_SPEED)){}
+        while(drive.turnLeft(135.0, TEST_MOTOR_SPEED)){}
+        while(drive.driveByEncoders(8.0, TEST_MOTOR_SPEED)){}
     }
-    */
+
+    else if (cdsCell.isRed()) //RED
+    {
+        while(drive.turnRight(20.0, TEST_MOTOR_SPEED)){}
+        while(drive.driveByEncoders(2.0, TEST_MOTOR_SPEED)){}
+        while(commands.followLineForDistance(7.5, TEST_MOTOR_SPEED)){}
+        //Button Push Here
+        while(drive.driveByEncoders(4.0, -TEST_MOTOR_SPEED)){}
+        while(drive.turnLeft(135.0, TEST_MOTOR_SPEED)){}
+        while(drive.driveByEncoders(10.0, TEST_MOTOR_SPEED)){}
+    }
+
+    else
+    {
+        goto TouchCondition;
+    }
 
 
+
+    //Ramp
+    while(drive.turnLeft(70.0, TEST_MOTOR_SPEED)){}
+    while(drive.turnLeft(180.0, TEST_MOTOR_SPEED)){}
+    while(drive.driveByEncoders(24.0, -TEST_MOTOR_SPEED/2)){}
+
+
+
+    //Flex
+    //while(drive.turnLeft(720, TEST_MOTOR_SPEED)){}
+
+
+
+
+
+
+
+    //If test mode is enabled, use the touch condition instead of the light condition
+    if (testMode)
+    {
+        goto TouchCondition;
+    }
+    goto LightCondition;
+
+
+
+
+
+
+
+PerformanceLoop:
+
+    //Tray
+    while(drive.turnLeft(10.0, TEST_MOTOR_SPEED)){}
+    while(drive.driveByEncoders(20.0, TEST_MOTOR_SPEED)){}
+    while(commands.followLineForDistance(15.0, TEST_MOTOR_SPEED)){}
+
+
+
+    //Button
+    while(drive.driveByEncoders(2.0, -TEST_MOTOR_SPEED)){}
+    while(drive.turnRight(160.0, TEST_MOTOR_SPEED)){}
+    while(drive.driveByEncoders(2.0, -TEST_MOTOR_SPEED)){}
+    while(drive.turnRight(45.0, TEST_MOTOR_SPEED)){}
+    while(drive.driveByEncoders(6.0, -TEST_MOTOR_SPEED)){}
+    while(drive.turnLeft(30.0, TEST_MOTOR_SPEED)){}
+    while(commands.followLineForDistance(7.375, TEST_MOTOR_SPEED)){}
+    while(drive.turnLeft(15.0, TEST_MOTOR_SPEED)){}
+    while(drive.driveByEncoders(3.0, TEST_MOTOR_SPEED)){}
+    while(drive.turnRight(20.0, TEST_MOTOR_SPEED)){}
+
+    //Button Selection
+    if (cdsCell.isBlue()) //BLUE
+    {
+        while(drive.turnLeft(20.0, TEST_MOTOR_SPEED)){}
+        while(drive.driveByEncoders(2.0, TEST_MOTOR_SPEED)){}
+        while(commands.followLineForDistance(7.5, TEST_MOTOR_SPEED)){}
+        //Button Push Here
+        while(drive.driveByEncoders(4.0, -TEST_MOTOR_SPEED)){}
+        while(drive.turnLeft(135.0, TEST_MOTOR_SPEED)){}
+        while(drive.driveByEncoders(8.0, TEST_MOTOR_SPEED)){}
+    }
+
+    else if (cdsCell.isRed()) //RED
+    {
+        while(drive.turnRight(20.0, TEST_MOTOR_SPEED)){}
+        while(drive.driveByEncoders(2.0, TEST_MOTOR_SPEED)){}
+        while(commands.followLineForDistance(7.5, TEST_MOTOR_SPEED)){}
+        //Button Push Here
+        while(drive.driveByEncoders(4.0, -TEST_MOTOR_SPEED)){}
+        while(drive.turnLeft(135.0, TEST_MOTOR_SPEED)){}
+        while(drive.driveByEncoders(10.0, TEST_MOTOR_SPEED)){}
+    }
+
+    else
+    {
+        goto TouchCondition;
+    }
+
+
+
+    //Ramp
+    while(drive.turnLeft(70.0, TEST_MOTOR_SPEED)){}
+    while(drive.turnLeft(180.0, TEST_MOTOR_SPEED)){}
+    while(drive.driveByEncoders(24.0, -TEST_MOTOR_SPEED/2)){}
 
 
 

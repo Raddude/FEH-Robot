@@ -10,6 +10,7 @@ public:
     Commands();
 
     bool followLineForDistance(double, int);
+    bool configureOptosensors();
 };
 
 extern Commands commands;

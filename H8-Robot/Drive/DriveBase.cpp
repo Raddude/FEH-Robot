@@ -7,7 +7,6 @@
  *  Superclasses: None.
  *  Subclasses: LeftDrive.cpp, RightDrive.cpp.
  *  Used in: None.
- *  Uses: None.
  */
 
 #include <FEHMotor.h>

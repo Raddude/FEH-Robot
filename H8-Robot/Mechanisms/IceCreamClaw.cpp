@@ -7,7 +7,6 @@
  *  Superclasses: None.
  *  Subclasses: None.
  *  Used in: None.
- *  Uses: None.
  */
 
 #include "IceCreamClaw.h"

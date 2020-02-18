@@ -6,8 +6,7 @@
  *
  *  Superclasses: None.
  *  Subclasses: None.
- *  Used in: None.
- *  Uses: None.
+ *  Used in: Commands.cpp, ScreenController.cpp.
  */
 
 #include <FEHIO.h>

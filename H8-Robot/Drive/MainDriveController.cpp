@@ -4,10 +4,10 @@
  *
  *  Purpose: This class unifies the two halves of the robot into one file and is the highest level drive class. This class directly interfaces with main.cpp and wraps a lot of functionality into easy to use, high level methods.
  *
- *  Superclasses: None.
+ *  Superclasses: LeftDrive.cpp, RightDrive.cpp.
  *  Subclasses: None.
  *  Used in: main.cpp.
- *  Uses: LeftDrive.cpp, RightDrive.cpp.
+ *  Uses: None.
  */
 
 #include <FEHUtility.h>
