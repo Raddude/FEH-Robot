@@ -28,6 +28,8 @@
 
 Commands commands;
 
+char sideWhereLineWasLastSeen = 'M';
+
 
 
 
@@ -52,7 +54,7 @@ Commands::Commands()
  */
 bool Commands::followLineForDistance(double distance, int speed)
 {
-    //THIS RUNS WELL AT 40% INPUT SPEED
+    //THIS RUNS WELL AT ANY INPUT SPEED
 
 
     //End the command if the robot drove far enough
@@ -68,8 +70,16 @@ bool Commands::followLineForDistance(double distance, int speed)
     //High correction if no line is seen
     if (!optosensors.isLeftSeeingALine() && !optosensors.isMiddleSeeingALine() && !optosensors.isRightSeeingALine())
     {
-        //Implement better logic by tracking last seen side
-        drive.driveByPower(speed*LF_HIGH_FAR_TURN_CONSTANT, speed*LF_HIGH_CLOSE_TURN_CONSTANT);
+        if (sideWhereLineWasLastSeen == 'L')
+        {
+            drive.driveByPower(speed*LF_HIGH_CLOSE_TURN_CONSTANT, speed*LF_HIGH_FAR_TURN_CONSTANT);
+        }
+
+        else if (sideWhereLineWasLastSeen == 'R' || sideWhereLineWasLastSeen == 'M')
+        {
+            drive.driveByPower(speed*LF_HIGH_FAR_TURN_CONSTANT, speed*LF_HIGH_CLOSE_TURN_CONSTANT);
+        }
+
     }
 
 
@@ -78,12 +88,14 @@ bool Commands::followLineForDistance(double distance, int speed)
     else if (optosensors.isLeftSeeingALine() && optosensors.isMiddleSeeingALine())
     {
         drive.driveByPower(speed*LF_LOW_CLOSE_TURN_CONSTANT, speed*LF_LOW_FAR_TURN_CONSTANT);
+        sideWhereLineWasLastSeen = 'L';
     }
 
     //Low correction if a line is seen on two sides
     else if (optosensors.isMiddleSeeingALine() && optosensors.isRightSeeingALine())
     {
         drive.driveByPower(speed*LF_LOW_FAR_TURN_CONSTANT, speed*LF_LOW_CLOSE_TURN_CONSTANT);
+        sideWhereLineWasLastSeen = 'R';
     }
 
 
@@ -92,12 +104,14 @@ bool Commands::followLineForDistance(double distance, int speed)
     else if (optosensors.isLeftSeeingALine())
     {
         drive.driveByPower(speed*LF_MED_CLOSE_TURN_CONSTANT, speed*LF_MED_FAR_TURN_CONSTANT);
+        sideWhereLineWasLastSeen = 'L';
     }
 
     //Medium correction if a line is only seen on one side
     else if (optosensors.isRightSeeingALine())
     {
         drive.driveByPower(speed*LF_MED_FAR_TURN_CONSTANT, speed*LF_MED_CLOSE_TURN_CONSTANT);
+        sideWhereLineWasLastSeen = 'R';
     }
 
 

@@ -12,12 +12,12 @@
 #include <FEHIO.h>
 #include "Optosensors.h"
 
-#define L_MIN_LINE_THRESHOLD 2.66
-#define L_MAX_LINE_THRESHOLD 2.85
-#define M_MIN_LINE_THRESHOLD 2.55
-#define M_MAX_LINE_THRESHOLD 2.75
-#define R_MIN_LINE_THRESHOLD 2.75
-#define R_MAX_LINE_THRESHOLD 2.95
+#define L_MIN_LINE_THRESHOLD 2.3
+#define L_MAX_LINE_THRESHOLD 2.65
+#define M_MIN_LINE_THRESHOLD 2.6
+#define M_MAX_LINE_THRESHOLD 2.8
+#define R_MIN_LINE_THRESHOLD 2.05
+#define R_MAX_LINE_THRESHOLD 2.3
 
 AnalogInputPin leftSensor(FEHIO::P1_2);
 AnalogInputPin middleSensor(FEHIO::P1_1);

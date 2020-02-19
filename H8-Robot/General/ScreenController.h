@@ -24,6 +24,12 @@ public:
 
     void displayAllOptosensorReading();
     void displayAllOptosensorDetection();
+
+    void displayEncoderCount(char);
+    void displayEncoderDistance(char);
+
+    void displayAllEncoderCounts();
+    void displayAllEncoderDistances();
 };
 
 extern ScreenController screen;

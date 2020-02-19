@@ -15,6 +15,7 @@
 #include "ScreenController.h"
 #include "CdSController.h"
 #include "Optosensors.h"
+#include "Drive/MainDriveController.h"
 
 #define SCREEN_WIDTH 240
 #define SCREEN_HEIGHT 320
@@ -160,3 +161,66 @@ void ScreenController::displayAllOptosensorDetection()
     displayOptosensorDetection('M');
     displayOptosensorDetection('R');
 }
+
+
+
+
+
+/*  This method displays the tick count of a specific encoder
+ *
+ *  char input - The letter (L/R) corresponding to the left or right encoder to be displayed
+ */
+void ScreenController::displayEncoderCount(char input)
+{
+    if (input == 'L')
+    {
+        LCD.WriteLine("L");
+        LCD.WriteLine(drive.getLeftEncoderCount());
+    }
+
+    else if (input == 'R')
+    {
+        LCD.WriteLine("R");
+        LCD.WriteLine(drive.getRightEncoderCount());
+    }
+}
+
+/*  This method displays the distance reading of a specific encoder
+ *
+ *  char input - The letter (L/R) corresponding to the left or right encoder to be displayed
+ */
+void ScreenController::displayEncoderDistance(char input)
+{
+    if (input == 'L')
+    {
+        LCD.WriteLine("L");
+        LCD.WriteLine(drive.getLeftEncoderDistance());
+    }
+
+    else if (input == 'R')
+    {
+        LCD.WriteLine("R");
+        LCD.WriteLine(drive.getRightEncoderDistance());
+    }
+}
+
+
+
+
+
+/*  This method displays both encoder tick counts
+ */
+void ScreenController::displayAllEncoderCounts()
+{
+    displayEncoderCount('L');
+    displayEncoderCount('R');
+}
+
+/*  This method displays both encoder distances
+ */
+void ScreenController::displayAllEncoderDistances()
+{
+    displayEncoderDistance('L');
+    displayEncoderDistance('R');
+}
+
