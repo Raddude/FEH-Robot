@@ -12,10 +12,10 @@
 #include <FEHIO.h>
 #include "CdSController.h"
 
-#define RED_MIN_THRESHOLD 0.127
-#define RED_MAX_THRESHOLD 0.327
-#define BLUE_MIN_THRESHOLD 0.551
-#define BLUE_MAX_THRESHOLD 0.751
+#define RED_MIN_THRESHOLD 0.031
+#define RED_MAX_THRESHOLD 0.241
+#define BLUE_MIN_THRESHOLD 0.745
+#define BLUE_MAX_THRESHOLD 0.945
 
 CdSController cdsCell;
 

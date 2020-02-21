@@ -122,10 +122,7 @@ TestLoop:
 
 
 
-    while(drive.turnLeft(90, TEST_MOTOR_SPEED)){}
-
-
-
+    while(commands.configureCdSCell()){}
 
 
 

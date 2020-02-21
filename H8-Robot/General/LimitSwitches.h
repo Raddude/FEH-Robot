@@ -6,7 +6,8 @@ class LimitSwitches
 {
 public:
     LimitSwitches();
-    bool getBackLimitSwitch();
+    double getBackLimitSwitchReading();
+    bool isBackLimitSwitchPressed();
 };
 
 extern LimitSwitches limitSwitches;

@@ -158,7 +158,7 @@ bool Commands::driveUntilLimitSwitch(char sensor, int speed)
     switch(sensor)
     {
         case 'B':
-            if (limitSwitches.getBackLimitSwitch())
+            if (limitSwitches.isBackLimitSwitchPressed())
             {
                 return false;
             }
@@ -173,12 +173,41 @@ bool Commands::driveUntilLimitSwitch(char sensor, int speed)
 
 
 
+/*  This command is meant to be run alone, and displays the value of all limit switches
+ */
+bool Commands::configureLimitSwitches()
+{
+
+
+    return true;
+}
+
+
+
+
+
 /*  This command is meant to be run alone, and displays the value and detection of each optosensor for configuration
  */
 bool Commands::configureOptosensors()
 {
     screen.displayAllOptosensorDetection();
     screen.displayAllOptosensorReading();
+    Sleep(100);
+    screen.clearScreen();
+
+    return true;
+}
+
+
+
+
+
+/*  This command is meant to be run alone, and displays the value and detection of the CdS cell for configuration
+ */
+bool Commands::configureCdSCell()
+{
+    screen.displayCdSReading();
+    screen.displayCdSDetection();
     Sleep(100);
     screen.clearScreen();
 

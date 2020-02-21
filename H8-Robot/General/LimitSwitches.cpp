@@ -14,7 +14,7 @@
 
 LimitSwitches limitSwitches;
 
-DigitalInputPin backBumpSwitch(FEHIO::P1_0);
+DigitalInputPin backBumpSwitch(FEHIO::P2_1);
 
 
 
@@ -35,7 +35,14 @@ LimitSwitches::LimitSwitches()
 
 /*  This returns the state of the back limit switch
  */
-bool LimitSwitches::getBackLimitSwitch()
+double LimitSwitches::getBackLimitSwitchReading()
+{
+    return backBumpSwitch.Value();
+}
+
+/*  This returns the detection of the back limit switch
+ */
+bool LimitSwitches::isBackLimitSwitchPressed()
 {
     if (backBumpSwitch.Value() == 0)
     {

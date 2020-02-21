@@ -11,6 +11,8 @@ public:
 
     void preMatchReset();
     bool configureOptosensors();
+    bool configureCdSCell();
+    bool configureLimitSwitches();
     bool showBatteryVoltage();
 
     bool followLineForDistance(double, int);

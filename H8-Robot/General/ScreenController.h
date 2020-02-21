@@ -22,6 +22,9 @@ public:
     void displayCdSReading();
     void displayCdSDetection();
 
+    void displayLimitSwitchReadings();
+    void displayLimitSwitchDetections();
+
     void displayOptosensorReading(char);
     void displayOptosensorDetection(char);
 
