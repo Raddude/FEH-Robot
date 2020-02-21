@@ -122,7 +122,7 @@ TestLoop:
 
 
 
-    while(commands.configureCdSCell()){}
+    while(drive.driveByEncoders(4.0, TEST_MOTOR_SPEED)){}
 
 
 
@@ -155,8 +155,7 @@ PerformanceLoop:
     while(drive.turnLeft(90, TEST_MOTOR_SPEED)){}
     while(commands.driveUntilLightDetected(5.0, TEST_MOTOR_SPEED)){}
     while(drive.driveByEncoders(0.2, TEST_MOTOR_SPEED)){}
-    screen.displayCdSDetection();
-    Sleep(3.0);
+    Sleep(1.0);
 
     if(cdsCell.isRed())
     {
@@ -173,19 +172,22 @@ PerformanceLoop:
         burger.setPosition('U');
     }
 
+    screen.displayCdSDetection();
+    Sleep(2.0);
 
-    while(drive.turnLeft(10.0, TEST_MOTOR_SPEED)){}
-    while(drive.driveByEncoders(4.0, TEST_MOTOR_SPEED)){}
+
+    //while(drive.turnLeft(5.0, TEST_MOTOR_SPEED)){}
+    while(drive.driveByEncoders(4.5, TEST_MOTOR_SPEED)){}
 
 
 
     //Ramp
     while(drive.driveByEncoders(6.5, -TEST_MOTOR_SPEED)){}
-    while(drive.turnLeft(135, TEST_MOTOR_SPEED)){}
-    while(drive.driveByEncoders(20.0, TEST_MOTOR_SPEED)){}
-    while(drive.turnLeft(45, TEST_MOTOR_SPEED)){}
-    while(drive.driveByEncoders(30.0, TEST_MOTOR_SPEED)){}
-    while(drive.driveByEncoders(25.0, -TEST_MOTOR_SPEED)){}
+    while(drive.turnLeft(110, TEST_MOTOR_SPEED)){}
+    while(drive.driveByEncoders(10.0, TEST_MOTOR_SPEED)){}
+    while(drive.turnLeft(70, TEST_MOTOR_SPEED)){}
+    while(drive.driveByEncoders(25.0, TEST_MOTOR_SPEED)){}
+    while(drive.driveByEncoders(35.0, -TEST_MOTOR_SPEED)){}
 
 
 
