@@ -16,6 +16,7 @@ public:
     bool showBatteryVoltage();
 
     bool followLineForDistance(double, int);
+    bool driveUntilLightDetected(double, int);
     bool driveUntilLimitSwitch(char, int);
 };
 

@@ -128,6 +128,8 @@ TestLoop:
 
 
 
+    Sleep(5.0);
+
     //If test mode is enabled, use the touch condition instead of the light condition
     if (testMode)
     {
@@ -151,7 +153,8 @@ PerformanceLoop:
     while(drive.turnLeft(45, TEST_MOTOR_SPEED)){}
     while(drive.driveByEncoders(3.5, TEST_MOTOR_SPEED)){}
     while(drive.turnLeft(90, TEST_MOTOR_SPEED)){}
-    while(drive.driveByEncoders(3.25, TEST_MOTOR_SPEED)){}
+    while(commands.driveUntilLightDetected(5.0, TEST_MOTOR_SPEED)){}
+    while(drive.driveByEncoders(0.2, TEST_MOTOR_SPEED)){}
     screen.displayCdSDetection();
     Sleep(3.0);
 
@@ -170,18 +173,19 @@ PerformanceLoop:
         burger.setPosition('U');
     }
 
-    /*
-    while(drive.driveByEncoders(6.5, TEST_MOTOR_SPEED)){}
+
+    while(drive.turnLeft(10.0, TEST_MOTOR_SPEED)){}
+    while(drive.driveByEncoders(4.0, TEST_MOTOR_SPEED)){}
     while(drive.driveByEncoders(6.5, -TEST_MOTOR_SPEED)){}
-    */
+
 
 
 
 
     //If test mode is enabled, use the touch condition instead of the light condition
 
-
-    goto LightCondition;
+    Sleep(5.0);
+    goto TouchCondition;
 
 
     return 0;

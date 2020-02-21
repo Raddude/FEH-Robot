@@ -172,6 +172,31 @@ bool Commands::driveUntilLimitSwitch(char sensor, int speed)
 
 
 
+/*  This method drives forward until it either sees a light or crosses the threshold distance
+ *
+ *  double distance - The maximum distance the robot is allowed to scan for a light
+ *  int speed - The speed at which the robot drives forward
+ */
+bool Commands::driveUntilLightDetected(double distance, int speed)
+{
+    if (leftDrive.getLeftEncoderDistance() > distance || rightDrive.getRightEncoderDistance() > distance)
+    {
+        return false;
+    }
+
+    else if (cdsCell.isBlue() || cdsCell.isRed())
+    {
+        return false;
+    }
+
+    drive.driveByPower(speed, speed);
+    return true;
+
+}
+
+
+
+
 
 /*  This command is meant to be run alone, and displays the value of all limit switches
  */
