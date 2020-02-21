@@ -13,6 +13,7 @@
 #include <FEHIO.h>
 #include <math.h>
 #include "DriveBase.h"
+#include "DriveConstants.h"
 
 using namespace std;
 
@@ -20,6 +21,8 @@ DriveBase driveBase;
 
 FEHMotor leftMotor(FEHMotor::Motor0, 9.0);
 FEHMotor rightMotor(FEHMotor::Motor1, 9.0);
+
+double areaSum;
 
 
 
@@ -54,6 +57,77 @@ void DriveBase::driveLeftMotor(int speed)
 void DriveBase::driveRightMotor(int speed)
 {
     rightMotor.SetPercent(speed);
+}
+
+
+
+
+
+/*  This is the BIG boi, the base-level PID controller. It sets a motor's speed to an appropriate percent to get to the target setpoint
+ *
+ *  char side - This char corresponds to either the left or right motor
+ *  int setpoint - A distance in INCHES corresponding to the target distance of the given motor
+ *  double* previousValues - A double array of size [driveConstants.getBufferSize()]
+ *  double kP - The coefficient for the P term of the PID loop
+ *  double kI - The coefficient for the I term of the PID loop
+ *  double kD - The coefficient for the D term of the PID loop
+ */
+void DriveBase::driveMotorPID(char side, int setpoint, double *previousValues, double kP, double kI, double kD)
+{
+    if (side == 'L')
+    {
+        leftMotor.SetPercent(
+                    (kP * previousValues[0]) + (kI * getAreaOfValues(previousValues) + (kD * getSlopeOfValues(previousValues)))
+                    );
+    }
+
+    else if (side == 'R')
+    {
+        //Copy from side == 'L' when working
+    }
+}
+
+/*  This is the BIG boi, the base-level PID controller. It sets a motor's speed to an appropriate percent to get to the target setpoint
+ *
+ *  char side - This char corresponds to either the left or right motor
+ *  double setpoint - A distance in TICKS corresponding to the target distance of the given motor
+ *  double* previousValues - A double array of size [driveConstants.getBufferSize()]
+ *  double kP - The coefficient for the P term of the PID loop
+ *  double kI - The coefficient for the I term of the PID loop
+ *  double kD - The coefficient for the D term of the PID loop
+ */
+void DriveBase::driveMotorPID(char side, double setpoint, double *previousValues, double kP, double kI, double kD)
+{
+    driveMotorPID(side, setpoint * driveConstants.getDistancePerTick(), previousValues, kP, kI, kD);
+}
+
+
+
+
+
+/*  This function returns the area of the previous error values of a motor for PID. This is a manual Riemann sum where every value has a height of its value and a width of 1.
+ *
+ *  double *previousValues - The array of previous error values of the motor.
+ */
+double DriveBase::getAreaOfValues(double *previousValues)
+{
+    areaSum = 0;
+
+    for (int i = 0; i < driveConstants.getBufferSize(); i++)
+    {
+        areaSum += previousValues[i];
+    }
+
+    return areaSum;
+}
+
+/*  This function returns the slope of the previous error values of a motor for PID. The values used to calculate slope are the current value and the one [driveConstants.getSLopeDomain()] before the current value
+ *
+ *  double *previousValues - The array of previous error values of the motor.
+ */
+double DriveBase::getSlopeOfValues(double *previousValues)
+{
+    return (previousValues[0] - previousValues[driveConstants.getSlopeDomain()])/(driveConstants.getSlopeDomain());
 }
 
 

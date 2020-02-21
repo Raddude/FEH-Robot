@@ -9,8 +9,12 @@ class Commands
 public:
     Commands();
 
-    bool followLineForDistance(double, int);
+    void preMatchReset();
     bool configureOptosensors();
+    bool showBatteryVoltage();
+
+    bool followLineForDistance(double, int);
+    bool driveUntilLimitSwitch(char, int);
 };
 
 extern Commands commands;

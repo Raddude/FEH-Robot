@@ -14,6 +14,8 @@
 #include "Drive/MainDriveController.h"
 #include "General/Optosensors.h"
 #include "General/ScreenController.h"
+#include "General/LimitSwitches.h"
+#include "Mechanisms/BurgerFlipper.h"
 
 //Distance in inches that the robot moves before checking the line again
 #define LINE_FOLLOWING_STEP_SIZE 0.05
@@ -42,6 +44,21 @@ Commands::Commands()
 }
 
 
+
+
+
+
+
+/*  This command performs all necessary resets before the match begins
+ */
+void Commands::preMatchReset()
+{
+    screen.clearScreen();
+    screen.clearBuffer();
+    drive.resetEncoders();
+    burger.setEndStops();
+    burger.setPosition('U');
+}
 
 
 
@@ -131,12 +148,52 @@ bool Commands::followLineForDistance(double distance, int speed)
 
 
 
+/*  This method drives in a given direction until given sensor(s) are depressed
+ *
+ *  char sensor - The character corresponding to a specific combination of limit switches to be depressed
+ *  int speed - The speed at which the robot drives
+ */
+bool Commands::driveUntilLimitSwitch(char sensor, int speed)
+{
+    switch(sensor)
+    {
+        case 'B':
+            if (limitSwitches.getBackLimitSwitch())
+            {
+                return false;
+            }
+            break;
+    }
+
+    drive.driveByPower(speed, speed);
+    return true;
+}
+
+
+
+
+
 /*  This command is meant to be run alone, and displays the value and detection of each optosensor for configuration
  */
 bool Commands::configureOptosensors()
 {
     screen.displayAllOptosensorDetection();
     screen.displayAllOptosensorReading();
+    Sleep(100);
+    screen.clearScreen();
+
+    return true;
+}
+
+
+
+
+
+/*  This command constantly updates the screen with the battery voltage
+ */
+bool Commands::showBatteryVoltage()
+{
+    screen.displayBatteryVoltage();
     Sleep(100);
     screen.clearScreen();
 

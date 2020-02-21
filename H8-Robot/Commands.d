@@ -3,7 +3,8 @@
  ../Drive/LeftDrive.h ../Drive/DriveBase.h Libraries/FEHMotor.h \
  Startup/derivative.h Startup/MK60DZ10.h ../Drive/DriveConstants.h \
  ../Drive/RightDrive.h ../General/ScreenController.h \
- ../General/CdSController.h ../General/Optosensors.h
+ ../General/CdSController.h ../General/Optosensors.h \
+ ../Mechanisms/BurgerFlipper.h
 
 Libraries/FEHUtility.h:
 
@@ -32,3 +33,5 @@ Startup/MK60DZ10.h:
 ../General/CdSController.h:
 
 ../General/Optosensors.h:
+
+../Mechanisms/BurgerFlipper.h:

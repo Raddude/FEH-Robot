@@ -20,6 +20,8 @@ LeftDrive leftDrive;
 
 DigitalEncoder leftEncoder(FEHIO::P0_1);
 
+double leftErrorValues[100];
+
 
 
 
@@ -43,7 +45,7 @@ LeftDrive::LeftDrive()
  */
 void LeftDrive::driveLeftCorrected(int speed)
 {
-    driveLeftMotor(speed);
+    driveLeftMotor(-speed);
 }
 
 

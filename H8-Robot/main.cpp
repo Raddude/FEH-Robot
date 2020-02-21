@@ -23,6 +23,7 @@
 #include "Drive/MainDriveController.h"
 #include "Drive/DriveConstants.h"
 #include "Drive/LeftDrive.h"
+#include "Mechanisms/BurgerFlipper.h"
 #include "Commands.h"
 
 #define TEST_MOTOR_SPEED 40 //40 is the default value
@@ -41,7 +42,8 @@ int main(void)
      *
      * -Timer class, that constantly counts up and manages time
      * -Speed functions relating to time, that take in time and output speeds at different rates (y=sqrt(2), y=x, y=x^2, y=asin(bx+c)+d)
-     *
+     * -PID man
+     * -PT1
      */
 
 
@@ -80,8 +82,8 @@ TouchCondition:
     while(LCD.Touch(&x,&y))
     {}
 
-    screen.clearScreen();
-    drive.resetEncoders();
+    commands.preMatchReset();
+
 
     if (testMode)
     {
@@ -94,11 +96,11 @@ TouchCondition:
 LightCondition:
 
     //Start Condition: Wait for the light to turn on
-    screen.clearScreen();
-    LCD.ClearBuffer();
-    drive.resetEncoders();
+    screen.displayFullScreenMessage("Waiting...");
 
     while(!cdsCell.isRed()){}
+
+    commands.preMatchReset();
 
     if (testMode)
     {
@@ -120,7 +122,10 @@ TestLoop:
 
 
 
-    //
+    while(drive.turnLeft(90, TEST_MOTOR_SPEED)){}
+
+
+
 
 
 
@@ -141,59 +146,37 @@ TestLoop:
 
 PerformanceLoop:
 
-    //Tray
-    while(drive.turnLeft(10.0, TEST_MOTOR_SPEED)){}
+
+
+
+    //Jukebox
     while(drive.driveByEncoders(20.0, TEST_MOTOR_SPEED)){}
-    while(commands.followLineForDistance(15.0, TEST_MOTOR_SPEED)){}
+    while(drive.turnLeft(45, TEST_MOTOR_SPEED)){}
+    while(drive.driveByEncoders(3.5, TEST_MOTOR_SPEED)){}
+    while(drive.turnLeft(90, TEST_MOTOR_SPEED)){}
+    while(drive.driveByEncoders(2.0, TEST_MOTOR_SPEED)){}
+    screen.displayCdSDetection();
+    Sleep(3.0);
 
-
-
-    //Button
-    while(drive.driveByEncoders(2.0, -TEST_MOTOR_SPEED)){}
-    while(drive.turnRight(160.0, TEST_MOTOR_SPEED)){}
-    while(drive.driveByEncoders(2.0, -TEST_MOTOR_SPEED)){}
-    while(drive.turnRight(45.0, TEST_MOTOR_SPEED)){}
-    while(drive.driveByEncoders(6.0, -TEST_MOTOR_SPEED)){}
-    while(drive.turnLeft(30.0, TEST_MOTOR_SPEED)){}
-    while(commands.followLineForDistance(7.375, TEST_MOTOR_SPEED)){}
-    while(drive.turnLeft(15.0, TEST_MOTOR_SPEED)){}
-    while(drive.driveByEncoders(3.0, TEST_MOTOR_SPEED)){}
-    while(drive.turnRight(20.0, TEST_MOTOR_SPEED)){}
-
-    //Button Selection
-    if (cdsCell.isBlue()) //BLUE
+    if(cdsCell.isRed())
     {
-        while(drive.turnLeft(20.0, TEST_MOTOR_SPEED)){}
-        while(drive.driveByEncoders(2.0, TEST_MOTOR_SPEED)){}
-        while(commands.followLineForDistance(7.5, TEST_MOTOR_SPEED)){}
-        //Button Push Here
-        while(drive.driveByEncoders(4.0, -TEST_MOTOR_SPEED)){}
-        while(drive.turnLeft(135.0, TEST_MOTOR_SPEED)){}
-        while(drive.driveByEncoders(8.0, TEST_MOTOR_SPEED)){}
+        burger.setPosition('R');
     }
 
-    else if (cdsCell.isRed()) //RED
+    else if (cdsCell.isBlue())
     {
-        while(drive.turnRight(20.0, TEST_MOTOR_SPEED)){}
-        while(drive.driveByEncoders(2.0, TEST_MOTOR_SPEED)){}
-        while(commands.followLineForDistance(7.5, TEST_MOTOR_SPEED)){}
-        //Button Push Here
-        while(drive.driveByEncoders(4.0, -TEST_MOTOR_SPEED)){}
-        while(drive.turnLeft(135.0, TEST_MOTOR_SPEED)){}
-        while(drive.driveByEncoders(10.0, TEST_MOTOR_SPEED)){}
+        burger.setPosition('L');
     }
 
     else
     {
-        goto TouchCondition;
+        burger.setPosition('U');
     }
 
-
-
-    //Ramp
-    while(drive.turnLeft(70.0, TEST_MOTOR_SPEED)){}
-    while(drive.turnLeft(180.0, TEST_MOTOR_SPEED)){}
-    while(drive.driveByEncoders(24.0, -TEST_MOTOR_SPEED/2)){}
+    /*
+    while(drive.driveByEncoders(6.5, TEST_MOTOR_SPEED)){}
+    while(drive.driveByEncoders(6.5, -TEST_MOTOR_SPEED)){}
+    */
 
 
 

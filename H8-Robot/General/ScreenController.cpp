@@ -49,6 +49,13 @@ void ScreenController::clearScreen()
     LCD.SetOrientation(FEHLCD::North);
 }
 
+/*  This is a wrapper method for LCD.ClearBuffer()
+ */
+void ScreenController::clearBuffer()
+{
+    LCD.ClearBuffer();
+}
+
 
 
 
@@ -84,6 +91,26 @@ void ScreenController::displayBatteryVoltage()
 void ScreenController::displayCdSReading()
 {
     LCD.WriteLine(cdsCell.getCurrentValue());
+}
+
+/*  This function displays the current detection of the CdS cell to the screen.
+ */
+void ScreenController::displayCdSDetection()
+{
+    if (cdsCell.isRed())
+    {
+        LCD.WriteLine("RED");
+    }
+
+    else if (cdsCell.isBlue())
+    {
+        LCD.WriteLine("BLUE");
+    }
+
+    else
+    {
+        LCD.WriteLine("NONE");
+    }
 }
 
 

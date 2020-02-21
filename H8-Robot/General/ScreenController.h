@@ -14,10 +14,13 @@ public:
     ScreenController();
 
     void clearScreen();
+    void clearBuffer();
 
     void displayFullScreenMessage(const char*);
     void displayBatteryVoltage();
+
     void displayCdSReading();
+    void displayCdSDetection();
 
     void displayOptosensorReading(char);
     void displayOptosensorDetection(char);

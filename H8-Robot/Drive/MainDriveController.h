@@ -16,8 +16,15 @@ public:
     bool driveByEncoders(double, int, double, int);
     bool driveByEncoders(int, int, int, int);
 
+    bool driveByPID(double, int);
+    bool driveByPID(double, int, double, int);
+    bool driveByPID(int, int, int, int);
+
     bool turnLeft(double, int);
     bool turnRight(double, int);
+
+    bool turnLeftPID(double, int);
+    bool turnRightPID(double, int);
 
     void stopMotors();
     void resetEncoders();

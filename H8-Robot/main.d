@@ -7,7 +7,8 @@
  ../General/Optosensors.h ../General/Optosensors.h \
  ../Drive/MainDriveController.h ../Drive/LeftDrive.h ../Drive/DriveBase.h \
  ../Drive/DriveConstants.h ../Drive/RightDrive.h \
- ../Drive/DriveConstants.h ../Drive/LeftDrive.h ../Commands.h
+ ../Drive/DriveConstants.h ../Drive/LeftDrive.h \
+ ../Mechanisms/BurgerFlipper.h ../Commands.h
 
 Libraries/FEHLCD.h:
 
@@ -54,5 +55,7 @@ Drivers/adc16.h:
 ../Drive/DriveConstants.h:
 
 ../Drive/LeftDrive.h:
+
+../Mechanisms/BurgerFlipper.h:
 
 ../Commands.h:

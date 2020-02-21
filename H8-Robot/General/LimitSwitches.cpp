@@ -9,9 +9,12 @@
  *  Used in: None.
  */
 
+#include <FEHIO.h>
 #include "LimitSwitches.h"
 
 LimitSwitches limitSwitches;
+
+DigitalInputPin backBumpSwitch(FEHIO::P1_0);
 
 
 
@@ -22,4 +25,22 @@ LimitSwitches limitSwitches;
 LimitSwitches::LimitSwitches()
 {
 
+}
+
+
+
+
+
+
+
+/*  This returns the state of the back limit switch
+ */
+bool LimitSwitches::getBackLimitSwitch()
+{
+    if (backBumpSwitch.Value() == 0)
+    {
+        return true;
+    }
+
+    return false;
 }

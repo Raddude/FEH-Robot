@@ -6,6 +6,10 @@ class BurgerFlipper
 {
 public:
     BurgerFlipper();
+    void setAngle(float);
+    void setPosition(char);
+    void touchCalibrateServo();
+    void setEndStops();
 };
 
 extern BurgerFlipper burger;

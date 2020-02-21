@@ -20,6 +20,8 @@ RightDrive rightDrive;
 
 DigitalEncoder rightEncoder(FEHIO::P0_0);
 
+double rightErrorValues[100];
+
 
 
 

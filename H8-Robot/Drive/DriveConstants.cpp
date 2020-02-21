@@ -11,8 +11,8 @@
 
 #include "DriveConstants.h"
 
-#define WHEEL_DIAMETER 2.5
-#define WHEEL_SPAN 6.875 //This is the distance between the center of the contact points of both wheels, std 6.875
+#define WHEEL_DIAMETER 3
+#define WHEEL_SPAN 7.875 //7.925 is the default value configured at 360 degrees
 #define TICKS_PER_ROTATION 318
 #define PI 3.141592653589793238463
 #define DISTANCE_PER_ROTATION (PI*WHEEL_DIAMETER)
@@ -20,6 +20,16 @@
 #define DISTANCE_PER_FULL_TURN (PI*WHEEL_SPAN)
 #define TICKS_PER_FULL_TURN (DISTANCE_PER_TICK/DISTANCE_PER_FULL_TURN)
 #define SLEEP_AMOUNT 0.125
+
+//PID Constants
+#define L_KP 1
+#define L_KI 0
+#define L_KD 0
+#define R_KP 1
+#define R_KI 0
+#define R_KD 0
+#define BUFFER_SIZE 25
+#define KD_SLOPE_DOMAIN 5
 
 DriveConstants driveConstants;
 
@@ -101,4 +111,79 @@ double DriveConstants::getTicksPerFullTurn()
 double DriveConstants::getSleepAmount()
 {
     return SLEEP_AMOUNT;
+}
+
+
+
+
+
+/*  This method returns the P coefficient for the listed side's PID loop
+ *
+ *  char side - The side of the robot that is being used in PID
+ */
+double DriveConstants::getKP(char side)
+{
+    if (side == 'L')
+    {
+        return L_KP;
+    }
+
+    else if (side == 'R')
+    {
+        return R_KP;
+    }
+
+    return 0;
+}
+
+/*  This method returns the I coefficient for the listed side's PID loop
+ *
+ *  char side - The side of the robot that is being used in PID
+ */
+double DriveConstants::getKI(char side)
+{
+    if (side == 'L')
+    {
+        return L_KI;
+    }
+
+    else if (side == 'R')
+    {
+        return R_KI;
+    }
+
+    return 0;
+}
+
+/*  This method returns the D coefficient for the listed side's PID loop
+ *
+ *  char side - The side of the robot that is being used in PID
+ */
+double DriveConstants::getKD(char side)
+{
+    if (side == 'L')
+    {
+        return L_KD;
+    }
+
+    else if (side == 'R')
+    {
+        return R_KD;
+    }
+
+    return 0;
+}
+
+/*  This method returns the size of the PID buffer, the number of previous values stored in memory
+ */
+int DriveConstants::getBufferSize()
+{
+    return BUFFER_SIZE;
+}
+
+/*  This method returns the distance between previous values used to calculate the current D term
+ */
+int DriveConstants::getSlopeDomain()
+{
+    return KD_SLOPE_DOMAIN;
 }
