@@ -176,7 +176,16 @@ PerformanceLoop:
 
     while(drive.turnLeft(10.0, TEST_MOTOR_SPEED)){}
     while(drive.driveByEncoders(4.0, TEST_MOTOR_SPEED)){}
+
+
+
+    //Ramp
     while(drive.driveByEncoders(6.5, -TEST_MOTOR_SPEED)){}
+    while(drive.turnLeft(135, TEST_MOTOR_SPEED)){}
+    while(drive.driveByEncoders(20.0, TEST_MOTOR_SPEED)){}
+    while(drive.turnLeft(45, TEST_MOTOR_SPEED)){}
+    while(drive.driveByEncoders(30.0, TEST_MOTOR_SPEED)){}
+    while(drive.driveByEncoders(25.0, -TEST_MOTOR_SPEED)){}
 
 
 
