@@ -53,7 +53,7 @@ int main(void)
 
 
     //TEST MODE
-    bool testMode = true;
+    bool testMode = false;
 
 
 
@@ -151,7 +151,7 @@ PerformanceLoop:
     while(drive.turnLeft(45, TEST_MOTOR_SPEED)){}
     while(drive.driveByEncoders(3.5, TEST_MOTOR_SPEED)){}
     while(drive.turnLeft(90, TEST_MOTOR_SPEED)){}
-    while(drive.driveByEncoders(2.0, TEST_MOTOR_SPEED)){}
+    while(drive.driveByEncoders(3.25, TEST_MOTOR_SPEED)){}
     screen.displayCdSDetection();
     Sleep(3.0);
 
@@ -179,10 +179,8 @@ PerformanceLoop:
 
 
     //If test mode is enabled, use the touch condition instead of the light condition
-    if (testMode)
-    {
-        goto TouchCondition;
-    }
+
+
     goto LightCondition;
 
 

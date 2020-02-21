@@ -13,9 +13,9 @@
 #include "CdSController.h"
 
 #define RED_MIN_THRESHOLD 0.031
-#define RED_MAX_THRESHOLD 0.241
-#define BLUE_MIN_THRESHOLD 0.745
-#define BLUE_MAX_THRESHOLD 0.945
+#define RED_MAX_THRESHOLD 0.49
+#define BLUE_MIN_THRESHOLD 0.5
+#define BLUE_MAX_THRESHOLD 1
 
 CdSController cdsCell;
 
