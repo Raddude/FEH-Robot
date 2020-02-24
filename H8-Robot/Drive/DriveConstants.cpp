@@ -30,6 +30,7 @@
 #define R_KD 0
 #define BUFFER_SIZE 25
 #define KD_SLOPE_DOMAIN 5
+#define PID_ERROR_MARGIN 0.125 //Distance in inches, range that PID can be off by
 
 DriveConstants driveConstants;
 
@@ -186,4 +187,11 @@ int DriveConstants::getBufferSize()
 int DriveConstants::getSlopeDomain()
 {
     return KD_SLOPE_DOMAIN;
+}
+
+/*  This method returns the margin of error for PID
+ */
+double DriveConstants::getPIDErrorMargin()
+{
+    return PID_ERROR_MARGIN;
 }

@@ -10,6 +10,9 @@ public:
     RightDrive();
 
     void driveRightCorrected(int);
+    void driveRightPID(double);
+    void resetRightErrorValues();
+
     int getRightEncoderCount();
     double getRightEncoderDistance();
     void resetRightEncoder();

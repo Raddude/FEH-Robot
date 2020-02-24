@@ -12,6 +12,9 @@ public:
     void driveLeftMotor(int);
     void driveRightMotor(int);
 
+    void updatePreviousValues(double, double*);
+    void resetPreviousValues(double*);
+
     void driveMotorPID(char, int, double*, double, double, double);
     void driveMotorPID(char, double, double*, double, double, double);
 

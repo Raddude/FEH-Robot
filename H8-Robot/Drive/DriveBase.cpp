@@ -63,6 +63,38 @@ void DriveBase::driveRightMotor(int speed)
 
 
 
+/*  This method shifts all of the previous values back by 1 slot, deletes the last value, and add the current value in the front
+ *
+ *  double currentValue - The current error value of the motor
+ *  double* previousValues - A double array of previous error values
+ */
+void DriveBase::updatePreviousValues(double currentValue, double *previousValues)
+{
+    for (int i = driveConstants.getBufferSize(); i > 0; i--)
+    {
+        previousValues[i] = previousValues[i-1];
+    }
+
+    previousValues[0] = currentValue;
+
+}
+
+/*  Resets the previous error values array to all values of 0
+ *
+ *  double* previousValues - A double array of previous error values
+ */
+void DriveBase::resetPreviousValues(double *previousValues)
+{
+    for (int i = 0; i < driveConstants.getBufferSize(); i++)
+    {
+        previousValues[i] = 0;
+    }
+}
+
+
+
+
+
 /*  This is the BIG boi, the base-level PID controller. It sets a motor's speed to an appropriate percent to get to the target setpoint
  *
  *  char side - This char corresponds to either the left or right motor
@@ -77,13 +109,16 @@ void DriveBase::driveMotorPID(char side, int setpoint, double *previousValues, d
     if (side == 'L')
     {
         leftMotor.SetPercent(
-                    (kP * previousValues[0]) + (kI * getAreaOfValues(previousValues) + (kD * getSlopeOfValues(previousValues)))
+                    (kP * previousValues[driveConstants.getBufferSize()]) + (kI * getAreaOfValues(previousValues) + (kD * getSlopeOfValues(previousValues)))
                     );
     }
 
     else if (side == 'R')
     {
         //Copy from side == 'L' when working
+        rightMotor.SetPercent(
+                    (kP * previousValues[driveConstants.getBufferSize()]) + (kI * getAreaOfValues(previousValues) + (kD * getSlopeOfValues(previousValues)))
+                    );
     }
 }
 
@@ -127,7 +162,7 @@ double DriveBase::getAreaOfValues(double *previousValues)
  */
 double DriveBase::getSlopeOfValues(double *previousValues)
 {
-    return (previousValues[0] - previousValues[driveConstants.getSlopeDomain()])/(driveConstants.getSlopeDomain());
+    return (previousValues[driveConstants.getBufferSize()] - previousValues[driveConstants.getBufferSize() - driveConstants.getSlopeDomain()])/(driveConstants.getSlopeDomain());
 }
 
 

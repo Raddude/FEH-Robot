@@ -22,6 +22,7 @@ public:
     double getKD(char);
     int getBufferSize();
     int getSlopeDomain();
+    double getPIDErrorMargin();
 };
 
 extern DriveConstants driveConstants;

@@ -43,7 +43,9 @@ int main(void)
      * -Timer class, that constantly counts up and manages time
      * -Speed functions relating to time, that take in time and output speeds at different rates (y=sqrt(2), y=x, y=x^2, y=asin(bx+c)+d)
      * -PID man
-     * -PT1
+     * -Combine encoder functions
+     * -Make the file manager work
+     * -Subtract 9-11 ticks from encoder function to make it overshoot correctly
      */
 
 
@@ -53,7 +55,7 @@ int main(void)
 
 
     //TEST MODE
-    bool testMode = false;
+    bool testMode = true;
 
 
 
@@ -121,8 +123,8 @@ TestLoop:
 
 
 
+    drive.driveByPID(5.0);
 
-    while(drive.driveByEncoders(4.0, TEST_MOTOR_SPEED)){}
 
 
 

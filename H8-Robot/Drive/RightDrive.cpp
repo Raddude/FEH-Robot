@@ -53,6 +53,26 @@ void RightDrive::driveRightCorrected(int speed)
 
 
 
+/*  This is a wrapper for the left motor's PID function, it automagically fills in the left motor's constants and simplifies parameters
+ *
+ *  int setpoint - The target distance of the motor
+ */
+void RightDrive::driveRightPID(double setpoint)
+{
+    driveBase.driveMotorPID('R', setpoint, rightErrorValues, driveConstants.getKP('R'), driveConstants.getKI('R'), driveConstants.getKD('R'));
+}
+
+/*  This resets the rightErrorValues array
+ */
+void RightDrive::resetRightErrorValues()
+{
+    driveBase.resetPreviousValues(rightErrorValues);
+}
+
+
+
+
+
 /*  This method returns the output of the right encoder in terms of raw encoder ticks.
  */
 int RightDrive::getRightEncoderCount()

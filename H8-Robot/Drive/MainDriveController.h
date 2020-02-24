@@ -16,9 +16,9 @@ public:
     bool driveByEncoders(double, int, double, int);
     bool driveByEncoders(int, int, int, int);
 
-    bool driveByPID(double, int);
-    bool driveByPID(double, int, double, int);
-    bool driveByPID(int, int, int, int);
+    bool driveByPID(double);
+    bool driveByPID(double, double);
+    void resetPID();
 
     bool turnLeft(double, int);
     bool turnRight(double, int);

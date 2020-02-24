@@ -10,6 +10,9 @@ public:
     LeftDrive();
 
     void driveLeftCorrected(int);
+    void driveLeftPID(double);
+    void resetLeftErrorValues();
+
     int getLeftEncoderCount();
     double getLeftEncoderDistance();
     void resetLeftEncoder();

@@ -52,6 +52,28 @@ void LeftDrive::driveLeftCorrected(int speed)
 
 
 
+/*  This is a wrapper for the left motor's PID function, it automagically fills in the left motor's constants and simplifies parameters
+ *
+ *  double setpoint - The target distance of the motor
+ */
+void LeftDrive::driveLeftPID(double setpoint)
+{
+    driveBase.driveMotorPID('L', setpoint, leftErrorValues, driveConstants.getKP('L'), driveConstants.getKI('L'), driveConstants.getKD('L'));
+
+    driveBase.updatePreviousValues(setpoint - getLeftEncoderDistance(), leftErrorValues);
+}
+
+/*  This resets the leftErrorValues array
+ */
+void LeftDrive::resetLeftErrorValues()
+{
+    driveBase.resetPreviousValues(leftErrorValues);
+}
+
+
+
+
+
 /*  This method returns the output of the left encoder in terms of raw encoder ticks.
  */
 int LeftDrive::getLeftEncoderCount()

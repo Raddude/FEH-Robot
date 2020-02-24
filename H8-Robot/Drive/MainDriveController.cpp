@@ -182,6 +182,61 @@ bool MainDriveController::driveByEncoders(int leftTarget, int leftSpeed, int rig
 
 
 
+/*  This overloaded method drives the robot forward to the target distance using PID
+ *
+ *  double target - A distance in INCHES that the robot must drive forward
+ */
+bool MainDriveController::driveByPID(double target)
+{
+    return driveByPID(target, target);
+}
+
+/*  This overloaded method drives the robot forward to the target distance using PID
+ *
+ *  double leftTarget - A distance in INCHES that the left half of the robot must travel
+ *  double rightTarget - A distance in INCHES that the right half of the robot must travel
+ */
+bool MainDriveController::driveByPID(double leftTarget, double rightTarget)
+{
+
+    //If BOTH encoders are within the error margin
+    if (LeftDrive::getLeftEncoderDistance() >= leftTarget - driveConstants.getPIDErrorMargin() && LeftDrive::getLeftEncoderDistance() <= leftTarget + driveConstants.getPIDErrorMargin())
+    {
+        if (RightDrive::getRightEncoderDistance() >= rightTarget - driveConstants.getPIDErrorMargin() && RightDrive::getRightEncoderDistance() <= rightTarget + driveConstants.getPIDErrorMargin())
+        {
+            resetPID();
+            return false;
+        }
+    }
+
+
+    LeftDrive::driveLeftPID(leftTarget);
+    RightDrive::driveRightPID(rightTarget);
+
+    Sleep(driveConstants.getSleepAmount());
+
+    return true;
+}
+
+
+
+
+
+/*  This method resets the robot for a different setpoint
+ */
+void MainDriveController::resetPID()
+{
+    LeftDrive::resetLeftErrorValues();
+    RightDrive::resetRightErrorValues();
+
+    LeftDrive::resetLeftEncoder();
+    RightDrive::resetRightEncoder();
+}
+
+
+
+
+
 /*  This method has the robot make a 90 degree left turn about the center of rotation.
  *
  *  double angle - The angle in DEGREES that the robot should turn left.
