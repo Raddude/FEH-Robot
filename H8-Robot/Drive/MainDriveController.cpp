@@ -61,37 +61,7 @@ void MainDriveController::driveByPower(int leftSpeed, int rightSpeed)
  */
 bool MainDriveController::driveByEncoders(double target, int speed)
 {
-
-
-    if (LeftDrive::getLeftEncoderDistance() <= target)
-    {
-        LeftDrive::driveLeftCorrected(speed);
-    }
-
-    else
-    {
-        stopMotors();
-        resetEncoders();
-        Sleep(LeftDrive::getSleepAmount());
-        return false;
-    }
-
-
-
-    if (RightDrive::getRightEncoderDistance() <= target)
-    {
-        RightDrive::driveRightCorrected(speed);
-    }
-
-    else
-    {
-        stopMotors();
-        resetEncoders();
-        Sleep(LeftDrive::getSleepAmount());
-        return false;
-    }
-
-    return true;
+    return driveByEncoders(target, speed, target, speed);
 }
 
 /*  This overloaded method drives each half of the robot to its own distance at its own speed.
@@ -104,6 +74,8 @@ bool MainDriveController::driveByEncoders(double target, int speed)
 bool MainDriveController::driveByEncoders(double leftTarget, int leftSpeed, double rightTarget, int rightSpeed)
 {
 
+    leftTarget = leftTarget - (driveConstants.getOvershootTicks(leftSpeed) * driveConstants.getDistancePerTick());
+    rightTarget = rightTarget - (driveConstants.getOvershootTicks(rightSpeed) * driveConstants.getDistancePerTick());
 
     if (LeftDrive::getLeftEncoderDistance() < leftTarget)
     {
@@ -145,37 +117,7 @@ bool MainDriveController::driveByEncoders(double leftTarget, int leftSpeed, doub
  */
 bool MainDriveController::driveByEncoders(int leftTarget, int leftSpeed, int rightTarget, int rightSpeed)
 {
-
-
-    if (LeftDrive::getLeftEncoderCount() < leftTarget)
-    {
-        LeftDrive::driveLeftCorrected(leftSpeed);
-    }
-
-    else
-    {
-        stopMotors();
-        resetEncoders();
-        Sleep(LeftDrive::getSleepAmount());
-        return false;
-    }
-
-
-
-    if (RightDrive::getRightEncoderCount() < rightTarget)
-    {
-        RightDrive::driveRightCorrected(rightSpeed);
-    }
-
-    else
-    {
-        stopMotors();
-        resetEncoders();
-        Sleep(LeftDrive::getSleepAmount());
-        return false;
-    }
-
-    return true;
+    return driveByEncoders(leftTarget * driveConstants.getDistancePerTick(), leftSpeed, rightTarget * driveConstants.getDistancePerTick(), rightSpeed);
 }
 
 

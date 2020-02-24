@@ -19,6 +19,8 @@
 #define DISTANCE_PER_TICK (DISTANCE_PER_ROTATION/TICKS_PER_ROTATION)
 #define DISTANCE_PER_FULL_TURN (PI*WHEEL_SPAN)
 #define TICKS_PER_FULL_TURN (DISTANCE_PER_TICK/DISTANCE_PER_FULL_TURN)
+#define OVERSHOOT_SLOPE 1.135
+#define OVERSHOOT_OFFSET 21.5
 #define SLEEP_AMOUNT 0.125
 
 //PID Constants
@@ -114,6 +116,14 @@ double DriveConstants::getSleepAmount()
     return SLEEP_AMOUNT;
 }
 
+/*  This method returns the number of ticks that the encoders typically overshoot by at a given speed
+ *
+ *  int speed - The motor speed that the robot is travelling at in the range of [0, 100>]
+ */
+int DriveConstants::getOvershootTicks(int speed)
+{
+    return OVERSHOOT_SLOPE * speed - OVERSHOOT_OFFSET;
+}
 
 
 

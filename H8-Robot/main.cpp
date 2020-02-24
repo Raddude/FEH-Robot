@@ -43,9 +43,9 @@ int main(void)
      * -Timer class, that constantly counts up and manages time
      * -Speed functions relating to time, that take in time and output speeds at different rates (y=sqrt(2), y=x, y=x^2, y=asin(bx+c)+d)
      * -PID man
-     * -Combine encoder functions
      * -Make the file manager work
-     * -Subtract 9-11 ticks from encoder function to make it overshoot correctly
+     * -Properly implement getOvershootTicks() in DriveConstants
+     * -Turn about radius methods
      */
 
 
@@ -56,6 +56,7 @@ int main(void)
 
     //TEST MODE
     bool testMode = true;
+    int testSpeed = 20;
 
 
 
@@ -123,7 +124,15 @@ TestLoop:
 
 
 
-    drive.driveByPID(5.0);
+    while(drive.driveByEncoders(12.0, testSpeed)){}
+    LCD.WriteLine(testSpeed);
+    LCD.WriteLine(leftDrive.getLeftEncoderCount());
+    LCD.WriteLine(rightDrive.getRightEncoderCount());
+    LCD.WriteLine(driveConstants.getOvershootTicks(testSpeed)*driveConstants.getDistancePerTick());
+    LCD.WriteLine(driveConstants.getOvershootTicks(testSpeed));
+    Sleep(5.0);
+    testSpeed += 5;
+
 
 
 

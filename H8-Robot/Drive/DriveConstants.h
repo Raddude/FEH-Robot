@@ -16,6 +16,7 @@ public:
     double getDistancePerFullTurn();
     double getTicksPerFullTurn();
     double getSleepAmount();
+    int getOvershootTicks(int);
 
     double getKP(char);
     double getKI(char);
