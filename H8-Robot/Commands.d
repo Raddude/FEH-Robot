@@ -4,7 +4,8 @@
  Startup/derivative.h Startup/MK60DZ10.h ../Drive/DriveConstants.h \
  ../Drive/RightDrive.h ../General/ScreenController.h \
  ../General/CdSController.h ../General/Optosensors.h \
- ../General/LimitSwitches.h ../Mechanisms/BurgerFlipper.h
+ ../General/LimitSwitches.h ../General/Time.h \
+ ../Mechanisms/BurgerFlipper.h ../Mechanisms/IceCreamClaw.h
 
 Libraries/FEHUtility.h:
 
@@ -36,4 +37,8 @@ Startup/MK60DZ10.h:
 
 ../General/LimitSwitches.h:
 
+../General/Time.h:
+
 ../Mechanisms/BurgerFlipper.h:
+
+../Mechanisms/IceCreamClaw.h:

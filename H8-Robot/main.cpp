@@ -20,13 +20,16 @@
 #include "General/FileManager.h"
 #include "General/ScreenController.h"
 #include "General/Optosensors.h"
+#include "General/Time.h"
 #include "Drive/MainDriveController.h"
 #include "Drive/DriveConstants.h"
 #include "Drive/LeftDrive.h"
 #include "Mechanisms/BurgerFlipper.h"
+#include "Mechanisms/IceCreamClaw.h"
 #include "Commands.h"
 
-#define TEST_MOTOR_SPEED 40 //40 is the default value
+#define STRAIGHT_SPEED 60 //40 is the default value
+#define TURN_SPEED 40
 
 using namespace std;
 
@@ -40,11 +43,9 @@ int main(void)
 {
     /*  TO-DO LIST
      *
-     * -Timer class, that constantly counts up and manages time
      * -Speed functions relating to time, that take in time and output speeds at different rates (y=sqrt(2), y=x, y=x^2, y=asin(bx+c)+d)
      * -PID man
      * -Make the file manager work
-     * -Properly implement getOvershootTicks() in DriveConstants
      * -Turn about radius methods
      */
 
@@ -56,7 +57,6 @@ int main(void)
 
     //TEST MODE
     bool testMode = true;
-    int testSpeed = 20;
 
 
 
@@ -119,19 +119,7 @@ LightCondition:
 
 TestLoop:
     //Example command
-    //while(drive.driveByEncoders(14.0, TEST_MOTOR_SPEED));
-
-
-
-
-    while(drive.driveByEncoders(12.0, testSpeed)){}
-    LCD.WriteLine(testSpeed);
-    LCD.WriteLine(leftDrive.getLeftEncoderCount());
-    LCD.WriteLine(rightDrive.getRightEncoderCount());
-    LCD.WriteLine(driveConstants.getOvershootTicks(testSpeed)*driveConstants.getDistancePerTick());
-    LCD.WriteLine(driveConstants.getOvershootTicks(testSpeed));
-    Sleep(5.0);
-    testSpeed += 5;
+    //while(drive.driveByEncoders(14.0, TEST_MOTOR_SPEED)){time.keepTime();}
 
 
 
@@ -139,6 +127,12 @@ TestLoop:
 
 
 
+
+
+
+
+
+    screen.displayCurrentTime();
     Sleep(5.0);
 
     //If test mode is enabled, use the touch condition instead of the light condition
@@ -160,13 +154,13 @@ PerformanceLoop:
 
 
     //Jukebox
-    while(drive.driveByEncoders(20.0, TEST_MOTOR_SPEED)){}
-    while(drive.turnLeft(45, TEST_MOTOR_SPEED)){}
-    while(drive.driveByEncoders(3.5, TEST_MOTOR_SPEED)){}
-    while(drive.turnLeft(90, TEST_MOTOR_SPEED)){}
-    while(commands.driveUntilLightDetected(5.0, TEST_MOTOR_SPEED)){}
-    while(drive.driveByEncoders(0.2, TEST_MOTOR_SPEED)){}
-    Sleep(1.0);
+    while(drive.driveByEncodersCorrected(20.0, TEST_MOTOR_SPEED)){time.keepTime();}
+    while(drive.turnLeft(45, TURN_SPEED)){time.keepTime();}
+    while(drive.driveByEncodersCorrected(3.5, TEST_MOTOR_SPEED)){time.keepTime();}
+    while(drive.turnLeft(90, TEST_MOTOR_SPEED)){time.keepTime();}
+    while(commands.driveUntilLightDetected(5.0, TEST_MOTOR_SPEED)){time.keepTime();}
+    while(drive.driveByEncodersCorrected(0.2, TEST_MOTOR_SPEED)){time.keepTime();}
+    time.sleepSeconds(1.0);
 
     if(cdsCell.isRed())
     {
@@ -184,29 +178,29 @@ PerformanceLoop:
     }
 
     screen.displayCdSDetection();
-    Sleep(2.0);
+    time.sleepSeconds(2.0);
 
 
     //while(drive.turnLeft(5.0, TEST_MOTOR_SPEED)){}
-    while(drive.driveByEncoders(4.5, TEST_MOTOR_SPEED)){}
+    while(drive.driveByEncodersCorrected(4.5, TEST_MOTOR_SPEED)){time.keepTime();}
 
 
 
     //Ramp
-    while(drive.driveByEncoders(6.5, -TEST_MOTOR_SPEED)){}
-    while(drive.turnLeft(110, TEST_MOTOR_SPEED)){}
-    while(drive.driveByEncoders(10.0, TEST_MOTOR_SPEED)){}
-    while(drive.turnLeft(70, TEST_MOTOR_SPEED)){}
-    while(drive.driveByEncoders(25.0, TEST_MOTOR_SPEED)){}
-    while(drive.driveByEncoders(35.0, -TEST_MOTOR_SPEED)){}
+    while(drive.driveByEncodersCorrected(6.5, -TEST_MOTOR_SPEED)){time.keepTime();}
+    while(drive.turnLeft(110, TEST_MOTOR_SPEED)){time.keepTime();}
+    while(drive.driveByEncodersCorrected(10.0, TEST_MOTOR_SPEED)){time.keepTime();}
+    while(drive.turnLeft(70, TEST_MOTOR_SPEED)){time.keepTime();}
+    while(drive.driveByEncodersCorrected(25.0, TEST_MOTOR_SPEED)){time.keepTime();}
+    while(drive.driveByEncodersCorrected(35.0, -TEST_MOTOR_SPEED)){time.keepTime();}
 
 
 
 
 
     //If test mode is enabled, use the touch condition instead of the light condition
-
-    Sleep(5.0);
+    screen.displayCurrentTime();
+    time.sleepSeconds(5.0);
     goto TouchCondition;
 
 

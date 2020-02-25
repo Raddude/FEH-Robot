@@ -36,6 +36,8 @@ public:
 
     void displayAllEncoderCounts();
     void displayAllEncoderDistances();
+
+    void displayCurrentTime();
 };
 
 extern ScreenController screen;

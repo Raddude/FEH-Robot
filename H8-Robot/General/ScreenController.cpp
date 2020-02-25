@@ -16,6 +16,7 @@
 #include "CdSController.h"
 #include "Optosensors.h"
 #include "Drive/MainDriveController.h"
+#include "General/Time.h"
 
 #define SCREEN_WIDTH 240
 #define SCREEN_HEIGHT 320
@@ -251,3 +252,14 @@ void ScreenController::displayAllEncoderDistances()
     displayEncoderDistance('R');
 }
 
+
+
+
+
+/*  This method displays the current time
+ */
+void ScreenController::displayCurrentTime()
+{
+    LCD.Write("Time: ");
+    LCD.Write(time.getCurrentTime());
+}

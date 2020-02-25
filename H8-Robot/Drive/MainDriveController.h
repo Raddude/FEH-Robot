@@ -15,6 +15,8 @@ public:
     bool driveByEncoders(double, int);
     bool driveByEncoders(double, int, double, int);
     bool driveByEncoders(int, int, int, int);
+    bool driveByEncodersCorrected(double, int, double, int);
+    bool driveByEncodersCorrected(double, int);
 
     bool driveByPID(double);
     bool driveByPID(double, double);

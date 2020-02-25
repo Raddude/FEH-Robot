@@ -11,6 +11,7 @@
  */
 
 #include <FEHUtility.h>
+#include "General/Time.h"
 #include "MainDriveController.h"
 #include "LeftDrive.h"
 #include "RightDrive.h"
@@ -73,10 +74,6 @@ bool MainDriveController::driveByEncoders(double target, int speed)
  */
 bool MainDriveController::driveByEncoders(double leftTarget, int leftSpeed, double rightTarget, int rightSpeed)
 {
-
-    leftTarget = leftTarget - (driveConstants.getOvershootTicks(leftSpeed) * driveConstants.getDistancePerTick());
-    rightTarget = rightTarget - (driveConstants.getOvershootTicks(rightSpeed) * driveConstants.getDistancePerTick());
-
     if (LeftDrive::getLeftEncoderDistance() < leftTarget)
     {
         LeftDrive::driveLeftCorrected(leftSpeed);
@@ -86,7 +83,7 @@ bool MainDriveController::driveByEncoders(double leftTarget, int leftSpeed, doub
     {
         stopMotors();
         resetEncoders();
-        Sleep(LeftDrive::getSleepAmount());
+        time.sleepStandard();
         return false;
     }
 
@@ -101,7 +98,7 @@ bool MainDriveController::driveByEncoders(double leftTarget, int leftSpeed, doub
     {
         stopMotors();
         resetEncoders();
-        Sleep(LeftDrive::getSleepAmount());
+        time.sleepStandard();
         return false;
     }
 
@@ -120,7 +117,30 @@ bool MainDriveController::driveByEncoders(int leftTarget, int leftSpeed, int rig
     return driveByEncoders(leftTarget * driveConstants.getDistancePerTick(), leftSpeed, rightTarget * driveConstants.getDistancePerTick(), rightSpeed);
 }
 
+/*  This overloaded method drives each half of the robot to its own distance at its own speed.
+ *
+ *  double leftTarget - A distance in INCHES of how far the left half of the robot should travel.
+ *  int leftSpeed - The percent speed of the left motor on the interval [-100. 100]. Positive is 'forwards', since the direction is corrected for by the driveLeftCorrected() method.
+ *  double rightTarget - A distance in INCHES of how far the right half of robot should travel.
+ *  int rightSpeed - The percent speed of the right motor on the interval [-100. 100]. Positive is 'forwards', since the direction is corrected for by the driveRightCorrected() method.
+ */
+bool MainDriveController::driveByEncodersCorrected(double leftTarget, int leftSpeed, double rightTarget, int rightSpeed)
+{
+    leftTarget = leftTarget - (driveConstants.getOvershootTicks('L', leftSpeed) * driveConstants.getDistancePerTick());
+    rightTarget = rightTarget - (driveConstants.getOvershootTicks('R', rightSpeed) * driveConstants.getDistancePerTick());
 
+    return driveByEncoders(leftTarget, leftSpeed, rightTarget, rightSpeed);
+}
+
+/*  This overloaded method drives the robot forward to the target distance at the listed speed.
+ *
+ *  double target - A distance in INCHES of how far the robot should travel.
+ *  int speed - The percent speed of both motors on the interval [-100. 100]. Positive is 'forwards', since the direction is corrected for by the driveLeftCorrected() and driveRightCorrected() methods.
+ */
+bool MainDriveController::driveByEncodersCorrected(double target, int speed)
+{
+    return driveByEncodersCorrected(target, speed, target, speed);
+}
 
 
 
@@ -147,6 +167,7 @@ bool MainDriveController::driveByPID(double leftTarget, double rightTarget)
         if (RightDrive::getRightEncoderDistance() >= rightTarget - driveConstants.getPIDErrorMargin() && RightDrive::getRightEncoderDistance() <= rightTarget + driveConstants.getPIDErrorMargin())
         {
             resetPID();
+            time.sleepStandard();
             return false;
         }
     }
@@ -154,8 +175,6 @@ bool MainDriveController::driveByPID(double leftTarget, double rightTarget)
 
     LeftDrive::driveLeftPID(leftTarget);
     RightDrive::driveRightPID(rightTarget);
-
-    Sleep(driveConstants.getSleepAmount());
 
     return true;
 }

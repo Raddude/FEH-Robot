@@ -9,19 +9,25 @@
  *  Used in: Main.cpp, MainDriveController.cpp, LeftDrive.cpp, RightDrive.cpp.
  */
 
+#include <cmath>
 #include "DriveConstants.h"
 
 #define WHEEL_DIAMETER 3
-#define WHEEL_SPAN 7.875 //7.925 is the default value configured at 360 degrees
+#define WHEEL_SPAN 8.125  //7.925 is the default value configured at 360 degrees
 #define TICKS_PER_ROTATION 318
 #define PI 3.141592653589793238463
 #define DISTANCE_PER_ROTATION (PI*WHEEL_DIAMETER)
 #define DISTANCE_PER_TICK (DISTANCE_PER_ROTATION/TICKS_PER_ROTATION)
 #define DISTANCE_PER_FULL_TURN (PI*WHEEL_SPAN)
 #define TICKS_PER_FULL_TURN (DISTANCE_PER_TICK/DISTANCE_PER_FULL_TURN)
-#define OVERSHOOT_SLOPE 1.135
-#define OVERSHOOT_OFFSET 21.5
-#define SLEEP_AMOUNT 0.125
+
+#define L_OVERSHOOT_A 0.0071
+#define L_OVERSHOOT_B 0.2854
+#define L_OVERSHOOT_C 1.5155
+#define R_OVERSHOOT_A 0.0056
+#define R_OVERSHOOT_B 0.4716
+#define R_OVERSHOOT_C 4.2678
+
 
 //PID Constants
 #define L_KP 1
@@ -109,20 +115,21 @@ double DriveConstants::getTicksPerFullTurn()
     return TICKS_PER_FULL_TURN;
 }
 
-/*  This method returns the default sleep duration between actions
- */
-double DriveConstants::getSleepAmount()
-{
-    return SLEEP_AMOUNT;
-}
-
 /*  This method returns the number of ticks that the encoders typically overshoot by at a given speed
  *
  *  int speed - The motor speed that the robot is travelling at in the range of [0, 100>]
  */
-int DriveConstants::getOvershootTicks(int speed)
+int DriveConstants::getOvershootTicks(char side, int speed)
 {
-    return OVERSHOOT_SLOPE * speed - OVERSHOOT_OFFSET;
+    if (side == 'L')
+    {
+        return L_OVERSHOOT_A * speed * speed + L_OVERSHOOT_B * speed + L_OVERSHOOT_C;
+    }
+
+    else if (side == 'R')
+    {
+        return R_OVERSHOOT_A * speed * speed + R_OVERSHOOT_B * speed + R_OVERSHOOT_C;
+    }
 }
 
 

@@ -6,7 +6,7 @@
  ../General/ScreenController.h ../General/CdSController.h \
  ../General/Optosensors.h ../Drive/MainDriveController.h \
  ../Drive/LeftDrive.h ../Drive/DriveBase.h Libraries/FEHMotor.h \
- ../Drive/DriveConstants.h ../Drive/RightDrive.h
+ ../Drive/DriveConstants.h ../Drive/RightDrive.h ../General/Time.h
 
 Libraries/FEHLCD.h:
 
@@ -45,3 +45,5 @@ Libraries/FEHMotor.h:
 ../Drive/DriveConstants.h:
 
 ../Drive/RightDrive.h:
+
+../General/Time.h:

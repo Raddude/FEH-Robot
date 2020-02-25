@@ -6,6 +6,14 @@ class Time
 {
 public:
     Time();
+
+    void sleepSeconds(double);
+    void sleepMS(int);
+    void sleepStandard();
+
+    void keepTime();
+    double getCurrentTime();
+    void resetTime();
 };
 
 extern Time time;

@@ -15,7 +15,9 @@
 #include "General/Optosensors.h"
 #include "General/ScreenController.h"
 #include "General/LimitSwitches.h"
+#include "General/Time.h"
 #include "Mechanisms/BurgerFlipper.h"
+#include "Mechanisms/IceCreamClaw.h"
 
 //Distance in inches that the robot moves before checking the line again
 #define LINE_FOLLOWING_STEP_SIZE 0.05
@@ -58,6 +60,9 @@ void Commands::preMatchReset()
     drive.resetEncoders();
     burger.setEndStops();
     burger.setPosition('U');
+    iceCream.setEndStops();
+    iceCream.setPosition('L');
+    time.resetTime();
 }
 
 
@@ -217,7 +222,6 @@ bool Commands::configureOptosensors()
 {
     screen.displayAllOptosensorDetection();
     screen.displayAllOptosensorReading();
-    Sleep(100);
     screen.clearScreen();
 
     return true;
@@ -233,7 +237,6 @@ bool Commands::configureCdSCell()
 {
     screen.displayCdSReading();
     screen.displayCdSDetection();
-    Sleep(100);
     screen.clearScreen();
 
     return true;
@@ -248,7 +251,6 @@ bool Commands::configureCdSCell()
 bool Commands::showBatteryVoltage()
 {
     screen.displayBatteryVoltage();
-    Sleep(100);
     screen.clearScreen();
 
     return true;

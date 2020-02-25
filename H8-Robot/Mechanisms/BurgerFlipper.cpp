@@ -43,7 +43,7 @@ void BurgerFlipper::setAngle(float angle)
     burgerServo.SetDegree(angle);
 }
 
-/*  This method allows for easy selection of the vertical and both horizonatl positions
+/*  This method allows for easy selection of the vertical and both horizontal positions
  *
  *  char input - This char (L/U/R) represents the position of the servo
  */
