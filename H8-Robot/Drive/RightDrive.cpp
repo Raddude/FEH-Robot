@@ -12,7 +12,6 @@
 #include <FEHMotor.h>
 #include <FEHIO.h>
 #include "RightDrive.h"
-#include "DriveConstants.h"
 
 using namespace std;
 

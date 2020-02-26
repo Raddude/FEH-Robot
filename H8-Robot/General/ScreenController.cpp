@@ -12,11 +12,11 @@
 #include <FEHLCD.h>
 #include <FEHBattery.h>
 #include <string.h>
-#include "ScreenController.h"
-#include "Mechanisms/CdSController.h"
-#include "Mechanisms/Optosensors.h"
 #include "Drive/MainDriveController.h"
 #include "General/Time.h"
+#include "Mechanisms/CdSController.h"
+#include "Mechanisms/Optosensors.h"
+#include "ScreenController.h"
 
 #define SCREEN_WIDTH 240
 #define SCREEN_HEIGHT 320

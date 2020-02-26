@@ -5,7 +5,7 @@
  ../Mechanisms/Optosensors.h ../Mechanisms/CdSController.h \
  ../General/ScreenController.h ../Mechanisms/LimitSwitches.h \
  ../General/Time.h ../Mechanisms/BurgerFlipper.h \
- ../Mechanisms/IceCreamClaw.h
+ ../Mechanisms/IceCreamClaw.h ../Mechanisms/TicketSlider.h
 
 Libraries/FEHUtility.h:
 
@@ -40,3 +40,5 @@ Startup/MK60DZ10.h:
 ../Mechanisms/BurgerFlipper.h:
 
 ../Mechanisms/IceCreamClaw.h:
+
+../Mechanisms/TicketSlider.h:

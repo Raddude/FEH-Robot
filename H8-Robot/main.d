@@ -4,10 +4,11 @@
  Libraries/FEHMotor.h Libraries/FEHIO.h Drivers/adc16.h \
  ../Mechanisms/CdSController.h ../General/FileManager.h \
  ../General/ScreenController.h ../Mechanisms/Optosensors.h \
- ../General/Time.h ../Drive/MainDriveController.h ../Drive/LeftDrive.h \
- ../Drive/DriveBase.h ../Drive/DriveConstants.h ../Drive/RightDrive.h \
- ../Drive/DriveConstants.h ../Drive/LeftDrive.h \
- ../Mechanisms/BurgerFlipper.h ../Mechanisms/IceCreamClaw.h ../Commands.h
+ ../General/Time.h ../General/Speed.h ../Drive/MainDriveController.h \
+ ../Drive/LeftDrive.h ../Drive/DriveBase.h ../Drive/DriveConstants.h \
+ ../Drive/RightDrive.h ../Drive/DriveConstants.h ../Drive/LeftDrive.h \
+ ../Mechanisms/BurgerFlipper.h ../Mechanisms/IceCreamClaw.h \
+ ../Mechanisms/TicketSlider.h ../Commands.h
 
 Libraries/FEHLCD.h:
 
@@ -39,6 +40,8 @@ Drivers/adc16.h:
 
 ../General/Time.h:
 
+../General/Speed.h:
+
 ../Drive/MainDriveController.h:
 
 ../Drive/LeftDrive.h:
@@ -56,5 +59,7 @@ Drivers/adc16.h:
 ../Mechanisms/BurgerFlipper.h:
 
 ../Mechanisms/IceCreamClaw.h:
+
+../Mechanisms/TicketSlider.h:
 
 ../Commands.h:

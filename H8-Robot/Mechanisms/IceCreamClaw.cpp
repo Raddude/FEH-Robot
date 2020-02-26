@@ -12,8 +12,8 @@
 #include <FEHServo.h>
 #include "IceCreamClaw.h"
 
-#define CLAW_SERVO_MIN 800
-#define CLAW_SERVO_MAX 2400
+#define CLAW_SERVO_MIN 760
+#define CLAW_SERVO_MAX 2480
 
 IceCreamClaw iceCream;
 
@@ -50,22 +50,22 @@ void IceCreamClaw::setPosition(char input)
 {
     if (input == 'L')
     {
-        clawServo.SetDegree(0.0);
+        clawServo.SetDegree(60.0);
     }
 
-    else if (input == 'U')
+    else if (input == 'M')
     {
-        clawServo.SetDegree(93.0);
+        clawServo.SetDegree(90.0);
     }
 
-    else if (input == 'R')
+    else if (input == 'H')
     {
-        clawServo.SetDegree(180.0);
+        clawServo.SetDegree(120.0);
     }
 
     else
     {
-        clawServo.SetDegree(0.0);
+        clawServo.SetDegree(180.0);
     }
 }
 

@@ -12,10 +12,8 @@
 
 #include <FEHUtility.h>
 #include "General/Time.h"
-#include "MainDriveController.h"
-#include "LeftDrive.h"
-#include "RightDrive.h"
 #include "DriveConstants.h"
+#include "MainDriveController.h"
 #include "Commands.h"
 
 #define SLEEP_AMOUNT 0.25

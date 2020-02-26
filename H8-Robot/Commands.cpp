@@ -12,13 +12,13 @@
 #include <FEHUtility.h>
 #include "Commands.h"
 #include "Drive/MainDriveController.h"
-#include "Mechanisms/Optosensors.h"
-#include "Mechanisms/CdSController.h"
 #include "General/ScreenController.h"
-#include "Mechanisms/LimitSwitches.h"
 #include "General/Time.h"
 #include "Mechanisms/BurgerFlipper.h"
+#include "Mechanisms/CdSController.h"
 #include "Mechanisms/IceCreamClaw.h"
+#include "Mechanisms/LimitSwitches.h"
+#include "Mechanisms/Optosensors.h"
 #include "Mechanisms/TicketSlider.h"
 
 //Distance in inches that the robot moves before checking the line again
@@ -65,7 +65,7 @@ void Commands::preMatchReset()
     iceCream.setEndStops();
     //iceCream.setPosition('U');
     ticketSlider.setEndStops();
-    //ticketSlider.setPosition('U');
+    ticketSlider.setPosition('U');
     time.resetTime();
 }
 

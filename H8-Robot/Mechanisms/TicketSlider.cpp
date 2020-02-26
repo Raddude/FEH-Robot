@@ -12,8 +12,8 @@
 #include <FEHServo.h>
 #include "TicketSlider.h"
 
-#define TICKET_SERVO_MIN 0
-#define TICKET_SERVO_MAX 2600
+#define TICKET_SERVO_MIN 500
+#define TICKET_SERVO_MAX 2400
 
 TicketSlider ticketSlider;
 
@@ -54,9 +54,14 @@ void TicketSlider::setPosition(char input)
         ticketServo.SetDegree(0.0);
     }
 
+    else if (input == 'M')
+    {
+        ticketServo.SetDegree(35.0);
+    }
+
     else if (input == 'D')
     {
-        ticketServo.SetDegree(93.0);
+        ticketServo.SetDegree(65.0);
     }
 
     else

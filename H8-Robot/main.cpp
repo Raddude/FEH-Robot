@@ -15,18 +15,17 @@
 #include <FEHIO.h>
 #include <string>
 #include <iostream>
-
-#include "Mechanisms/CdSController.h"
-#include "General/FileManager.h"
-#include "General/ScreenController.h"
-#include "Mechanisms/Optosensors.h"
-#include "General/Time.h"
-#include "General/Speed.h"
 #include "Drive/MainDriveController.h"
 #include "Drive/DriveConstants.h"
-#include "Drive/LeftDrive.h"
+#include "General/FileManager.h"
+#include "General/ScreenController.h"
+#include "General/Speed.h"
+#include "General/Time.h"
 #include "Mechanisms/BurgerFlipper.h"
+#include "Mechanisms/CdSController.h"
 #include "Mechanisms/IceCreamClaw.h"
+#include "Mechanisms/Optosensors.h"
+#include "Mechanisms/TicketSlider.h"
 #include "Commands.h"
 
 #define STRAIGHT_SPEED 40 //40 is the default value
@@ -57,7 +56,7 @@ int main(void)
 
 
     //TEST MODE
-    bool testMode = false;
+    bool testMode = true;
 
 
 
@@ -125,7 +124,9 @@ TestLoop:
 
 
 
-    while(drive.driveByEncoders(20.0, STRAIGHT_SPEED)){time.keepTime();}
+
+
+    //
 
 
 
