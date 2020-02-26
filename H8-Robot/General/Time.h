@@ -11,6 +11,9 @@ public:
     void sleepMS(int);
     void sleepStandard();
 
+    double getStopwatch();
+    void resetStopwatch();
+
     void keepTime();
     double getCurrentTime();
     void resetTime();

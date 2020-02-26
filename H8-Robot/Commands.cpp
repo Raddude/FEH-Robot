@@ -19,6 +19,7 @@
 #include "General/Time.h"
 #include "Mechanisms/BurgerFlipper.h"
 #include "Mechanisms/IceCreamClaw.h"
+#include "Mechanisms/TicketSlider.h"
 
 //Distance in inches that the robot moves before checking the line again
 #define LINE_FOLLOWING_STEP_SIZE 0.05
@@ -62,7 +63,9 @@ void Commands::preMatchReset()
     burger.setEndStops();
     burger.setPosition('U');
     iceCream.setEndStops();
-    //iceCream.setPosition('L');
+    //iceCream.setPosition('U');
+    ticketSlider.setEndStops();
+    //ticketSlider.setPosition('U');
     time.resetTime();
 }
 
@@ -73,6 +76,7 @@ void Commands::postMoveReset()
     drive.stopMotors();
     time.sleepStandard();
     drive.resetEncoders();
+    time.resetStopwatch();
 }
 
 
@@ -92,8 +96,7 @@ bool Commands::followLineForDistance(double distance, int speed)
     //End the command if the robot drove far enough
     if (drive.getLeftEncoderDistance() >= distance || drive.getRightEncoderDistance() >= distance)
     {
-        drive.resetEncoders();
-        drive.stopMotors();
+        postMoveReset();
         return false;
     }
 
@@ -175,6 +178,7 @@ bool Commands::driveUntilLimitSwitch(char sensor, int speed)
         case 'B':
             if (limitSwitches.isBackLimitSwitchPressed())
             {
+                postMoveReset();
                 return false;
             }
             break;
@@ -216,6 +220,7 @@ bool Commands::driveUntilLightDetected(double distance, int speed)
 {
     if (leftDrive.getLeftEncoderDistance() > distance || rightDrive.getRightEncoderDistance() > distance)
     {
+        postMoveReset();
         return false;
     }
 

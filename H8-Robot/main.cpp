@@ -21,6 +21,7 @@
 #include "General/ScreenController.h"
 #include "Mechanisms/Optosensors.h"
 #include "General/Time.h"
+#include "General/Speed.h"
 #include "Drive/MainDriveController.h"
 #include "Drive/DriveConstants.h"
 #include "Drive/LeftDrive.h"
@@ -146,26 +147,29 @@ PerformanceLoop:
 
 
 
-
-
     /*  TICKET SLIDER  */
     while(drive.turnRight(60, TURN_SPEED)){time.keepTime();}
     while(drive.driveByEncoders(12.0, STRAIGHT_SPEED)){time.keepTime();}
     while(drive.turnLeft(195, TURN_SPEED)){time.keepTime();}
     while(drive.driveByEncoders(3.5, -STRAIGHT_SPEED)){time.keepTime();}
     while(commands.pivotUntilBackLimitSwitch('L', -TURN_SPEED)){time.keepTime();}
-//    //Slider arm down here
-//    while(drive.driveByEncoders(4.0, STRAIGHT_SPEED)){time.keepTime();}
+    //Slider arm down here
+    while(drive.driveByEncoders(4.0, STRAIGHT_SPEED)){time.keepTime();}
 
-//    /*  TRAY RETURN  */
-//    while(drive.driveByEncoders(4.0, -STRAIGHT_SPEED)){time.keepTime();}
-//    //Slider arm up here
-//    while(drive.pivotLeft(45, TURN_SPEED)){time.keepTime();}
-//    while(drive.driveByEncoders(6.0, STRAIGHT_SPEED)){time.keepTime();}
-//    while(drive.turnRight(90, TURN_SPEED)){time.keepTime();}
-//    while(drive.driveByEncoders(10.0, STRAIGHT_SPEED)){time.keepTime();}
-//    while(drive.turnRight(90, TURN_SPEED)){time.keepTime();}
-//    while(drive.driveByEncoders(20.0, STRAIGHT_SPEED)){time.keepTime();}
+
+
+    /*  TRAY RETURN  */
+    while(drive.driveByEncoders(4.0, -STRAIGHT_SPEED)){time.keepTime();}
+    //Slider arm up here
+    while(drive.pivotLeft(45, TURN_SPEED)){time.keepTime();}
+    while(drive.driveByEncoders(6.0, STRAIGHT_SPEED)){time.keepTime();}
+    while(drive.turnRight(90, TURN_SPEED)){time.keepTime();}
+    while(drive.driveByEncoders(10.0, STRAIGHT_SPEED)){time.keepTime();}
+    while(drive.turnRight(90, TURN_SPEED)){time.keepTime();}
+    while(drive.driveByEncoders(20.0, STRAIGHT_SPEED)){time.keepTime();}
+    while(drive.turnRight(90, TURN_SPEED)){time.keepTime();}
+    while(commands.driveUntilLimitSwitch('B', -STRAIGHT_SPEED)){time.keepTime();}
+    //Dump tray here
 
 
 

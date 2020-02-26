@@ -49,19 +49,14 @@ void TicketSlider::setAngle(float angle)
  */
 void TicketSlider::setPosition(char input)
 {
-    if (input == 'L')
+    if (input == 'U')
     {
         ticketServo.SetDegree(0.0);
     }
 
-    else if (input == 'U')
+    else if (input == 'D')
     {
         ticketServo.SetDegree(93.0);
-    }
-
-    else if (input == 'R')
-    {
-        ticketServo.SetDegree(180.0);
     }
 
     else

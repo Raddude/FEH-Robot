@@ -6,6 +6,9 @@ class Speed
 {
 public:
     Speed();
+
+    int getCurrentFinishSpeed();
+    int rampSpeed(double, int);
 };
 
 extern Speed speed;

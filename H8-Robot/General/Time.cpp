@@ -18,6 +18,7 @@
 Time time;
 
 double globalTime = 0; //Time in seconds
+double stopwatchTime = 0;
 
 
 
@@ -67,12 +68,31 @@ void Time::sleepStandard()
 
 
 
+/*  This method returns the current time of the stopwatch
+ */
+double Time::getStopwatch()
+{
+    return stopwatchTime;
+}
+
+/*  This method resets the stopwatch time back to 0
+ */
+void Time::resetStopwatch()
+{
+    stopwatchTime = 0;
+}
+
+
+
+
+
 /*  This method keeps the time for the code and increments the global timer by the TIME_INCREMENT constant
  */
 void Time::keepTime()
 {
     Sleep(TIME_INCREMENT);
     globalTime += TIME_INCREMENT;
+    stopwatchTime += TIME_INCREMENT;
 }
 
 /*  This method returns the current global time

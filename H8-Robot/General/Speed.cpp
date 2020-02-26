@@ -1,4 +1,4 @@
-/*  Time.cpp
+/*  Speed.cpp
  *  Author: Jake Marchewitz
  *  Creation Date: 2/25/20
  *
@@ -10,8 +10,11 @@
  */
 
 #include "Speed.h"
+#include "Time.h"
 
 Speed speed;
+
+int finishSpeed;
 
 
 
@@ -20,6 +23,30 @@ Speed speed;
 
 
 Speed::Speed()
+{
+
+}
+
+
+
+
+
+
+
+/*  This method returns the currently set final speed for overshoot calculations in other parts of the code.
+ */
+int Speed::getCurrentFinishSpeed()
+{
+    return finishSpeed;
+}
+
+
+
+
+
+/*  This function ramps the speed up and down to smooth the travel of the robot
+ */
+int Speed::rampSpeed(double runTime, int topSpeed)
 {
 
 }
