@@ -72,7 +72,7 @@ int main(void)
      *  NOT INSIDE WHILE() LOOPS:
      *  burger.setPosition('CHAR'); - (L)eft, (U)p, or (R)ight
      *  ticketSlider.setPosition('CHAR'); - (U)p, (M)iddle, or (D)own  - THIS IS SEMI-UNTESTED
-     *  iceCream.setPosition('CHAR'); - (L)ow, (Middle), (H)igh, (U)p  - THIS IS UNTESTED
+     *  iceCream.setPosition('CHAR'); - (L)ow, (M)iddle, (H)igh, (U)p  - THIS IS UNTESTED
      */
 
 
