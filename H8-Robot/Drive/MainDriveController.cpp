@@ -21,6 +21,8 @@
 using namespace std;
 
 MainDriveController drive;
+double leftDistanceFromTurn, rightDistanceFromTurn, leftOrbitCircumference, rightOrbitCircumference;
+int closeSpeed;
 
 
 
@@ -235,6 +237,48 @@ bool MainDriveController::pivotLeft(double angle, int speed)
 bool MainDriveController::pivotRight(double angle, int speed)
 {
     return driveByEncoders((2*angle/360) * driveConstants.getDistancePerFullTurn(), speed, 2000, 0);
+}
+
+
+
+
+
+/*  This method has the robot turn about a point that is neither in the center nor under a wheel. This allows for more turning options
+ *
+ *  double angle - The angle that the robot will cover out of a full circle orbiting this radius
+ *  int farSpeed - The speed of the far (right) side of the robot. The left speed will be calculated in relation to this.
+ *  double radiusFromCenter - The distance away from the centerline of the robot that the robot will orbit about
+ */
+bool MainDriveController::orbitLeft(double angle, int farSpeed, double radiusFromCenter)
+{
+    leftDistanceFromTurn = radiusFromCenter - (driveConstants.getWheelSpan()/2);
+    rightDistanceFromTurn = radiusFromCenter + (driveConstants.getWheelSpan()/2);
+
+    leftOrbitCircumference = driveConstants.getPI() * 2 * leftDistanceFromTurn;
+    rightOrbitCircumference = driveConstants.getPI() * 2 * rightDistanceFromTurn;
+
+    closeSpeed = farSpeed * (leftDistanceFromTurn/rightDistanceFromTurn);
+
+    driveByEncoders((angle/360) * leftOrbitCircumference, closeSpeed, (angle/360) * rightOrbitCircumference, farSpeed);
+}
+
+/*  This method has the robot turn about a point that is neither in the center nor under a wheel. This allows for more turning options
+ *
+ *  double angle - The angle that the robot will cover out of a full circle orbiting this radius
+ *  int farSpeed - The speed of the far (right) side of the robot. The left speed will be calculated in relation to this.
+ *  double radiusFromCenter - The distance away from the centerline of the robot that the robot will orbit about
+ */
+bool MainDriveController::orbitRight(double angle, int farSpeed, double radiusFromCenter)
+{
+    leftDistanceFromTurn = radiusFromCenter + (driveConstants.getWheelSpan()/2);
+    rightDistanceFromTurn = radiusFromCenter - (driveConstants.getWheelSpan()/2);
+
+    leftOrbitCircumference = driveConstants.getPI() * 2 * leftDistanceFromTurn;
+    rightOrbitCircumference = driveConstants.getPI() * 2 * rightDistanceFromTurn;
+
+    closeSpeed = farSpeed * (rightDistanceFromTurn/leftDistanceFromTurn);
+
+    driveByEncoders((angle/360) * leftOrbitCircumference, farSpeed, (angle/360) * rightOrbitCircumference, closeSpeed);
 }
 
 

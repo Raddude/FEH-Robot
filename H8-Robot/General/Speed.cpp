@@ -9,12 +9,14 @@
  *  Used in: main.cpp.
  */
 
+#include "Drive/MainDriveController.h"
 #include "Speed.h"
 #include "Time.h"
 
 Speed speed;
 
 int finishSpeed;
+double completePercent, rampSlope;
 
 
 
@@ -45,8 +47,29 @@ int Speed::getCurrentFinishSpeed()
 
 
 /*  This function ramps the speed up and down to smooth the travel of the robot
+ *
+ *  double distance - The total distance of the command that rampSpeed() is being put into
+ *  int topSpeed - The maximum speed that the robot should reach
  */
-int Speed::rampSpeed(double runTime, int topSpeed)
+int Speed::rampSpeed(double distance, int topSpeed)
 {
+    finishSpeed = 20;
+    completePercent = leftDrive.getLeftEncoderDistance()/distance;
+    rampSlope = (topSpeed-finishSpeed) / 0.1;
+
+    if (completePercent < 0.1)
+    {
+        return rampSlope * completePercent + 20;
+    }
+
+    else if (completePercent > 0.9)
+    {
+        return -rampSlope * (completePercent - 0.9) + topSpeed;
+    }
+
+    else
+    {
+        return topSpeed;
+    }
 
 }

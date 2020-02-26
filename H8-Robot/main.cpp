@@ -43,11 +43,39 @@ int main(void)
 {
     /*  TO-DO LIST
      *
-     * -Speed functions relating to time, that take in time and output speeds at different rates (y=sqrt(2), y=x, y=x^2, y=asin(bx+c)+d)
      * -PID man
-     * -Make the file manager work
-     * -Turn about radius methods
+     * -Test orbit functions
+     * -Test file functions
      */
+
+
+
+    /*  EXAMPLE COMMANDS - FOR MOUSTAPHA AND CLAY
+     *  You can basically copy and paste each of these lines into the code and edit the parameters as needed
+     *
+     *  All distances are in INCHES, all angles are in DEGREES, and all speeds are a PERCENT
+     *  Speeds STRAIGHT_SPEED and TURN_SPEED, have been tested and are the most accurate speeds to run the program at.
+     *  They are constants made with #define at the top
+     *
+     *  while(drive.driveByEncoders(DISTANCE, SPEED){time.keepTime();} - FORWARDS
+     *  while(drive.driveByEncoders(DISTANCE, -SPEED){time.keepTime();} - BACKWARDS (Note that the distance is still positive)
+     *
+     *  while(drive.turnLeft(ANGLE, SPEED)){time.keepTime();}
+     *  while(drive.turnRight(ANGLE, SPEED)){time.keepTime();}
+     *
+     *  while(drive.pivotLeft(ANGLE, SPEED)){time.keepTime();}
+     *  while(drive.pivotRight(ANGLE, SPEED)){time.keepTime();}
+     *
+     *  while(commands.pivotUntilBackLimitSwitch('L', -TURN_SPEED)){time.keepTime();} - PIVOT LEFT UNTIL BACK LIMIT SWITCH
+     *  while(commands.pivotUntilBackLimitSwitch('R', -TURN_SPEED)){time.keepTime();} - PIVOT RIGHT UNTIL BACK LIMIT SWITCH
+     *
+     *  NOT INSIDE WHILE() LOOPS:
+     *  burger.setPosition('CHAR'); - (L)eft, (U)p, or (R)ight
+     *  ticketSlider.setPosition('CHAR'); - (U)p, (M)iddle, or (D)own  - THIS IS SEMI-UNTESTED
+     *  iceCream.setPosition('CHAR'); - (L)ow, (Middle), (H)igh, (U)p  - THIS IS UNTESTED
+     */
+
+
 
 
 
@@ -86,13 +114,7 @@ TouchCondition:
     {}
 
     commands.preMatchReset();
-
-
-    if (testMode)
-    {
-        goto TestLoop;
-    }
-    goto PerformanceLoop;
+    goto TestLoop;
 
 
 
@@ -104,11 +126,6 @@ LightCondition:
     while(!cdsCell.isRed()){}
 
     commands.preMatchReset();
-
-    if (testMode)
-    {
-        goto TestLoop;
-    }
     goto PerformanceLoop;
 
 
@@ -125,17 +142,14 @@ TestLoop:
 
 
 
-
-    //
-
+    while(drive.driveByEncoders(12.0, speed.rampSpeed(12.0, 80))){time.keepTime();}
 
 
 
 
 
-    screen.displayCurrentTime();
-    Sleep(5.0);
-
+    //Post-match
+    commands.postMatchActions();
     goto TouchCondition;
 
 
@@ -154,18 +168,18 @@ PerformanceLoop:
     while(drive.turnLeft(195, TURN_SPEED)){time.keepTime();}
     while(drive.driveByEncoders(3.5, -STRAIGHT_SPEED)){time.keepTime();}
     while(commands.pivotUntilBackLimitSwitch('L', -TURN_SPEED)){time.keepTime();}
-    //Slider arm down here
+    //Untested - ticketSlider.setPosition('D');
     while(drive.driveByEncoders(4.0, STRAIGHT_SPEED)){time.keepTime();}
 
 
 
     /*  TRAY RETURN  */
     while(drive.driveByEncoders(4.0, -STRAIGHT_SPEED)){time.keepTime();}
-    //Slider arm up here
+    //Untested - ticketSlider.setPosition('U');
     while(drive.pivotLeft(45, TURN_SPEED)){time.keepTime();}
-    while(drive.driveByEncoders(6.0, STRAIGHT_SPEED)){time.keepTime();}
-    while(drive.turnRight(90, TURN_SPEED)){time.keepTime();}
-    while(drive.driveByEncoders(10.0, STRAIGHT_SPEED)){time.keepTime();}
+    while(drive.driveByEncoders(7.0, STRAIGHT_SPEED)){time.keepTime();}
+    while(drive.turnRight(45, TURN_SPEED)){time.keepTime();}
+    while(drive.driveByEncoders(9.0, STRAIGHT_SPEED)){time.keepTime();}
     while(drive.turnRight(90, TURN_SPEED)){time.keepTime();}
     while(drive.driveByEncoders(20.0, STRAIGHT_SPEED)){time.keepTime();}
     while(drive.turnRight(90, TURN_SPEED)){time.keepTime();}
@@ -174,22 +188,18 @@ PerformanceLoop:
 
 
 
+    /*  BURGER TOUCH */
+    while(drive.pivotLeft(60, TURN_SPEED)){time.keepTime();}
+    while(drive.driveByEncoders(25.0, STRAIGHT_SPEED)){time.keepTime();}
+    while(drive.turnLeft(30, TURN_SPEED)){time.keepTime();}
+    while(drive.driveByEncoders(4.0, STRAIGHT_SPEED)){time.keepTime();}
 
 
 
-    //If test mode is enabled, use the touch condition instead of the light condition
-    screen.displayCurrentTime();
-    time.sleepSeconds(5.0);
-    screen.clearScreen();
-    screen.displayFullScreenMessage("Touch to continue...");
 
-    LCD.ClearBuffer();
 
-    while(!LCD.Touch(&x,&y))
-    {}
-    while(LCD.Touch(&x,&y))
-    {}
-
+    //Post-match
+    commands.postMatchActions();
     goto LightCondition;
 
 

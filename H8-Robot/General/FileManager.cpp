@@ -10,14 +10,18 @@
  */
 
 #include <FEHSD.h>
+#include <FEHUtility.h>
 #include <stdio.h>
+#include "Time.h"
 #include "FileManager.h"
 
 using namespace std;
 
 FileManager fileManager;
 
-int variables[0];
+FEHFile *fileA;
+FEHFile *fileB;
+FEHFile *fileC;
 
 
 
@@ -36,57 +40,68 @@ FileManager::FileManager()
 
 
 
-/*  This method reads all of the tracked variables from the Stored_Values.txt.
+/*  This method opens all of the documented files
  */
-void FileManager::readAllVariables()
+void FileManager::openFiles()
 {
-    FEHFile *fptr = SD.FOpen("Stored_Values.txt", "r");
-    int i = 0;
+    //*fileA = SD.FOpen("File_A.txt", 'w');
+    //*fileB = SD.FOpen("File_B.txt", 'w');
+    //*fileC = SD.FOpen("File_C.txt", 'w');
+}
 
-    while(!SD.FEof(fptr))
+/*  This method closes all of the documented files
+ */
+void FileManager::closeFiles()
+{
+    SD.FCloseAll();
+}
+
+
+
+
+
+/*  This method writes the given data to the selected file, with the robot's global time attached
+ *
+ *  char file - The file to be written to
+ *  double data - The current data point to be written
+ */
+void FileManager::writeToFile(char file, double data)
+{
+    if (file == 'A')
     {
-        SD.FScanf(fptr, "%d", &variables[i]);
-        i++;
+        SD.FPrintf(fileA, "%f\t%f", time.getCurrentTime(), data);
     }
 
-    SD.FClose(fptr);
-}
-
-/*  This method writes all of the tracked variables to Stored_Variables.txt.
- */
-void FileManager::writeAllVariables()
-{
-    remove("Stored_Values.txt");
-
-    FEHFile *fptr = SD.FOpen("Stored_Values.txt", "w");
-
-    for(int j = 0; j < 100; j++)
+    else if (file == 'B')
     {
-        SD.FPrintf(fptr, "%i\n", variables[j]);
+        SD.FPrintf(fileB, "%f\t%f", time.getCurrentTime(), data);
     }
 
-    SD.FClose(fptr);
+    else if (file == 'C')
+    {
+        SD.FPrintf(fileC, "%f\t%f", time.getCurrentTime(), data);
+    }
 }
 
-
-
-
-
-/*  This method reads a specific variable from the array and returns it.
+/*  This method writes the given data to the selected file, with the robot's global time attached
  *
- *  int ID - The index of the array being read. This can act as the variable's ID.
+ *  char file - The file to be written to
+ *  int data - The current data point to be written
  */
-int FileManager::readIntVariable(int ID)
+void FileManager::writeToFile(char file, int data)
 {
-    return variables[ID];
-}
+    if (file == 'A')
+    {
+        SD.FPrintf(fileA, "%f\t%d", time.getCurrentTime(), data);
+    }
 
-/*  This method writes a given value to a specific variable in the array.
- *
- *  int ID - The index of the array being read. This can act as the variable's ID.
- *  int value - The value being written to the variable.
- */
-void FileManager::writeIntVariable(int ID, int value)
-{
-    variables[ID] = value;
+    else if (file == 'B')
+    {
+        SD.FPrintf(fileB, "%f\t%d", time.getCurrentTime(), data);
+    }
+
+    else if (file == 'C')
+    {
+        SD.FPrintf(fileC, "%f\t%d", time.getCurrentTime(), data);
+    }
 }

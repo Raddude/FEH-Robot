@@ -10,8 +10,10 @@
  */
 
 #include <FEHUtility.h>
+#include <FEHLCD.h>
 #include "Commands.h"
 #include "Drive/MainDriveController.h"
+#include "General/FileManager.h"
 #include "General/ScreenController.h"
 #include "General/Time.h"
 #include "Mechanisms/BurgerFlipper.h"
@@ -35,6 +37,7 @@
 Commands commands;
 
 char sideWhereLineWasLastSeen = 'M';
+float x, y;
 
 
 
@@ -57,6 +60,7 @@ Commands::Commands()
  */
 void Commands::preMatchReset()
 {
+    fileManager.openFiles();
     screen.clearScreen();
     screen.clearBuffer();
     drive.resetEncoders();
@@ -79,6 +83,24 @@ void Commands::postMoveReset()
     time.resetStopwatch();
 }
 
+/*  This command performs a few key actions after a match
+ */
+void Commands::postMatchActions()
+{
+    fileManager.closeFiles();
+
+    screen.displayCurrentTime();
+    time.sleepSeconds(5.0);
+    screen.clearScreen();
+    screen.displayFullScreenMessage("Touch to continue...");
+
+    LCD.ClearBuffer();
+
+    while(!LCD.Touch(&x,&y))
+    {}
+    while(LCD.Touch(&x,&y))
+    {}
+}
 
 
 

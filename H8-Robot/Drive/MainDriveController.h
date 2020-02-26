@@ -28,6 +28,9 @@ public:
     bool pivotLeft(double, int);
     bool pivotRight(double, int);
 
+    bool orbitLeft(double, int, double);
+    bool orbitRight(double, int, double);
+
     bool turnLeftPID(double, int);
     bool turnRightPID(double, int);
 

@@ -7,10 +7,11 @@ class FileManager
 public:
     FileManager();
 
-    void readAllVariables();
-    void writeAllVariables();
-    int readIntVariable(int);
-    void writeIntVariable(int, int);
+    void openFiles();
+    void closeFiles();
+
+    void writeToFile(char, double);
+    void writeToFile(char, int);
 };
 
 extern FileManager fileManager;

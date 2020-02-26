@@ -9,6 +9,7 @@ public:
 
     void preMatchReset();
     void postMoveReset();
+    void postMatchActions();
 
     bool configureOptosensors();
     bool configureCdSCell();
