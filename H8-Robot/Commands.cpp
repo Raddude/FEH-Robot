@@ -12,9 +12,10 @@
 #include <FEHUtility.h>
 #include "Commands.h"
 #include "Drive/MainDriveController.h"
-#include "General/Optosensors.h"
+#include "Mechanisms/Optosensors.h"
+#include "Mechanisms/CdSController.h"
 #include "General/ScreenController.h"
-#include "General/LimitSwitches.h"
+#include "Mechanisms/LimitSwitches.h"
 #include "General/Time.h"
 #include "Mechanisms/BurgerFlipper.h"
 #include "Mechanisms/IceCreamClaw.h"
@@ -61,8 +62,17 @@ void Commands::preMatchReset()
     burger.setEndStops();
     burger.setPosition('U');
     iceCream.setEndStops();
-    iceCream.setPosition('L');
+    //iceCream.setPosition('L');
     time.resetTime();
+}
+
+/*  This command resets the robot after executing a command.
+ */
+void Commands::postMoveReset()
+{
+    drive.stopMotors();
+    time.sleepStandard();
+    drive.resetEncoders();
 }
 
 
@@ -174,8 +184,28 @@ bool Commands::driveUntilLimitSwitch(char sensor, int speed)
     return true;
 }
 
+/*  This method pivots the robot in a diven direction until the back limit switch is pressed
+ */
+bool Commands::pivotUntilBackLimitSwitch(char side, int speed)
+{
+    if (limitSwitches.isBackLimitSwitchPressed())
+    {
+        postMoveReset();
+        return false;
+    }
 
+    if (side == 'L')
+    {
+        drive.driveByPower(0, speed);
+    }
 
+    else if (side == 'R')
+    {
+        drive.driveByPower(speed, 0);
+    }
+
+    return true;
+}
 
 /*  This method drives forward until it either sees a light or crosses the threshold distance
  *
@@ -212,10 +242,6 @@ bool Commands::configureLimitSwitches()
     return true;
 }
 
-
-
-
-
 /*  This command is meant to be run alone, and displays the value and detection of each optosensor for configuration
  */
 bool Commands::configureOptosensors()
@@ -227,10 +253,6 @@ bool Commands::configureOptosensors()
     return true;
 }
 
-
-
-
-
 /*  This command is meant to be run alone, and displays the value and detection of the CdS cell for configuration
  */
 bool Commands::configureCdSCell()
@@ -241,10 +263,6 @@ bool Commands::configureCdSCell()
 
     return true;
 }
-
-
-
-
 
 /*  This command constantly updates the screen with the battery voltage
  */

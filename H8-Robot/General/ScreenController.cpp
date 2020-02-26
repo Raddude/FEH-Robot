@@ -11,10 +11,10 @@
 
 #include <FEHLCD.h>
 #include <FEHBattery.h>
-#include <string>
+#include <string.h>
 #include "ScreenController.h"
-#include "CdSController.h"
-#include "Optosensors.h"
+#include "Mechanisms/CdSController.h"
+#include "Mechanisms/Optosensors.h"
 #include "Drive/MainDriveController.h"
 #include "General/Time.h"
 

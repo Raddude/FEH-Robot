@@ -16,10 +16,10 @@
 #include <string>
 #include <iostream>
 
-#include "General/CdSController.h"
+#include "Mechanisms/CdSController.h"
 #include "General/FileManager.h"
 #include "General/ScreenController.h"
-#include "General/Optosensors.h"
+#include "Mechanisms/Optosensors.h"
 #include "General/Time.h"
 #include "Drive/MainDriveController.h"
 #include "Drive/DriveConstants.h"
@@ -28,7 +28,7 @@
 #include "Mechanisms/IceCreamClaw.h"
 #include "Commands.h"
 
-#define STRAIGHT_SPEED 60 //40 is the default value
+#define STRAIGHT_SPEED 40 //40 is the default value
 #define TURN_SPEED 40
 
 using namespace std;
@@ -56,7 +56,7 @@ int main(void)
 
 
     //TEST MODE
-    bool testMode = true;
+    bool testMode = false;
 
 
 
@@ -124,8 +124,7 @@ TestLoop:
 
 
 
-
-
+    while(drive.driveByEncoders(20.0, STRAIGHT_SPEED)){time.keepTime();}
 
 
 
@@ -135,12 +134,7 @@ TestLoop:
     screen.displayCurrentTime();
     Sleep(5.0);
 
-    //If test mode is enabled, use the touch condition instead of the light condition
-    if (testMode)
-    {
-        goto TouchCondition;
-    }
-    goto LightCondition;
+    goto TouchCondition;
 
 
 
@@ -153,46 +147,26 @@ PerformanceLoop:
 
 
 
-    //Jukebox
-    while(drive.driveByEncodersCorrected(20.0, TEST_MOTOR_SPEED)){time.keepTime();}
-    while(drive.turnLeft(45, TURN_SPEED)){time.keepTime();}
-    while(drive.driveByEncodersCorrected(3.5, TEST_MOTOR_SPEED)){time.keepTime();}
-    while(drive.turnLeft(90, TEST_MOTOR_SPEED)){time.keepTime();}
-    while(commands.driveUntilLightDetected(5.0, TEST_MOTOR_SPEED)){time.keepTime();}
-    while(drive.driveByEncodersCorrected(0.2, TEST_MOTOR_SPEED)){time.keepTime();}
-    time.sleepSeconds(1.0);
 
-    if(cdsCell.isRed())
-    {
-        burger.setPosition('R');
-    }
+    /*  TICKET SLIDER  */
+    while(drive.turnRight(60, TURN_SPEED)){time.keepTime();}
+    while(drive.driveByEncoders(12.0, STRAIGHT_SPEED)){time.keepTime();}
+    while(drive.turnLeft(195, TURN_SPEED)){time.keepTime();}
+    while(drive.driveByEncoders(3.5, -STRAIGHT_SPEED)){time.keepTime();}
+    while(commands.pivotUntilBackLimitSwitch('L', -TURN_SPEED)){time.keepTime();}
+//    //Slider arm down here
+//    while(drive.driveByEncoders(4.0, STRAIGHT_SPEED)){time.keepTime();}
 
-    else if (cdsCell.isBlue())
-    {
-        burger.setPosition('L');
-    }
+//    /*  TRAY RETURN  */
+//    while(drive.driveByEncoders(4.0, -STRAIGHT_SPEED)){time.keepTime();}
+//    //Slider arm up here
+//    while(drive.pivotLeft(45, TURN_SPEED)){time.keepTime();}
+//    while(drive.driveByEncoders(6.0, STRAIGHT_SPEED)){time.keepTime();}
+//    while(drive.turnRight(90, TURN_SPEED)){time.keepTime();}
+//    while(drive.driveByEncoders(10.0, STRAIGHT_SPEED)){time.keepTime();}
+//    while(drive.turnRight(90, TURN_SPEED)){time.keepTime();}
+//    while(drive.driveByEncoders(20.0, STRAIGHT_SPEED)){time.keepTime();}
 
-    else
-    {
-        burger.setPosition('U');
-    }
-
-    screen.displayCdSDetection();
-    time.sleepSeconds(2.0);
-
-
-    //while(drive.turnLeft(5.0, TEST_MOTOR_SPEED)){}
-    while(drive.driveByEncodersCorrected(4.5, TEST_MOTOR_SPEED)){time.keepTime();}
-
-
-
-    //Ramp
-    while(drive.driveByEncodersCorrected(6.5, -TEST_MOTOR_SPEED)){time.keepTime();}
-    while(drive.turnLeft(110, TEST_MOTOR_SPEED)){time.keepTime();}
-    while(drive.driveByEncodersCorrected(10.0, TEST_MOTOR_SPEED)){time.keepTime();}
-    while(drive.turnLeft(70, TEST_MOTOR_SPEED)){time.keepTime();}
-    while(drive.driveByEncodersCorrected(25.0, TEST_MOTOR_SPEED)){time.keepTime();}
-    while(drive.driveByEncodersCorrected(35.0, -TEST_MOTOR_SPEED)){time.keepTime();}
 
 
 
@@ -201,7 +175,17 @@ PerformanceLoop:
     //If test mode is enabled, use the touch condition instead of the light condition
     screen.displayCurrentTime();
     time.sleepSeconds(5.0);
-    goto TouchCondition;
+    screen.clearScreen();
+    screen.displayFullScreenMessage("Touch to continue...");
+
+    LCD.ClearBuffer();
+
+    while(!LCD.Touch(&x,&y))
+    {}
+    while(LCD.Touch(&x,&y))
+    {}
+
+    goto LightCondition;
 
 
     return 0;

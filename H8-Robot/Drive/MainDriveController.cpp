@@ -16,6 +16,7 @@
 #include "LeftDrive.h"
 #include "RightDrive.h"
 #include "DriveConstants.h"
+#include "Commands.h"
 
 #define SLEEP_AMOUNT 0.25
 
@@ -60,9 +61,9 @@ void MainDriveController::driveByPower(int leftSpeed, int rightSpeed)
  *  double target - A distance in INCHES of how far the robot should travel.
  *  int speed - The percent speed of both motors on the interval [-100. 100]. Positive is 'forwards', since the direction is corrected for by the driveLeftCorrected() and driveRightCorrected() methods.
  */
-bool MainDriveController::driveByEncoders(double target, int speed)
+bool MainDriveController::driveByEncodersUncorrected(double target, int speed)
 {
-    return driveByEncoders(target, speed, target, speed);
+    return driveByEncodersUncorrected(target, speed, target, speed);
 }
 
 /*  This overloaded method drives each half of the robot to its own distance at its own speed.
@@ -72,7 +73,7 @@ bool MainDriveController::driveByEncoders(double target, int speed)
  *  double rightTarget - A distance in INCHES of how far the right half of robot should travel.
  *  int rightSpeed - The percent speed of the right motor on the interval [-100. 100]. Positive is 'forwards', since the direction is corrected for by the driveRightCorrected() method.
  */
-bool MainDriveController::driveByEncoders(double leftTarget, int leftSpeed, double rightTarget, int rightSpeed)
+bool MainDriveController::driveByEncodersUncorrected(double leftTarget, int leftSpeed, double rightTarget, int rightSpeed)
 {
     if (LeftDrive::getLeftEncoderDistance() < leftTarget)
     {
@@ -81,9 +82,7 @@ bool MainDriveController::driveByEncoders(double leftTarget, int leftSpeed, doub
 
     else
     {
-        stopMotors();
-        resetEncoders();
-        time.sleepStandard();
+        commands.postMoveReset();
         return false;
     }
 
@@ -96,9 +95,7 @@ bool MainDriveController::driveByEncoders(double leftTarget, int leftSpeed, doub
 
     else
     {
-        stopMotors();
-        resetEncoders();
-        time.sleepStandard();
+        commands.postMoveReset();
         return false;
     }
 
@@ -112,9 +109,9 @@ bool MainDriveController::driveByEncoders(double leftTarget, int leftSpeed, doub
  *  int rightTarget - A distance in TICKS of how far the right half of robot should travel.
  *  int rightSpeed - The percent speed of the right motor on the interval [-100. 100]. Positive is 'forwards', since the direction is corrected for by the driveRightCorrected() method.
  */
-bool MainDriveController::driveByEncoders(int leftTarget, int leftSpeed, int rightTarget, int rightSpeed)
+bool MainDriveController::driveByEncodersUncorrected(int leftTarget, int leftSpeed, int rightTarget, int rightSpeed)
 {
-    return driveByEncoders(leftTarget * driveConstants.getDistancePerTick(), leftSpeed, rightTarget * driveConstants.getDistancePerTick(), rightSpeed);
+    return driveByEncodersUncorrected(leftTarget * driveConstants.getDistancePerTick(), leftSpeed, rightTarget * driveConstants.getDistancePerTick(), rightSpeed);
 }
 
 /*  This overloaded method drives each half of the robot to its own distance at its own speed.
@@ -124,12 +121,12 @@ bool MainDriveController::driveByEncoders(int leftTarget, int leftSpeed, int rig
  *  double rightTarget - A distance in INCHES of how far the right half of robot should travel.
  *  int rightSpeed - The percent speed of the right motor on the interval [-100. 100]. Positive is 'forwards', since the direction is corrected for by the driveRightCorrected() method.
  */
-bool MainDriveController::driveByEncodersCorrected(double leftTarget, int leftSpeed, double rightTarget, int rightSpeed)
+bool MainDriveController::driveByEncoders(double leftTarget, int leftSpeed, double rightTarget, int rightSpeed)
 {
     leftTarget = leftTarget - (driveConstants.getOvershootTicks('L', leftSpeed) * driveConstants.getDistancePerTick());
     rightTarget = rightTarget - (driveConstants.getOvershootTicks('R', rightSpeed) * driveConstants.getDistancePerTick());
 
-    return driveByEncoders(leftTarget, leftSpeed, rightTarget, rightSpeed);
+    return driveByEncodersUncorrected(leftTarget, leftSpeed, rightTarget, rightSpeed);
 }
 
 /*  This overloaded method drives the robot forward to the target distance at the listed speed.
@@ -137,9 +134,9 @@ bool MainDriveController::driveByEncodersCorrected(double leftTarget, int leftSp
  *  double target - A distance in INCHES of how far the robot should travel.
  *  int speed - The percent speed of both motors on the interval [-100. 100]. Positive is 'forwards', since the direction is corrected for by the driveLeftCorrected() and driveRightCorrected() methods.
  */
-bool MainDriveController::driveByEncodersCorrected(double target, int speed)
+bool MainDriveController::driveByEncoders(double target, int speed)
 {
-    return driveByEncodersCorrected(target, speed, target, speed);
+    return driveByEncoders(target, speed, target, speed);
 }
 
 
@@ -205,7 +202,7 @@ void MainDriveController::resetPID()
  */
 bool MainDriveController::turnLeft(double angle, int speed)
 {
-    return driveByEncoders((angle/360) * LeftDrive::getDistancePerFullTurn(), -speed, (angle/360) * LeftDrive::getDistancePerFullTurn(), speed);
+    return driveByEncoders((angle/360) * driveConstants.getDistancePerFullTurn(), -speed, (angle/360) * driveConstants.getDistancePerFullTurn(), speed);
 }
 
 /*  This method has the robot make a 90 degree right turn about the center of rotation.
@@ -215,7 +212,31 @@ bool MainDriveController::turnLeft(double angle, int speed)
  */
 bool MainDriveController::turnRight(double angle, int speed)
 {
-    return driveByEncoders((angle/360) * RightDrive::getDistancePerFullTurn(), speed, (angle/360) * RightDrive::getDistancePerFullTurn(), -speed);
+    return driveByEncoders((angle/360) * driveConstants.getDistancePerFullTurn(), speed, (angle/360) * driveConstants.getDistancePerFullTurn(), -speed);
+}
+
+
+
+
+
+/*  This method only turns half of the robot, to pivot around the other wheel
+ *
+ *  double angle - The angle the robot must turn left towards
+ *  int speed - A speed on the interval [-100, 100] for the motors to turn
+ */
+bool MainDriveController::pivotLeft(double angle, int speed)
+{
+    return driveByEncoders(2000, 0, (2*angle/360) * driveConstants.getDistancePerFullTurn(), speed);
+}
+
+/*  This method only turns half of the robot, to pivot around the other wheel
+ *
+ *  double angle - The angle the robot must turn left towards
+ *  int speed - A speed on the interval [-100, 100] for the motors to turn
+ */
+bool MainDriveController::pivotRight(double angle, int speed)
+{
+    return driveByEncoders((2*angle/360) * driveConstants.getDistancePerFullTurn(), speed, 2000, 0);
 }
 
 

@@ -12,11 +12,11 @@ public:
 
     void driveByPower(int, int);
 
-    bool driveByEncoders(double, int);
+    bool driveByEncodersUncorrected(double, int);
+    bool driveByEncodersUncorrected(double, int, double, int);
+    bool driveByEncodersUncorrected(int, int, int, int);
     bool driveByEncoders(double, int, double, int);
-    bool driveByEncoders(int, int, int, int);
-    bool driveByEncodersCorrected(double, int, double, int);
-    bool driveByEncodersCorrected(double, int);
+    bool driveByEncoders(double, int);
 
     bool driveByPID(double);
     bool driveByPID(double, double);
@@ -24,6 +24,9 @@ public:
 
     bool turnLeft(double, int);
     bool turnRight(double, int);
+
+    bool pivotLeft(double, int);
+    bool pivotRight(double, int);
 
     bool turnLeftPID(double, int);
     bool turnRightPID(double, int);

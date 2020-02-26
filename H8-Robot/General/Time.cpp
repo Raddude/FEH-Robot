@@ -13,7 +13,7 @@
 #include "Time.h"
 
 #define TIME_INCREMENT 0.001 //Time to sleep in seconds
-#define STANDARD_TIME_DELAY 125 //MS
+#define STANDARD_TIME_DELAY 500 //MS
 
 Time time;
 

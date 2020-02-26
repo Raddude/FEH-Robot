@@ -1,8 +1,6 @@
 #ifndef COMMANDS_H
 #define COMMANDS_H
 
-#include "General/Optosensors.h"
-
 
 class Commands
 {
@@ -10,6 +8,8 @@ public:
     Commands();
 
     void preMatchReset();
+    void postMoveReset();
+
     bool configureOptosensors();
     bool configureCdSCell();
     bool configureLimitSwitches();
@@ -18,6 +18,7 @@ public:
     bool followLineForDistance(double, int);
     bool driveUntilLightDetected(double, int);
     bool driveUntilLimitSwitch(char, int);
+    bool pivotUntilBackLimitSwitch(char, int);
 };
 
 extern Commands commands;

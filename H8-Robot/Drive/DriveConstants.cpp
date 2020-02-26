@@ -13,7 +13,7 @@
 #include "DriveConstants.h"
 
 #define WHEEL_DIAMETER 3
-#define WHEEL_SPAN 8.125  //7.925 is the default value configured at 360 degrees
+#define WHEEL_SPAN 8.25  //7.25 is the default value configured at 360 degrees
 #define TICKS_PER_ROTATION 318
 #define PI 3.141592653589793238463
 #define DISTANCE_PER_ROTATION (PI*WHEEL_DIAMETER)

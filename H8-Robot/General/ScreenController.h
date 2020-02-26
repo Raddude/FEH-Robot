@@ -1,10 +1,6 @@
 #ifndef SCREENCONTROLLER_H
 #define SCREENCONTROLLER_H
 
-#include <string.h>
-#include "CdSController.h"
-#include "Optosensors.h"
-
 using namespace std;
 
 
