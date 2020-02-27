@@ -67,7 +67,7 @@ void Commands::preMatchReset()
     burger.setEndStops();
     burger.setPosition('U');
     iceCream.setEndStops();
-    //iceCream.setPosition('U');
+    iceCream.setPosition('U');
     ticketSlider.setEndStops();
     ticketSlider.setPosition('U');
     time.resetTime();
@@ -79,7 +79,7 @@ void Commands::postMoveReset()
 {
     drive.stopMotors();
     time.sleepStandard();
-    drive.resetEncoders();
+    //drive.resetEncoders();
     time.resetStopwatch();
 }
 

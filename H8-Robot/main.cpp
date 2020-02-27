@@ -84,14 +84,18 @@ int main(void)
 
 
     //TEST MODE
-    bool testMode = true;
+    bool testMode = false;
 
 
 
     //Other variables
     float x,y;
+    int testSpeed = 20;
 
     //If test mode is enabled, use the touch condition instead of the light condition
+
+    commands.preMatchReset();
+
     if (testMode)
     {
         goto TouchCondition;
@@ -140,12 +144,18 @@ TestLoop:
 
 
 
-
-
-    while(drive.driveByEncoders(12.0, speed.rampSpeed(12.0, 80))){time.keepTime();}
-
-
-
+//    while(testSpeed <= 100)
+//    {
+//        screen.clearScreen();
+//        while(drive.driveByEncoders(6.0, testSpeed)){time.keepTime();}
+//        time.sleepStandard();
+//        LCD.WriteLine(testSpeed);
+//        screen.displayAllEncoderCounts();
+//        screen.displayAllEncoderDistances();
+//        time.sleepSeconds(8.0);
+//        testSpeed += 5;
+//        drive.resetEncoders();
+//    }
 
 
     //Post-match
@@ -168,31 +178,31 @@ PerformanceLoop:
     while(drive.turnLeft(195, TURN_SPEED)){time.keepTime();}
     while(drive.driveByEncoders(3.5, -STRAIGHT_SPEED)){time.keepTime();}
     while(commands.pivotUntilBackLimitSwitch('L', -TURN_SPEED)){time.keepTime();}
-    //Untested - ticketSlider.setPosition('D');
+    ticketSlider.setPosition('D');
     while(drive.driveByEncoders(4.0, STRAIGHT_SPEED)){time.keepTime();}
 
 
 
-    /*  TRAY RETURN  */
-    while(drive.driveByEncoders(4.0, -STRAIGHT_SPEED)){time.keepTime();}
-    //Untested - ticketSlider.setPosition('U');
-    while(drive.pivotLeft(45, TURN_SPEED)){time.keepTime();}
-    while(drive.driveByEncoders(7.0, STRAIGHT_SPEED)){time.keepTime();}
-    while(drive.turnRight(45, TURN_SPEED)){time.keepTime();}
-    while(drive.driveByEncoders(9.0, STRAIGHT_SPEED)){time.keepTime();}
-    while(drive.turnRight(90, TURN_SPEED)){time.keepTime();}
-    while(drive.driveByEncoders(20.0, STRAIGHT_SPEED)){time.keepTime();}
-    while(drive.turnRight(90, TURN_SPEED)){time.keepTime();}
-    while(commands.driveUntilLimitSwitch('B', -STRAIGHT_SPEED)){time.keepTime();}
-    //Dump tray here
+//    /*  TRAY RETURN  */
+//    while(drive.driveByEncoders(4.0, -STRAIGHT_SPEED)){time.keepTime();}
+//    //Untested - ticketSlider.setPosition('U');
+//    while(drive.pivotLeft(45, TURN_SPEED)){time.keepTime();}
+//    while(drive.driveByEncoders(7.0, STRAIGHT_SPEED)){time.keepTime();}
+//    while(drive.turnRight(45, TURN_SPEED)){time.keepTime();}
+//    while(drive.driveByEncoders(9.0, STRAIGHT_SPEED)){time.keepTime();}
+//    while(drive.turnRight(90, TURN_SPEED)){time.keepTime();}
+//    while(drive.driveByEncoders(20.0, STRAIGHT_SPEED)){time.keepTime();}
+//    while(drive.turnRight(90, TURN_SPEED)){time.keepTime();}
+//    while(commands.driveUntilLimitSwitch('B', -STRAIGHT_SPEED)){time.keepTime();}
+//    //Dump tray here
 
 
 
-    /*  BURGER TOUCH */
-    while(drive.pivotLeft(60, TURN_SPEED)){time.keepTime();}
-    while(drive.driveByEncoders(25.0, STRAIGHT_SPEED)){time.keepTime();}
-    while(drive.turnLeft(30, TURN_SPEED)){time.keepTime();}
-    while(drive.driveByEncoders(4.0, STRAIGHT_SPEED)){time.keepTime();}
+//    /*  BURGER TOUCH */
+//    while(drive.pivotLeft(60, TURN_SPEED)){time.keepTime();}
+//    while(drive.driveByEncoders(25.0, STRAIGHT_SPEED)){time.keepTime();}
+//    while(drive.turnLeft(30, TURN_SPEED)){time.keepTime();}
+//    while(drive.driveByEncoders(4.0, STRAIGHT_SPEED)){time.keepTime();}
 
 
 
