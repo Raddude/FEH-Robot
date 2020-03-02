@@ -79,7 +79,7 @@ void Commands::postMoveReset()
 {
     drive.stopMotors();
     time.sleepStandard();
-    //drive.resetEncoders();
+    drive.resetEncoders();
     time.resetStopwatch();
 }
 

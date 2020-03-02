@@ -56,7 +56,7 @@ void TicketSlider::setPosition(char input)
 
     else if (input == 'M')
     {
-        ticketServo.SetDegree(35.0);
+        ticketServo.SetDegree(40.0);
     }
 
     else if (input == 'D')

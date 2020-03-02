@@ -142,7 +142,7 @@ TestLoop:
     //Example command
     //while(drive.driveByEncoders(14.0, TEST_MOTOR_SPEED)){time.keepTime();}
 
-
+//iceCream.setPosition('M');
 
 //    while(testSpeed <= 100)
 //    {
@@ -173,16 +173,40 @@ PerformanceLoop:
 
 
     /*  TICKET SLIDER  */
-    while(drive.turnRight(60, TURN_SPEED)){time.keepTime();}
-    while(drive.driveByEncoders(12.0, STRAIGHT_SPEED)){time.keepTime();}
-    while(drive.turnLeft(195, TURN_SPEED)){time.keepTime();}
-    while(drive.driveByEncoders(3.5, -STRAIGHT_SPEED)){time.keepTime();}
-    while(commands.pivotUntilBackLimitSwitch('L', -TURN_SPEED)){time.keepTime();}
+    while(drive.driveByEncoders(1, STRAIGHT_SPEED)){time.keepTime();}
+    while(drive.turnRight(70, TURN_SPEED)){time.keepTime();}
+    while(drive.driveByEncoders(12.5, STRAIGHT_SPEED)){time.keepTime();}
+    while(drive.turnLeft(193.5, TURN_SPEED)){time.keepTime();}
+    while(commands.driveUntilLimitSwitch('B', -STRAIGHT_SPEED)){time.keepTime();}
+    while(drive.driveByEncoders(7.25, STRAIGHT_SPEED)){time.keepTime();}
+    ticketSlider.setPosition('M');
+    while(drive.pivotLeft(90, -TURN_SPEED)){time.keepTime();}
+    while(commands.driveUntilLimitSwitch('B', -STRAIGHT_SPEED)){time.keepTime();}
     ticketSlider.setPosition('D');
-    while(drive.driveByEncoders(4.0, STRAIGHT_SPEED)){time.keepTime();}
+    while(drive.driveByEncoders(5.45, STRAIGHT_SPEED, 5, STRAIGHT_SPEED+15 )){time.keepTime();}
+//**Tray return attempt 1
+//    while(drive.pivotLeft(175, -TURN_SPEED)){time.keepTime();}
+//    ticketSlider.setPosition('U');
+//    while(commands.driveUntilLimitSwitch('B', -STRAIGHT_SPEED)){time.keepTime();}
+//    while(drive.pivotRight(90, TURN_SPEED)){time.keepTime();}
+//    while(commands.driveUntilLimitSwitch('B', -STRAIGHT_SPEED)){time.keepTime();}
+//    iceCream.setPosition('M');
+//    while(drive.driveByEncoders(6, -STRAIGHT_SPEED)){time.keepTime();}
 
-
-
+//Tray return attempt 2
+    while(drive.driveByEncoders(4.5, -STRAIGHT_SPEED)){time.keepTime();}
+    ticketSlider.setPosition('M');
+    while(drive.pivotLeft(85, TURN_SPEED)){time.keepTime();}
+    ticketSlider.setPosition('U');
+    while(drive.driveByEncoders(7, STRAIGHT_SPEED)){time.keepTime();}
+    while(drive.pivotRight(82, -TURN_SPEED)){time.keepTime();}
+    while(commands.driveUntilLimitSwitch('B', -STRAIGHT_SPEED)){time.keepTime();}
+    while(drive.driveByEncoders(1.31, STRAIGHT_SPEED)){time.keepTime();}
+    while(drive.pivotRight(85, TURN_SPEED)){time.keepTime();}
+    while(commands.driveUntilLimitSwitch('B', -STRAIGHT_SPEED)){time.keepTime();}
+    iceCream.setPosition('M');
+    time.sleepSeconds(0.5);
+    while(drive.driveByEncoders(10, STRAIGHT_SPEED)){time.keepTime();}
 //    /*  TRAY RETURN  */
 //    while(drive.driveByEncoders(4.0, -STRAIGHT_SPEED)){time.keepTime();}
 //    //Untested - ticketSlider.setPosition('U');
@@ -195,7 +219,17 @@ PerformanceLoop:
 //    while(drive.turnRight(90, TURN_SPEED)){time.keepTime();}
 //    while(commands.driveUntilLimitSwitch('B', -STRAIGHT_SPEED)){time.keepTime();}
 //    //Dump tray here
-
+    //Burger (doesn't work, first pivot might b wrong.)
+        iceCream.setPosition('U');
+        while(drive.pivotRight(82, -TURN_SPEED)){time.keepTime();}
+        while(commands.driveUntilLimitSwitch('B', -STRAIGHT_SPEED)){time.keepTime();}
+        while(drive.driveByEncoders(10, STRAIGHT_SPEED)){time.keepTime();}
+        while(drive.turnRight(90, TURN_SPEED)){time.keepTime();}
+        while(drive.driveByEncoders(20, STRAIGHT_SPEED + 10)){time.keepTime();}
+        while(drive.pivotRight(85, TURN_SPEED)){time.keepTime();}
+        while(drive.driveByEncoders(5, STRAIGHT_SPEED)){time.keepTime();}
+        while(drive.pivotLeft(85, TURN_SPEED)){time.keepTime();}
+        while(drive.driveByEncoders(15, STRAIGHT_SPEED)){time.keepTime();}
 
 
 //    /*  BURGER TOUCH */
