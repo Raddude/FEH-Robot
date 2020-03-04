@@ -10,6 +10,7 @@
  */
 
 #include <FEHUtility.h>
+#include <General/FileManager.h>
 #include "Time.h"
 
 #define TIME_INCREMENT 0.001 //Time to sleep in seconds
@@ -93,6 +94,8 @@ void Time::keepTime()
     Sleep(TIME_INCREMENT);
     globalTime += TIME_INCREMENT;
     stopwatchTime += TIME_INCREMENT;
+
+    fileManager.writeStateToFile();
 }
 
 /*  This method returns the current global time

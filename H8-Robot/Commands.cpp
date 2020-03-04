@@ -2,7 +2,7 @@
  *  Author: Jake Marchewitz
  *  Creation Date: 2/14/20
  *
- *  Purpose: This file is the 'second-in-command' class behind main.cpp. It holds many of the commands (methods) that can be put inside a while(COMMAND){} statement in the main loop in main.cpp.
+ *  Purpose: This file is the base level action class behind main.cpp. It holds many of the commands (methods) that can be put inside a while(COMMAND){} statement in the main loop in main.cpp.
  *
  *  Superclasses: None.
  *  Subclasses: None.
@@ -60,7 +60,7 @@ Commands::Commands()
  */
 void Commands::preMatchReset()
 {
-    fileManager.openFiles();
+    fileManager.writeHeaderToFile();
     screen.clearScreen();
     screen.clearBuffer();
     drive.resetEncoders();
@@ -87,7 +87,7 @@ void Commands::postMoveReset()
  */
 void Commands::postMatchActions()
 {
-    fileManager.closeFiles();
+    fileManager.closeFile();
 
     screen.displayCurrentTime();
     time.sleepSeconds(5.0);

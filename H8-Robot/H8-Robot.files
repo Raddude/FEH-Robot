@@ -10,6 +10,8 @@ Drive/MainDriveController.cpp
 Drive/MainDriveController.h
 Drive/RightDrive.cpp
 Drive/RightDrive.h
+General/RPSManager.cpp
+General/RPSManager.h
 General/Speed.cpp
 General/Speed.h
 Mechanisms/CdSController.cpp
@@ -30,4 +32,6 @@ Mechanisms/IceCreamClaw.h
 Mechanisms/IceCreamClaw.cpp
 Mechanisms/TicketSlider.cpp
 Mechanisms/TicketSlider.h
+Scripts.cpp
+Scripts.h
 main.cpp

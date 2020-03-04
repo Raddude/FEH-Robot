@@ -7,11 +7,11 @@ class FileManager
 public:
     FileManager();
 
-    void openFiles();
-    void closeFiles();
+    void openFile();
+    void closeFile();
 
-    void writeToFile(char, double);
-    void writeToFile(char, int);
+    void writeStateToFile();
+    void writeHeaderToFile();
 };
 
 extern FileManager fileManager;

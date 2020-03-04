@@ -14,14 +14,19 @@
 #include <stdio.h>
 #include "Time.h"
 #include "FileManager.h"
+#include "Drive/MainDriveController.h"
+#include "Mechanisms/BurgerFlipper.h"
+#include "Mechanisms/CdSController.h"
+#include "Mechanisms/IceCreamClaw.h"
+#include "Mechanisms/LimitSwitches.h"
+#include "Mechanisms/Optosensors.h"
+#include "Mechanisms/TicketSlider.h"
 
 using namespace std;
 
 FileManager fileManager;
 
-FEHFile *fileA;
-FEHFile *fileB;
-FEHFile *fileC;
+FEHFile *robotState = SD.FOpen("StateLog.txt", "w");
 
 
 
@@ -40,18 +45,16 @@ FileManager::FileManager()
 
 
 
-/*  This method opens all of the documented files
+/*  This method opens and clears the state file
  */
-void FileManager::openFiles()
+void FileManager::openFile()
 {
-    //*fileA = SD.FOpen("File_A.txt", 'w');
-    //*fileB = SD.FOpen("File_B.txt", 'w');
-    //*fileC = SD.FOpen("File_C.txt", 'w');
+
 }
 
-/*  This method closes all of the documented files
+/*  This method closes the state file
  */
-void FileManager::closeFiles()
+void FileManager::closeFile()
 {
     SD.FCloseAll();
 }
@@ -60,48 +63,16 @@ void FileManager::closeFiles()
 
 
 
-/*  This method writes the given data to the selected file, with the robot's global time attached
- *
- *  char file - The file to be written to
- *  double data - The current data point to be written
+/*  This method puts titles above each column in the state file
  */
-void FileManager::writeToFile(char file, double data)
+void FileManager::writeHeaderToFile()
 {
-    if (file == 'A')
-    {
-        SD.FPrintf(fileA, "%f\t%f", time.getCurrentTime(), data);
-    }
-
-    else if (file == 'B')
-    {
-        SD.FPrintf(fileB, "%f\t%f", time.getCurrentTime(), data);
-    }
-
-    else if (file == 'C')
-    {
-        SD.FPrintf(fileC, "%f\t%f", time.getCurrentTime(), data);
-    }
+    SD.FPrintf(robotState, "%s", "Time");
 }
 
-/*  This method writes the given data to the selected file, with the robot's global time attached
- *
- *  char file - The file to be written to
- *  int data - The current data point to be written
+/*  This method takes in data from all sensors on the robot and plots them to a large, timestamped state file for debugging
  */
-void FileManager::writeToFile(char file, int data)
+void FileManager::writeStateToFile()
 {
-    if (file == 'A')
-    {
-        SD.FPrintf(fileA, "%f\t%d", time.getCurrentTime(), data);
-    }
-
-    else if (file == 'B')
-    {
-        SD.FPrintf(fileB, "%f\t%d", time.getCurrentTime(), data);
-    }
-
-    else if (file == 'C')
-    {
-        SD.FPrintf(fileC, "%f\t%d", time.getCurrentTime(), data);
-    }
+    SD.FPrintf(robotState, "%f", time.getCurrentTime());
 }

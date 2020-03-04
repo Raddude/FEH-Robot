@@ -21,12 +21,14 @@
 #include "General/ScreenController.h"
 #include "General/Speed.h"
 #include "General/Time.h"
+#include "General/RPSManager.h"
 #include "Mechanisms/BurgerFlipper.h"
 #include "Mechanisms/CdSController.h"
 #include "Mechanisms/IceCreamClaw.h"
 #include "Mechanisms/Optosensors.h"
 #include "Mechanisms/TicketSlider.h"
 #include "Commands.h"
+#include "Scripts.h"
 
 #define STRAIGHT_SPEED 40 //40 is the default value
 #define TURN_SPEED 40
@@ -43,9 +45,14 @@ int main(void)
 {
     /*  TO-DO LIST
      *
-     * -PID man
+     * -Implement scripts.cpp
+     * -Actually implement PID
      * -Test orbit functions
-     * -Test file functions
+     * -Convert FileManager to be a state manager
+     * -Motor voltage compensation (break) (TJ said it is barely useful)
+     * -Error detection (list in notebook)
+     * -Check if set distances are true for the current run
+     * -Know when to give up on a task
      */
 
 
@@ -139,23 +146,11 @@ LightCondition:
 
 
 TestLoop:
-    //Example command
-    //while(drive.driveByEncoders(14.0, TEST_MOTOR_SPEED)){time.keepTime();}
 
-//iceCream.setPosition('M');
 
-//    while(testSpeed <= 100)
-//    {
-//        screen.clearScreen();
-//        while(drive.driveByEncoders(6.0, testSpeed)){time.keepTime();}
-//        time.sleepStandard();
-//        LCD.WriteLine(testSpeed);
-//        screen.displayAllEncoderCounts();
-//        screen.displayAllEncoderDistances();
-//        time.sleepSeconds(8.0);
-//        testSpeed += 5;
-//        drive.resetEncoders();
-//    }
+
+    //
+
 
 
     //Post-match
@@ -171,8 +166,8 @@ TestLoop:
 PerformanceLoop:
 
 
-
-    /*  TICKET SLIDER  */
+    /*
+    //TICKET SLIDER
     while(drive.driveByEncoders(1, STRAIGHT_SPEED)){time.keepTime();}
     while(drive.turnRight(70, TURN_SPEED)){time.keepTime();}
     while(drive.driveByEncoders(12.5, STRAIGHT_SPEED)){time.keepTime();}
@@ -184,16 +179,10 @@ PerformanceLoop:
     while(commands.driveUntilLimitSwitch('B', -STRAIGHT_SPEED)){time.keepTime();}
     ticketSlider.setPosition('D');
     while(drive.driveByEncoders(5.45, STRAIGHT_SPEED, 5, STRAIGHT_SPEED+15 )){time.keepTime();}
-//**Tray return attempt 1
-//    while(drive.pivotLeft(175, -TURN_SPEED)){time.keepTime();}
-//    ticketSlider.setPosition('U');
-//    while(commands.driveUntilLimitSwitch('B', -STRAIGHT_SPEED)){time.keepTime();}
-//    while(drive.pivotRight(90, TURN_SPEED)){time.keepTime();}
-//    while(commands.driveUntilLimitSwitch('B', -STRAIGHT_SPEED)){time.keepTime();}
-//    iceCream.setPosition('M');
-//    while(drive.driveByEncoders(6, -STRAIGHT_SPEED)){time.keepTime();}
 
-//Tray return attempt 2
+
+
+    //TRAY RETURN
     while(drive.driveByEncoders(4.5, -STRAIGHT_SPEED)){time.keepTime();}
     ticketSlider.setPosition('M');
     while(drive.pivotLeft(85, TURN_SPEED)){time.keepTime();}
@@ -207,36 +196,59 @@ PerformanceLoop:
     iceCream.setPosition('M');
     time.sleepSeconds(0.5);
     while(drive.driveByEncoders(10, STRAIGHT_SPEED)){time.keepTime();}
-//    /*  TRAY RETURN  */
-//    while(drive.driveByEncoders(4.0, -STRAIGHT_SPEED)){time.keepTime();}
-//    //Untested - ticketSlider.setPosition('U');
-//    while(drive.pivotLeft(45, TURN_SPEED)){time.keepTime();}
-//    while(drive.driveByEncoders(7.0, STRAIGHT_SPEED)){time.keepTime();}
-//    while(drive.turnRight(45, TURN_SPEED)){time.keepTime();}
-//    while(drive.driveByEncoders(9.0, STRAIGHT_SPEED)){time.keepTime();}
-//    while(drive.turnRight(90, TURN_SPEED)){time.keepTime();}
-//    while(drive.driveByEncoders(20.0, STRAIGHT_SPEED)){time.keepTime();}
-//    while(drive.turnRight(90, TURN_SPEED)){time.keepTime();}
-//    while(commands.driveUntilLimitSwitch('B', -STRAIGHT_SPEED)){time.keepTime();}
-//    //Dump tray here
-    //Burger (doesn't work, first pivot might b wrong.)
-        iceCream.setPosition('U');
-        while(drive.pivotRight(82, -TURN_SPEED)){time.keepTime();}
-        while(commands.driveUntilLimitSwitch('B', -STRAIGHT_SPEED)){time.keepTime();}
-        while(drive.driveByEncoders(10, STRAIGHT_SPEED)){time.keepTime();}
-        while(drive.turnRight(90, TURN_SPEED)){time.keepTime();}
-        while(drive.driveByEncoders(20, STRAIGHT_SPEED + 10)){time.keepTime();}
-        while(drive.pivotRight(85, TURN_SPEED)){time.keepTime();}
+
+
+
+    //BURGER TOUCH
+    while(drive.pivotLeft(60, TURN_SPEED)){time.keepTime();}
+    while(drive.driveByEncoders(25.0, STRAIGHT_SPEED)){time.keepTime();}
+    while(drive.turnLeft(30, TURN_SPEED)){time.keepTime();}
+    while(drive.driveByEncoders(4.0, STRAIGHT_SPEED)){time.keepTime();}
+    */
+
+
+    //Drive up ramp to burger
+    while(drive.driveByEncoders(12, STRAIGHT_SPEED)){time.keepTime();}
+    while(drive.turnRight(45, TURN_SPEED)){time.keepTime();}
+    while(drive.driveByEncoders(30, STRAIGHT_SPEED)){time.keepTime();}
+    while(drive.turnLeft(90, TURN_SPEED)){time.keepTime();}
+    while(commands.driveUntilLightDetected('B', -STRAIGHT_SPEED)){time.keepTime();}
+    while(drive.driveByEncoders(10, STRAIGHT_SPEED)){time.keepTime();}
+    burger.setPosition('L');
+    while(drive.turnRight(90, TURN_SPEED)){time.keepTime();}
+    while(drive.driveByEncoders(10, STRAIGHT_SPEED)){time.keepTime();}
+    burger.setPosition('U');
+    time.sleepSeconds(1.5);
+
+    //Drive to ice cream
+    burger.setPosition('L');
+    while(drive.driveByEncoders(5, -STRAIGHT_SPEED)){time.keepTime();}
+    while(drive.turnLeft(90, TURN_SPEED)){time.keepTime();}
+    while(drive.driveByEncoders(12, STRAIGHT_SPEED)){time.keepTime();}
+    iceCream.setPosition('H');
+    while(drive.turnLeft(45, TURN_SPEED)){time.keepTime();}
+
+    if (rps.getIceCream() == 'L')
+    {
+        while(drive.driveByEncoders(3, STRAIGHT_SPEED)){time.keepTime();}
+    }
+
+    else if (rps.getIceCream() == 'M')
+    {
         while(drive.driveByEncoders(5, STRAIGHT_SPEED)){time.keepTime();}
-        while(drive.pivotLeft(85, TURN_SPEED)){time.keepTime();}
-        while(drive.driveByEncoders(15, STRAIGHT_SPEED)){time.keepTime();}
+    }
 
+    else if (rps.getIceCream() == 'R')
+    {
+        while(drive.driveByEncoders(8, STRAIGHT_SPEED)){time.keepTime();}
+    }
 
-//    /*  BURGER TOUCH */
-//    while(drive.pivotLeft(60, TURN_SPEED)){time.keepTime();}
-//    while(drive.driveByEncoders(25.0, STRAIGHT_SPEED)){time.keepTime();}
-//    while(drive.turnLeft(30, TURN_SPEED)){time.keepTime();}
-//    while(drive.driveByEncoders(4.0, STRAIGHT_SPEED)){time.keepTime();}
+    while(drive.turnRight(90, TURN_SPEED)){time.keepTime();}
+    while(drive.driveByEncoders(4.0, STRAIGHT_SPEED)){time.keepTime();}
+    iceCream.setPosition('L');
+    time.sleepSeconds(7.25);
+    iceCream.setPosition('H');
+    while(drive.driveByEncoders(4.0, -STRAIGHT_SPEED)){time.keepTime();}
 
 
 

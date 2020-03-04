@@ -148,11 +148,6 @@ double DriveBase::getAreaOfValues(double *previousValues)
 {
     areaSum = 0;
 
-    for (int i = 0; i < driveConstants.getBufferSize(); i++)
-    {
-        areaSum += previousValues[i];
-    }
-
     return areaSum;
 }
 
