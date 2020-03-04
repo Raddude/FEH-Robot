@@ -7,6 +7,9 @@ class DriveConstants
 public:
     DriveConstants();
 
+    int straightSpeed();
+    int turnSpeed();
+
     double getWheelDiameter();
     double getWheelSpan();
     double getTicksPerRotation();

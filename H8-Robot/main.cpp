@@ -30,9 +30,6 @@
 #include "Commands.h"
 #include "Scripts.h"
 
-#define STRAIGHT_SPEED 40 //40 is the default value
-#define TURN_SPEED 40
-
 using namespace std;
 
 
@@ -166,89 +163,10 @@ TestLoop:
 PerformanceLoop:
 
 
-    /*
-    //TICKET SLIDER
-    while(drive.driveByEncoders(1, STRAIGHT_SPEED)){time.keepTime();}
-    while(drive.turnRight(70, TURN_SPEED)){time.keepTime();}
-    while(drive.driveByEncoders(12.5, STRAIGHT_SPEED)){time.keepTime();}
-    while(drive.turnLeft(193.5, TURN_SPEED)){time.keepTime();}
-    while(commands.driveUntilLimitSwitch('B', -STRAIGHT_SPEED)){time.keepTime();}
-    while(drive.driveByEncoders(7.25, STRAIGHT_SPEED)){time.keepTime();}
-    ticketSlider.setPosition('M');
-    while(drive.pivotLeft(90, -TURN_SPEED)){time.keepTime();}
-    while(commands.driveUntilLimitSwitch('B', -STRAIGHT_SPEED)){time.keepTime();}
-    ticketSlider.setPosition('D');
-    while(drive.driveByEncoders(5.45, STRAIGHT_SPEED, 5, STRAIGHT_SPEED+15 )){time.keepTime();}
 
 
 
-    //TRAY RETURN
-    while(drive.driveByEncoders(4.5, -STRAIGHT_SPEED)){time.keepTime();}
-    ticketSlider.setPosition('M');
-    while(drive.pivotLeft(85, TURN_SPEED)){time.keepTime();}
-    ticketSlider.setPosition('U');
-    while(drive.driveByEncoders(7, STRAIGHT_SPEED)){time.keepTime();}
-    while(drive.pivotRight(82, -TURN_SPEED)){time.keepTime();}
-    while(commands.driveUntilLimitSwitch('B', -STRAIGHT_SPEED)){time.keepTime();}
-    while(drive.driveByEncoders(1.31, STRAIGHT_SPEED)){time.keepTime();}
-    while(drive.pivotRight(85, TURN_SPEED)){time.keepTime();}
-    while(commands.driveUntilLimitSwitch('B', -STRAIGHT_SPEED)){time.keepTime();}
-    iceCream.setPosition('M');
-    time.sleepSeconds(0.5);
-    while(drive.driveByEncoders(10, STRAIGHT_SPEED)){time.keepTime();}
-
-
-
-    //BURGER TOUCH
-    while(drive.pivotLeft(60, TURN_SPEED)){time.keepTime();}
-    while(drive.driveByEncoders(25.0, STRAIGHT_SPEED)){time.keepTime();}
-    while(drive.turnLeft(30, TURN_SPEED)){time.keepTime();}
-    while(drive.driveByEncoders(4.0, STRAIGHT_SPEED)){time.keepTime();}
-    */
-
-
-    //Drive up ramp to burger
-    while(drive.driveByEncoders(12, STRAIGHT_SPEED)){time.keepTime();}
-    while(drive.turnRight(45, TURN_SPEED)){time.keepTime();}
-    while(drive.driveByEncoders(30, STRAIGHT_SPEED)){time.keepTime();}
-    while(drive.turnLeft(90, TURN_SPEED)){time.keepTime();}
-    while(commands.driveUntilLightDetected('B', -STRAIGHT_SPEED)){time.keepTime();}
-    while(drive.driveByEncoders(10, STRAIGHT_SPEED)){time.keepTime();}
-    burger.setPosition('L');
-    while(drive.turnRight(90, TURN_SPEED)){time.keepTime();}
-    while(drive.driveByEncoders(10, STRAIGHT_SPEED)){time.keepTime();}
-    burger.setPosition('U');
-    time.sleepSeconds(1.5);
-
-    //Drive to ice cream
-    burger.setPosition('L');
-    while(drive.driveByEncoders(5, -STRAIGHT_SPEED)){time.keepTime();}
-    while(drive.turnLeft(90, TURN_SPEED)){time.keepTime();}
-    while(drive.driveByEncoders(12, STRAIGHT_SPEED)){time.keepTime();}
-    iceCream.setPosition('H');
-    while(drive.turnLeft(45, TURN_SPEED)){time.keepTime();}
-
-    if (rps.getIceCream() == 'L')
-    {
-        while(drive.driveByEncoders(3, STRAIGHT_SPEED)){time.keepTime();}
-    }
-
-    else if (rps.getIceCream() == 'M')
-    {
-        while(drive.driveByEncoders(5, STRAIGHT_SPEED)){time.keepTime();}
-    }
-
-    else if (rps.getIceCream() == 'R')
-    {
-        while(drive.driveByEncoders(8, STRAIGHT_SPEED)){time.keepTime();}
-    }
-
-    while(drive.turnRight(90, TURN_SPEED)){time.keepTime();}
-    while(drive.driveByEncoders(4.0, STRAIGHT_SPEED)){time.keepTime();}
-    iceCream.setPosition('L');
-    time.sleepSeconds(7.25);
-    iceCream.setPosition('H');
-    while(drive.driveByEncoders(4.0, -STRAIGHT_SPEED)){time.keepTime();}
+    scripts.performanceTest3();
 
 
 

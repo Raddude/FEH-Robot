@@ -12,6 +12,9 @@
 #include <cmath>
 #include "DriveConstants.h"
 
+#define STRAIGHT_SPEED 40
+#define TURN_SPEED 40
+
 #define WHEEL_DIAMETER 3
 #define WHEEL_SPAN 8.25  //8.25 is the default value configured at 360 degrees
 #define TICKS_PER_ROTATION 318
@@ -58,6 +61,20 @@ DriveConstants::DriveConstants()
 
 
 
+
+/*  This method returns the default straight testing speed
+ */
+int DriveConstants::straightSpeed()
+{
+    return STRAIGHT_SPEED;
+}
+
+/*  This method returns the default turn testing speed
+ */
+int DriveConstants::turnSpeed()
+{
+    return TURN_SPEED;
+}
 
 /*  This method returns the wheel diameter in inches.
  */
