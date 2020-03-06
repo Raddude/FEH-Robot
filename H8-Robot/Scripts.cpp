@@ -60,6 +60,8 @@ void Scripts::preScriptReset()
  */
 void Scripts::performanceTest1()
 {
+    preScriptReset();
+
     while(drive.driveByEncoders(20.0, driveConstants.straightSpeed())){}
     while(drive.turnLeft(45, driveConstants.turnSpeed())){}
     while(drive.driveByEncoders(3.5, driveConstants.straightSpeed())){}
@@ -102,6 +104,9 @@ void Scripts::performanceTest1()
  */
 void Scripts::performanceTest2()
 {
+    preScriptReset();
+
+
     /*  TICKET SLIDER  */
     while(drive.driveByEncoders(1, driveConstants.straightSpeed())){time.keepTime();}
     while(drive.turnRight(70, driveConstants.turnSpeed())){time.keepTime();}
@@ -131,73 +136,189 @@ void Scripts::performanceTest2()
     iceCream.setPosition('M');
     time.sleepSeconds(0.5);
     while(drive.driveByEncoders(10, driveConstants.straightSpeed())){time.keepTime();}
-
-
-
-    /*  BURGER TOUCH  */
-    iceCream.setPosition('U');
-    while(drive.pivotRight(82, -driveConstants.turnSpeed())){time.keepTime();}
-    while(commands.driveUntilLimitSwitch('B', -driveConstants.straightSpeed())){time.keepTime();}
-    while(drive.driveByEncoders(10, driveConstants.straightSpeed())){time.keepTime();}
-    while(drive.turnRight(90, driveConstants.turnSpeed())){time.keepTime();}
-    while(drive.driveByEncoders(20, driveConstants.straightSpeed() + 10)){time.keepTime();}
-    while(drive.pivotRight(85, driveConstants.turnSpeed())){time.keepTime();}
-    while(drive.driveByEncoders(5, driveConstants.straightSpeed())){time.keepTime();}
-    while(drive.pivotLeft(85, driveConstants.turnSpeed())){time.keepTime();}
-    while(drive.driveByEncoders(15, driveConstants.straightSpeed())){time.keepTime();}
 }
 
-/*  This script completes PT3
+/*  This script completes PT3 and PT4
  */
-void Scripts::performanceTest3()
+void Scripts::performanceTest3and4()
 {
+    preScriptReset();
+
     //Drive up ramp to burger
-    while(drive.driveByEncoders(12, driveConstants.straightSpeed())){time.keepTime();}
+    while(drive.driveByEncoders(13.5, driveConstants.straightSpeed())){time.keepTime();}
     while(drive.turnRight(45, driveConstants.turnSpeed())){time.keepTime();}
-    while(drive.driveByEncoders(30, driveConstants.straightSpeed())){time.keepTime();}
+    while(drive.driveByEncoders(28, driveConstants.straightSpeed())){time.keepTime();}
+    while(drive.pivotLeft(90, -driveConstants.turnSpeed())){time.keepTime();}
+    while(commands.pivotUntilBackLimitSwitch('R', -driveConstants.straightSpeed())){time.keepTime();}
+
+    topLevel();
+}
+
+
+
+
+
+/*  This script flips an ice cream lever when already lined up with the correct one
+ */
+void Scripts::runIceCream()
+{
     while(drive.turnLeft(90, driveConstants.turnSpeed())){time.keepTime();}
-    while(commands.driveUntilLightDetected('B', -driveConstants.straightSpeed())){time.keepTime();}
-    while(drive.driveByEncoders(10, driveConstants.straightSpeed())){time.keepTime();}
-    burger.setPosition('L');
-    while(drive.turnRight(90, driveConstants.turnSpeed())){time.keepTime();}
-    while(drive.driveByEncoders(10, driveConstants.straightSpeed())){time.keepTime();}
-    burger.setPosition('U');
-    time.sleepSeconds(1.5);
-
-    //Drive to ice cream
-    burger.setPosition('L');
-    while(drive.driveByEncoders(5, -driveConstants.straightSpeed())){time.keepTime();}
-    while(drive.turnLeft(90, driveConstants.turnSpeed())){time.keepTime();}
-    while(drive.driveByEncoders(12, driveConstants.straightSpeed())){time.keepTime();}
-    iceCream.setPosition('H');
-    while(drive.turnLeft(45, driveConstants.turnSpeed())){time.keepTime();}
-
-    if (rps.getIceCream() == 'L')
-    {
-        while(drive.driveByEncoders(3, driveConstants.straightSpeed())){time.keepTime();}
-    }
-
-    else if (rps.getIceCream() == 'M')
-    {
-        while(drive.driveByEncoders(5, driveConstants.straightSpeed())){time.keepTime();}
-    }
-
-    else if (rps.getIceCream() == 'R')
-    {
-        while(drive.driveByEncoders(8, driveConstants.straightSpeed())){time.keepTime();}
-    }
-
-    while(drive.turnRight(90, driveConstants.turnSpeed())){time.keepTime();}
-    while(drive.driveByEncoders(4.0, driveConstants.straightSpeed())){time.keepTime();}
+    while(drive.driveByEncoders(9.75, -driveConstants.straightSpeed())){time.keepTime();}
     iceCream.setPosition('L');
     time.sleepSeconds(7.25);
     iceCream.setPosition('H');
-    while(drive.driveByEncoders(4.0, -driveConstants.straightSpeed())){time.keepTime();}
+    time.sleepSeconds(0.5);
+    while(drive.driveByEncoders(9.75, driveConstants.straightSpeed())){time.keepTime();}
+    while(drive.turnRight(90, driveConstants.turnSpeed())){time.keepTime();}
 }
 
-/*  This script completes PT4
- */
-void Scripts::performanceTest4()
-{
 
+
+
+
+/*  This script completes the bottom half of the field
+ */
+void Scripts::bottomLevel()
+{
+    preScriptReset();
+
+
+    /*  TICKET SLIDER  */
+    while(drive.driveByEncoders(1, driveConstants.straightSpeed())){time.keepTime();}
+    while(drive.pivotRight(45, driveConstants.turnSpeed())){time.keepTime();}
+    while(drive.driveByEncoders(9, driveConstants.straightSpeed())){time.keepTime();}
+    while(drive.turnLeft(90, driveConstants.turnSpeed())){time.keepTime();}
+    while(commands.driveUntilLimitSwitch('B', -driveConstants.straightSpeed())){time.keepTime();}
+    while(drive.driveByEncoders(3.5, driveConstants.straightSpeed())){time.keepTime();}
+    while(drive.turnLeft(90, driveConstants.turnSpeed())){time.keepTime();}
+    while(commands.driveUntilLimitSwitch('B', -driveConstants.straightSpeed())){time.keepTime();}
+    while(drive.driveByEncoders(7.125, driveConstants.straightSpeed())){time.keepTime();}
+    ticketSlider.setPosition('M');
+    while(drive.pivotLeft(90, -driveConstants.turnSpeed())){time.keepTime();}
+    while(commands.driveUntilLimitSwitch('B', -driveConstants.straightSpeed())){time.keepTime();}
+    ticketSlider.setPosition('D');
+    while(drive.driveByEncoders(5.45, driveConstants.straightSpeed(), 5, driveConstants.straightSpeed()+15 )){time.keepTime();}
+
+
+
+    /*  TRAY RETURN  */
+    while(drive.driveByEncoders(4.5, -driveConstants.straightSpeed())){time.keepTime();}
+    ticketSlider.setPosition('M');
+    while(drive.pivotLeft(90, driveConstants.turnSpeed())){time.keepTime();}
+    ticketSlider.setPosition('U');
+    while(drive.driveByEncoders(7, driveConstants.straightSpeed())){time.keepTime();}
+    while(drive.pivotLeft(90, -driveConstants.turnSpeed())){time.keepTime();}
+    while(commands.driveUntilLimitSwitch('B', -driveConstants.straightSpeed())){time.keepTime();}
+    while(drive.driveByEncoders(25.5, driveConstants.straightSpeed())){time.keepTime();}
+    while(drive.pivotRight(30, -driveConstants.turnSpeed())){time.keepTime();}
+    while(drive.driveByEncoders(5.5, driveConstants.straightSpeed())){time.keepTime();}
+    while(drive.turnLeft(60, driveConstants.turnSpeed())){time.keepTime();}
+    while(commands.driveUntilLimitSwitch('B', -driveConstants.straightSpeed())){time.keepTime();}
+    iceCream.setPosition('M');
+    time.sleepSeconds(0.5);
+    while(drive.driveByEncoders(4, driveConstants.straightSpeed())){time.keepTime();}
+
+
+
+
+    /*  JUKEBOX  */
+    while(drive.pivotLeft(50, driveConstants.turnSpeed())){time.keepTime();}
+    while(drive.pivotRight(50, driveConstants.turnSpeed())){time.keepTime();}
+    while(commands.driveUntilLightDetected(6.0, driveConstants.straightSpeed())){time.keepTime();}
+
+    if(cdsCell.isRed())
+    {
+        burger.setPosition('R');
+    }
+
+    else if (cdsCell.isBlue())
+    {
+        burger.setPosition('L');
+    }
+
+    else
+    {
+        burger.setPosition('U');
+    }
+
+    while(drive.driveByEncoders(4.5, driveConstants.straightSpeed())){time.keepTime();}
+
+
+
+//    /*  RAMP  */
+//    while(drive.driveByEncoders(4.5, -driveConstants.straightSpeed())){time.keepTime();}
+
+}
+
+/*  This script completes the top half of the field
+ */
+void Scripts::topLevel()
+{
+    while(drive.pivotLeft(45, driveConstants.turnSpeed())){time.keepTime();}
+    while(drive.driveByEncoders(15.25, driveConstants.straightSpeed())){time.keepTime();}
+    burger.setPosition('L');
+    while(drive.pivotLeft(45, driveConstants.turnSpeed())){time.keepTime();}
+    while(drive.turnLeft(90, driveConstants.turnSpeed())){time.keepTime();}
+    while(commands.driveUntilLimitSwitch('B', -driveConstants.straightSpeed())){time.keepTime();}
+    while(drive.driveByEncoders(2.175, driveConstants.straightSpeed())){time.keepTime();}
+    while(drive.pivotRight(90, driveConstants.turnSpeed())){time.keepTime();}
+    while(drive.driveForTime(0.75, driveConstants.straightSpeed())){time.keepTime();}
+    while(drive.driveForTime(0.75, 18)){time.keepTime();}
+    while(drive.turnRight(15, driveConstants.turnSpeed())){time.keepTime();}
+    while(drive.driveForTime(0.25, 80)){time.keepTime();}
+    while(drive.turnLeft(20, driveConstants.turnSpeed())){time.keepTime();}
+    while(drive.driveForTime(0.25, driveConstants.turnSpeed())){time.keepTime();}
+
+
+
+    //Flip burger
+    burger.setPosition('F');
+    time.sleepSeconds(1.0);
+    burger.setPosition('L');
+    time.sleepSeconds(1.0);
+
+
+
+    //Drive to ice cream
+    while(drive.driveByEncoders(1.0, -driveConstants.straightSpeed())){time.keepTime();}
+    while(drive.turnRight(90, -driveConstants.turnSpeed())){time.keepTime();}
+    while(commands.driveUntilLimitSwitch('B', -driveConstants.turnSpeed())){time.keepTime();}
+    while(drive.driveByEncoders(12, driveConstants.straightSpeed())){time.keepTime();}
+    iceCream.setPosition('H');
+
+    while(drive.pivotLeft(45, driveConstants.turnSpeed())){time.keepTime();}
+
+    //Flip ice cream
+    if (true)//rps.getIceCream() == 'L')
+    {
+        while(drive.driveByEncoders(6.5, driveConstants.straightSpeed())){time.keepTime();}
+        runIceCream();
+        while(drive.driveByEncoders(6.5, -driveConstants.straightSpeed())){time.keepTime();}
+    }
+
+    else if (false)//rps.getIceCream() == 'M')
+    {
+        while(drive.driveByEncoders(3, driveConstants.straightSpeed())){time.keepTime();}
+        runIceCream();
+        while(drive.driveByEncoders(3, -driveConstants.straightSpeed())){time.keepTime();}
+    }
+
+    else if (false)//rps.getIceCream() == 'R')
+    {
+        while(drive.driveByEncoders(0.5, -driveConstants.straightSpeed())){time.keepTime();}
+        runIceCream();
+        while(drive.driveByEncoders(0.5, driveConstants.straightSpeed())){time.keepTime();}
+    }
+
+    //Drive to final button
+    iceCream.setPosition('U');
+    while(drive.driveByEncoders(3.0, driveConstants.straightSpeed())){time.keepTime();}
+    while(drive.turnLeft(45, driveConstants.turnSpeed())){time.keepTime();}
+    while(commands.driveUntilLimitSwitch('B', -driveConstants.straightSpeed())){time.keepTime();}
+    while(drive.driveByEncoders(20.0, driveConstants.straightSpeed())){time.keepTime();}
+    while(drive.pivotLeft(30, driveConstants.turnSpeed())){time.keepTime();}
+    while(drive.pivotRight(30, driveConstants.turnSpeed())){time.keepTime();}
+    while(drive.driveByEncoders(26.5, driveConstants.straightSpeed())){time.keepTime();}
+    while(drive.pivotLeft(45, driveConstants.turnSpeed())){time.keepTime();}
+    while(drive.driveByEncoders(12.0, driveConstants.straightSpeed())){time.keepTime();}
 }

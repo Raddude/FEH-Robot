@@ -21,6 +21,8 @@
 #define SCREEN_WIDTH 240
 #define SCREEN_HEIGHT 320
 
+float x,y;
+
 using namespace std;
 
 ScreenController screen;
@@ -47,7 +49,7 @@ void ScreenController::clearScreen()
 {
     LCD.Clear(FEHLCD::Black);
     LCD.SetFontColor(FEHLCD::White);
-    LCD.SetOrientation(FEHLCD::North);
+    LCD.SetOrientation(FEHLCD::East);
 }
 
 /*  This is a wrapper method for LCD.ClearBuffer()
@@ -55,6 +57,44 @@ void ScreenController::clearScreen()
 void ScreenController::clearBuffer()
 {
     LCD.ClearBuffer();
+}
+
+/*  This method suspends the proteus until the screen is touched
+ */
+void ScreenController::waitForTouch()
+{
+    //while(LCD.Touch(&x,&y))
+    {}
+    while(!LCD.Touch(&x,&y))
+    {}
+}
+
+
+
+
+
+/*  This method displays a screen on startup that allows the user to select test mode or performance mode
+ */
+bool ScreenController::testModeSelect()
+{
+    clearScreen();
+    clearBuffer();
+
+    LCD.WriteAt("TEST", SCREEN_WIDTH/2  - (6*strlen("TEST")), SCREEN_HEIGHT/4);
+    LCD.WriteAt("PERFORM", SCREEN_WIDTH/2  - (6*strlen("PERFORM")), (3*SCREEN_HEIGHT)/4);
+    LCD.FillRectangle(0, (SCREEN_HEIGHT/2)+3, SCREEN_WIDTH, 6);
+
+    waitForTouch();
+
+    if (x > SCREEN_HEIGHT/2)
+    {
+        return true;
+    }
+
+    else
+    {
+        return false;
+    }
 }
 
 
@@ -69,7 +109,7 @@ void ScreenController::displayFullScreenMessage(const char* input)
 {
     //Try to make font size bigger if possible
     clearScreen();
-    LCD.WriteAt(input, SCREEN_HEIGHT/2  - (6*strlen(input)), SCREEN_WIDTH/2);
+    LCD.WriteAt(input, SCREEN_WIDTH/2  - (6*strlen(input)), SCREEN_HEIGHT/2);
 }
 
 

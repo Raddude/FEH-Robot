@@ -50,17 +50,17 @@ void IceCreamClaw::setPosition(char input)
 {
     if (input == 'L')
     {
-        clawServo.SetDegree(100.0);
+        clawServo.SetDegree(95.0);
     }
 
     else if (input == 'M')
     {
-        clawServo.SetDegree(73.0);
+        clawServo.SetDegree(65.0);
     }
 
     else if (input == 'H')
     {
-        clawServo.SetDegree(60.0);
+        clawServo.SetDegree(55.0);
     }
 
     else if (input == 'U')

@@ -56,6 +56,38 @@ void MainDriveController::driveByPower(int leftSpeed, int rightSpeed)
 
 
 
+/*  This method drives the robot straight for a given amount of time
+ *
+ *  doublerunTtime - A time in SECONDS that the robot should be driving
+ *  int speed - The speed of both motors in the range of [-100, 100] percent
+ */
+bool MainDriveController::driveForTime(double runTime, int speed)
+{
+    return driveForTime(runTime, speed, speed);
+}
+
+/*  This method drives the robot for a given amount of time
+ *
+ *  double runTime - A time in SECONDS that the robot should be driving
+ *  int leftSpeed - The speed of the LEFT motor in the range of [-100, 100] percent
+ *  int rightSpeed - The speed of the RIGHT motor in the range of [-100, 100] percent
+ */
+bool MainDriveController::driveForTime(double runTime, int leftSpeed, int rightSpeed)
+{
+    if (time.getStopwatch() < runTime)
+    {
+        driveByPower(leftSpeed, rightSpeed);
+        return true;
+    }
+
+    commands.postMoveReset();
+    return false;
+}
+
+
+
+
+
 /*  This overloaded method drives the robot forward to the target distance at the listed speed.
  *
  *  double target - A distance in INCHES of how far the robot should travel.

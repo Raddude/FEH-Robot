@@ -22,6 +22,7 @@
 #include "General/Speed.h"
 #include "General/Time.h"
 #include "General/RPSManager.h"
+#include "General/Sound.h"
 #include "Mechanisms/BurgerFlipper.h"
 #include "Mechanisms/CdSController.h"
 #include "Mechanisms/IceCreamClaw.h"
@@ -42,7 +43,6 @@ int main(void)
 {
     /*  TO-DO LIST
      *
-     * -Implement scripts.cpp
      * -Actually implement PID
      * -Test orbit functions
      * -Convert FileManager to be a state manager
@@ -88,22 +88,21 @@ int main(void)
 
 
     //TEST MODE
-    bool testMode = false;
+    bool testMode = true;
 
 
-
-    //Other variables
-    float x,y;
-    int testSpeed = 20;
+SelectionScreen:
 
     //If test mode is enabled, use the touch condition instead of the light condition
 
     commands.preMatchReset();
 
-    if (testMode)
+    if (screen.testModeSelect())
     {
+        testMode = true;
         goto TouchCondition;
     }
+    testMode = false;
     goto LightCondition;
 
 
@@ -111,15 +110,10 @@ int main(void)
 TouchCondition:
 
     //Start Condition: Wait for a touch of the screen
-    screen.clearScreen();
     screen.displayFullScreenMessage("TAP TO START");
 
     LCD.ClearBuffer();
-
-    while(!LCD.Touch(&x,&y))
-    {}
-    while(LCD.Touch(&x,&y))
-    {}
+    screen.waitForTouch();
 
     commands.preMatchReset();
     goto TestLoop;
@@ -145,14 +139,22 @@ LightCondition:
 TestLoop:
 
 
+    //screen.displayBatteryVoltage();
+    //time.sleepSeconds(5.0);
 
-    //
+
+    scripts.topLevel();
+    //while(drive.turnLeft(90, driveConstants.turnSpeed())){time.keepTime();}
+
+
+    screen.clearScreen();
+    //screen.displayCurrentTime();
 
 
 
     //Post-match
     commands.postMatchActions();
-    goto TouchCondition;
+    goto SelectionScreen;
 
 
 
@@ -166,7 +168,7 @@ PerformanceLoop:
 
 
 
-    scripts.performanceTest3();
+    scripts.bottomLevel();
 
 
 
@@ -174,7 +176,7 @@ PerformanceLoop:
 
     //Post-match
     commands.postMatchActions();
-    goto LightCondition;
+    goto SelectionScreen;
 
 
     return 0;

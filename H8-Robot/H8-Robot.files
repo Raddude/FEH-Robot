@@ -12,6 +12,8 @@ Drive/RightDrive.cpp
 Drive/RightDrive.h
 General/RPSManager.cpp
 General/RPSManager.h
+General/Sound.cpp
+General/Sound.h
 General/Speed.cpp
 General/Speed.h
 Mechanisms/CdSController.cpp

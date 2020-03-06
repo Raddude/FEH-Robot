@@ -26,7 +26,7 @@ using namespace std;
 
 FileManager fileManager;
 
-FEHFile *robotState = SD.FOpen("StateLog.txt", "w");
+//FEHFile *robotState = SD.FOpen("StateLog.txt", "w");
 
 
 
@@ -67,12 +67,12 @@ void FileManager::closeFile()
  */
 void FileManager::writeHeaderToFile()
 {
-    SD.FPrintf(robotState, "%s", "Time");
+    //SD.FPrintf(robotState, "%s", "Time");
 }
 
 /*  This method takes in data from all sensors on the robot and plots them to a large, timestamped state file for debugging
  */
 void FileManager::writeStateToFile()
 {
-    SD.FPrintf(robotState, "%f", time.getCurrentTime());
+    //SD.FPrintf(robotState, "%f", time.getCurrentTime());
 }

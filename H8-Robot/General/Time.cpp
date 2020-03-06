@@ -13,8 +13,8 @@
 #include <General/FileManager.h>
 #include "Time.h"
 
-#define TIME_INCREMENT 0.001 //Time to sleep in seconds
-#define STANDARD_TIME_DELAY 500 //MS
+#define TIME_INCREMENT 0.001 //Time to sleep in seconds 0.001
+#define STANDARD_TIME_DELAY 300 //MS
 
 Time time;
 
@@ -95,7 +95,7 @@ void Time::keepTime()
     globalTime += TIME_INCREMENT;
     stopwatchTime += TIME_INCREMENT;
 
-    fileManager.writeStateToFile();
+    //fileManager.writeStateToFile();
 }
 
 /*  This method returns the current global time
@@ -110,4 +110,5 @@ double Time::getCurrentTime()
 void Time::resetTime()
 {
     globalTime = 0;
+    stopwatchTime = 0;
 }

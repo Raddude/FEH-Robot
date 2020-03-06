@@ -11,6 +11,9 @@ public:
 
     void clearScreen();
     void clearBuffer();
+    void waitForTouch();
+
+    bool testModeSelect();
 
     void displayFullScreenMessage(const char*);
     void displayBatteryVoltage();

@@ -12,6 +12,9 @@ public:
 
     void driveByPower(int, int);
 
+    bool driveForTime(double, int);
+    bool driveForTime(double, int, int);
+
     bool driveByEncodersUncorrected(double, int);
     bool driveByEncodersUncorrected(double, int, double, int);
     bool driveByEncodersUncorrected(int, int, int, int);

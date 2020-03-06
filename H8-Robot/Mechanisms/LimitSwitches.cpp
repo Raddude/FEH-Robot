@@ -15,8 +15,8 @@
 LimitSwitches limitSwitches;
 
 DigitalInputPin backBumpSwitch(FEHIO::P2_1);
-DigitalInputPin rightBumpSwitch(FEHIO::P2_2);
-DigitalInputPin leftBumpSwitch(FEHIO::P2_3);
+DigitalInputPin leftBumpSwitch(FEHIO::P2_2);
+DigitalInputPin rightBumpSwitch(FEHIO::P2_3);
 
 
 

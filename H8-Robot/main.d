@@ -6,7 +6,7 @@
  ../Drive/DriveConstants.h ../Drive/RightDrive.h \
  ../Drive/DriveConstants.h ../General/FileManager.h \
  ../General/ScreenController.h ../General/Speed.h ../General/Time.h \
- ../General/RPSManager.h ../Mechanisms/BurgerFlipper.h \
+ ../General/RPSManager.h ../General/Sound.h ../Mechanisms/BurgerFlipper.h \
  ../Mechanisms/CdSController.h ../Mechanisms/IceCreamClaw.h \
  ../Mechanisms/Optosensors.h ../Mechanisms/TicketSlider.h ../Commands.h \
  ../Scripts.h
@@ -52,6 +52,8 @@ Drivers/adc16.h:
 ../General/Time.h:
 
 ../General/RPSManager.h:
+
+../General/Sound.h:
 
 ../Mechanisms/BurgerFlipper.h:
 

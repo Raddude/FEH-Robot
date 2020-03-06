@@ -11,8 +11,12 @@ public:
 
     void performanceTest1();
     void performanceTest2();
-    void performanceTest3();
-    void performanceTest4();
+    void performanceTest3and4();
+
+    void runIceCream();
+
+    void topLevel();
+    void bottomLevel();
 };
 
 extern Scripts scripts;

@@ -59,6 +59,11 @@ void BurgerFlipper::setPosition(char input)
         burgerServo.SetDegree(93.0);
     }
 
+    else if (input == 'F')
+    {
+        burgerServo.SetDegree(102.0);
+    }
+
     else if (input == 'R')
     {
         burgerServo.SetDegree(180.0);

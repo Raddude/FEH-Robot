@@ -37,7 +37,6 @@
 Commands commands;
 
 char sideWhereLineWasLastSeen = 'M';
-float x, y;
 
 
 
@@ -60,7 +59,7 @@ Commands::Commands()
  */
 void Commands::preMatchReset()
 {
-    fileManager.writeHeaderToFile();
+    //fileManager.writeHeaderToFile();
     screen.clearScreen();
     screen.clearBuffer();
     drive.resetEncoders();
@@ -89,17 +88,20 @@ void Commands::postMatchActions()
 {
     fileManager.closeFile();
 
+    drive.stopMotors();
+
+    burger.setPosition('U');
+    iceCream.setPosition('U');
+    ticketSlider.setPosition('U');
+
     screen.displayCurrentTime();
-    time.sleepSeconds(5.0);
+    time.sleepSeconds(10.0);
     screen.clearScreen();
     screen.displayFullScreenMessage("Touch to continue...");
 
     LCD.ClearBuffer();
 
-    while(!LCD.Touch(&x,&y))
-    {}
-    while(LCD.Touch(&x,&y))
-    {}
+    screen.waitForTouch();
 }
 
 
