@@ -258,7 +258,7 @@ bool MainDriveController::turnRight(double angle, int speed)
  */
 bool MainDriveController::pivotLeft(double angle, int speed)
 {
-    return driveByEncoders(2000, 0, (2*angle/360) * driveConstants.getDistancePerFullTurn(), speed);
+    return driveByEncoders(2000, 0, ((2*angle)/360) * driveConstants.getDistancePerFullTurn(), speed);
 }
 
 /*  This method only turns half of the robot, to pivot around the other wheel
@@ -268,7 +268,7 @@ bool MainDriveController::pivotLeft(double angle, int speed)
  */
 bool MainDriveController::pivotRight(double angle, int speed)
 {
-    return driveByEncoders((2*angle/360) * driveConstants.getDistancePerFullTurn(), speed, 2000, 0);
+    return driveByEncoders(((2*angle)/360) * driveConstants.getDistancePerFullTurn(), speed, 2000, 0);
 }
 
 

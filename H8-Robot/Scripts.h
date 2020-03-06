@@ -14,6 +14,7 @@ public:
     void performanceTest3and4();
 
     void runIceCream();
+    void runJukebox();
 
     void topLevel();
     void bottomLevel();

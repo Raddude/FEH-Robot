@@ -90,6 +90,8 @@ int main(void)
     //TEST MODE
     bool testMode = true;
 
+    rps.initializeTouchMenu();
+
 
 SelectionScreen:
 
@@ -143,8 +145,7 @@ TestLoop:
     //time.sleepSeconds(5.0);
 
 
-    scripts.topLevel();
-    //while(drive.turnLeft(90, driveConstants.turnSpeed())){time.keepTime();}
+    scripts.performanceTest3and4();
 
 
     screen.clearScreen();
@@ -169,6 +170,7 @@ PerformanceLoop:
 
 
     scripts.bottomLevel();
+    scripts.topLevel();
 
 
 
